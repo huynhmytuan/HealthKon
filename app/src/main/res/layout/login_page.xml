@@ -92,7 +92,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:background="@drawable/background_btn"
+        android:background="@drawable/background_btn1"
         android:text="Login"
         android:textColor="#ffffff"
         android:textSize="18dp"
