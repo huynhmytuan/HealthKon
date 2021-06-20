@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HealthKon</string>
+    <string name="action_1">1</string>
+    <string name="action_2">2</string>
+    <string name="action_3">3</string>
+    <string name="action_4">4</string>
+    <string name="action_5">5</string>
 </resources>
