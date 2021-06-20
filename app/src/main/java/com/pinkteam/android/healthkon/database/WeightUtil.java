@@ -23,12 +23,12 @@ public class WeightUtil {
 
     private ContentValues weightContentValues(Weight weight){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(dbHealthSchema.HeightTable.Value,weight.getmValue());
-        contentValues.put(dbHealthSchema.HeightTable.Date, String.valueOf(weight.getmDate()));
+        contentValues.put(dbHealthSchema.WeightTable.Value, weight.getmValue());
+        contentValues.put(dbHealthSchema.WeightTable.Date, String.valueOf(weight.getmDate()));
         return contentValues;
     }
 
-    //Insert
+    //Inssẻt
     public long add(int Value, Date Date){
         Weight mWeight = new Weight(Value, Date);
         ContentValues contentValues = weightContentValues(mWeight);

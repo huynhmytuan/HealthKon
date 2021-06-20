@@ -7,15 +7,7 @@ public class Height {
     private int mValue;
     private Date mDate;
 
-    public Height(int mValue, Date mDate) {
-        this.mValue = mValue;
-        this.mDate = mDate;
-    }
-
-    public Height() {
-        this.mId = mId;
-        this.mValue = mValue;
-        this.mDate = mDate;
+    public Height(int value, Date date) {
     }
 
     public int getmId() {
@@ -38,7 +30,13 @@ public class Height {
         return mDate;
     }
 
+
     public void setmDate(Date mDate) {
+        this.mDate = mDate;
+    }
+
+    public Height() {
+        this.mValue = mValue;
         this.mDate = mDate;
     }
 }
