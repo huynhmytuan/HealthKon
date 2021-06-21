@@ -8,6 +8,8 @@ public class Height {
     private Date mDate;
 
     public Height(int value, Date date) {
+        this.mValue = value;
+        this.mDate = date;
     }
 
     public int getmId() {
