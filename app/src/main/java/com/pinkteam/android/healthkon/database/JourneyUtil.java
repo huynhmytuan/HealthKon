@@ -49,6 +49,8 @@ public class JourneyUtil {
             //delete
             public long delete(int id){
             String journeyID = Integer.toString(id);
+            LocationUtil mLU = new LocationUtil(this.mContext);
+            mLU.delete(id);
             return mDatabase.delete("journey", dbHealthSchema.JourneyTable.JourneyId +"=?", new String[]{journeyID});
         }
             //view data
@@ -60,8 +62,7 @@ public class JourneyUtil {
             // Truy van toan bo du lieu do ve 1 danh sach
             public List<Journey> getAllJourney(){
             List <Journey> journeys = new ArrayList<>();
-            String SELECT = "SELECT * FROM " + "journey";
-            Cursor cursor = mDatabase.rawQuery(SELECT, null);
+            Cursor cursor = viewData();
             if(cursor.getCount()>0)
             {
                 cursor.moveToFirst();
@@ -74,7 +75,6 @@ public class JourneyUtil {
                     String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
                     String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
                     String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
-
                     Journey journey = new Journey();
                     journey.setmJourneyId(Integer.parseInt(id));
                     journey.setmDuration(Long.parseLong(duration));
@@ -91,6 +91,18 @@ public class JourneyUtil {
                 cursor.close();
             }
             return journeys;
+        }
+        public String getLastestRowID(){
+                String rowID;
+                Cursor cursor = viewData();
+                cursor.moveToLast();
+                if (cursor.getCount()>0){
+                    rowID = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+                }
+                else{
+                    rowID = "null";
+                }
+                return rowID;
         }
     }
 

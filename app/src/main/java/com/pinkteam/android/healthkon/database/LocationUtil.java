@@ -46,21 +46,20 @@ public class LocationUtil {
         return result;
     }
     //delete
-    public long delete(int id){
-        String locationID = Integer.toString(id);
-        return mDatabase.delete("location", dbHealthSchema.LocationTable.LocationID +"=?", new String[]{locationID});
+    public long delete(int JourneyID){
+        String JouID = Integer.toString(JourneyID);
+        return mDatabase.delete("location", dbHealthSchema.LocationTable.JourneyID +"=?", new String[]{JouID});
     }
     //view data
     public Cursor viewData(){
-        String view = " SELECT * FROM " + dbHealthSchema.UserTable.TABLE_NAME;
+        String view = " SELECT * FROM " + dbHealthSchema.LocationTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
         return cursor;
     }
     // Truy van toan bo du lieu do ve 1 danh sach
     public List<Location> getAll(){
         List <Location> locations = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "location";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();
@@ -85,5 +84,32 @@ public class LocationUtil {
         }
         return locations;
     }
+    public List<Location> getLocationsByJourney(int JourneyID) {
+        List<Location> locationList = new ArrayList<>();
+        String query = "SELECT * FROM " + dbHealthSchema.LocationTable.TABLE_NAME + " WHERE " + dbHealthSchema.LocationTable.JourneyID + " = " + JourneyID;
+        Cursor cursor = mDatabase.rawQuery(query, null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                String location_id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.LocationTable.LocationID));
+                String journey_id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.LocationTable.JourneyID));
+                String altitude = cursor.getString(cursor.getColumnIndex(dbHealthSchema.LocationTable.Altitude));
+                String longitude = cursor.getString(cursor.getColumnIndex(dbHealthSchema.LocationTable.Longitude));
+                String latitude = cursor.getString(cursor.getColumnIndex(dbHealthSchema.LocationTable.Latitude));
 
+                Location location = new Location();
+                location.setmLocationId(Integer.parseInt(location_id));
+                location.setmJourneyId(Integer.parseInt(journey_id));
+                location.setmAltitude(Float.parseFloat(altitude));
+                location.setmLongitude(Float.parseFloat(longitude));
+                location.setmLatitude(Float.parseFloat(latitude));
+
+                locationList.add(location);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return locationList;
+    }
 }
