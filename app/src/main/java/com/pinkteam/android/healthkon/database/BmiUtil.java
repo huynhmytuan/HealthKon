@@ -53,14 +53,12 @@ public class BmiUtil {
     public Cursor viewData(){
         String view = " SELECT * FROM " + dbHealthSchema.BmiTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
-
         return cursor;
     }
     // Truy van toan bo du lieu do ve 1 danh sach
     public List<BMI> getAllBMI(){
         List <BMI> bmis = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "bmi";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();

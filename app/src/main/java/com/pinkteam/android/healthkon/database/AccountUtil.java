@@ -55,8 +55,7 @@ public class AccountUtil {
     // Truy van toan bo du lieu do ve 1 danh sach toan bo user
     public List<Account> getAllAccount(){
         List <Account> accounts = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "account";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();

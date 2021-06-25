@@ -54,14 +54,12 @@ public class TopUtil {
     public Cursor viewData(){
         String view = " SELECT * FROM " + dbHealthSchema.TopTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
-
         return cursor;
     }
     // Truy van toan bo du lieu do ve 1 danh sach
     public List<Top> getAllTop(){
         List <Top> tops = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "top";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();

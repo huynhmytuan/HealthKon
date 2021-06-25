@@ -7,7 +7,15 @@ public class Weight {
     private int mValue;
     private Date mDate;
 
-    public Weight(int value, Date date) {
+    public Weight() {
+        this.mId = mId;
+        this.mValue = mValue;
+        this.mDate = mDate;
+    }
+
+    public Weight(int mValue, Date mDate) {
+        this.mValue = mValue;
+        this.mDate = mDate;
     }
 
     public int getmId() {
@@ -30,13 +38,7 @@ public class Weight {
         return mDate;
     }
 
-
     public void setmDate(Date mDate) {
-        this.mDate = mDate;
-    }
-
-    public Weight() {
-        this.mValue = mValue;
         this.mDate = mDate;
     }
 }

@@ -52,14 +52,12 @@ public class HeightUtil {
     public Cursor viewData(){
         String view = " SELECT * FROM " + dbHealthSchema.HeightTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
-
         return cursor;
     }
     // Truy van toan bo du lieu do ve 1 danh sach
     public List<Height> getAllHeight(){
         List <Height> heights = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "height";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();
@@ -79,5 +77,21 @@ public class HeightUtil {
             cursor.close();
         }
         return heights;
+    }
+
+    public Height getLastestdHeight(){
+        Height lastestHeight = new Height();
+        Cursor cursor = viewData();
+        cursor.moveToLast();
+        if(cursor.getCount()>0){
+            String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Id));
+            String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
+            long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+
+            lastestHeight.setmId(Integer.parseInt(id));
+            lastestHeight.setmValue(Integer.parseInt(value));
+            lastestHeight.setmDate(new Date(date));
+        }
+        return lastestHeight;
     }
 }

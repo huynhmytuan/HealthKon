@@ -58,8 +58,7 @@ public class UserUtil {
     // Truy van toan bo du lieu do ve 1 danh sach toan bo user
     public List<User> getAllUser(){
         List <User> users = new ArrayList<>();
-        String SELECT = "SELECT * FROM " + "user";
-        Cursor cursor = mDatabase.rawQuery(SELECT, null);
+        Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
             cursor.moveToFirst();
