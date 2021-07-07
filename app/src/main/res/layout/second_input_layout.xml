@@ -27,7 +27,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/male_radiobtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="92dp"
@@ -36,7 +36,7 @@
                 android:textColor="@color/white" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/female_radiobtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
@@ -45,7 +45,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/next_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

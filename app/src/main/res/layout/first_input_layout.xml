@@ -21,7 +21,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -35,7 +35,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/email_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -48,7 +48,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/phone_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -61,7 +61,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/next_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
