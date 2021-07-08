@@ -50,7 +50,7 @@ public class WeightUtil {
     }
     //view data
     public Cursor viewData(){
-        String view = " SELECT * FROM " + dbHealthSchema.HeightTable.TABLE_NAME;
+        String view = " SELECT * FROM " + dbHealthSchema.WeightTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
         return cursor;
     }
@@ -64,7 +64,7 @@ public class WeightUtil {
             while (!cursor.isAfterLast()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Id));
                 String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Value));
-                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
 
                 Weight weight = new Weight();
                 weight.setmId(Integer.parseInt(id));
@@ -79,7 +79,7 @@ public class WeightUtil {
         return weights;
     }
 
-    public Weight getLastestdHeight() {
+    public Weight getLastestWeight() {
         Weight lastestWeight = new Weight();
         Cursor cursor = viewData();
         cursor.moveToLast();

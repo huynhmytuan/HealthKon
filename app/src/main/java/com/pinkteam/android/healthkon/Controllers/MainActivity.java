@@ -1,12 +1,10 @@
 package com.pinkteam.android.healthkon.Controllers;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -23,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationView =findViewById(R.id.bottom_nav);
-        mViewpager=findViewById(R.id.view_pager);
+        mNavigationView = findViewById(R.id.bottom_nav);
+        mViewpager = findViewById(R.id.view_pager);
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_1:
                         mViewpager.setCurrentItem(0);
                         break;
@@ -49,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
 
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -88,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int reqCode, String[] permissions, int[] results) {
+        super.onRequestPermissionsResult(reqCode,permissions,results);
     }
 }
 

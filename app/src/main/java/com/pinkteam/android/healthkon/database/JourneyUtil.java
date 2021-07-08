@@ -17,7 +17,7 @@ public class JourneyUtil {
             SQLiteDatabase mDatabase;
             Context mContext;
             public JourneyUtil(Context context){
-            mContext = context.getApplicationContext();
+            mContext = context;
             mDatabase = new dbHeathHelper(mContext).getWritableDatabase();
         }
 
@@ -75,7 +75,9 @@ public class JourneyUtil {
                     String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
                     String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
                     String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
+
                     Journey journey = new Journey();
+
                     journey.setmJourneyId(Integer.parseInt(id));
                     journey.setmDuration(Long.parseLong(duration));
                     journey.setmDistance(Float.parseFloat(distance));
@@ -103,6 +105,40 @@ public class JourneyUtil {
                     rowID = "null";
                 }
                 return rowID;
+        }
+
+        public Journey getJourneyByID(int JourneyID){
+            Journey journey = new Journey();
+            String query = "SELECT * FROM "+ dbHealthSchema.JourneyTable.TABLE_NAME + " WHERE " + dbHealthSchema.JourneyTable.JourneyId + " = " + JourneyID;
+            Cursor cursor = mDatabase.rawQuery(query,null);
+            if(cursor.getCount()>0)
+            {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()){
+                    String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+                    String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
+                    String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
+                    long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
+                    String name = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Name));
+                    String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
+                    String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
+                    String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
+
+                    journey.setmJourneyId(Integer.parseInt(id));
+                    journey.setmDuration(Long.parseLong(duration));
+                    journey.setmDistance(Float.parseFloat(distance));
+                    journey.setmDate(new Date(date));
+                    journey.setmName(name);
+                    journey.setmRating(Integer.parseInt(rating));
+                    journey.setmComment(comment);
+                    journey.setmImage(image);
+
+                    cursor.moveToNext();
+                }
+                cursor.close();
+            }
+
+            return journey;
         }
     }
 
