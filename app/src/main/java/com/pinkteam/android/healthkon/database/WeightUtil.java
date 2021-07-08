@@ -64,7 +64,7 @@ public class WeightUtil {
             while (!cursor.isAfterLast()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Id));
                 String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Value));
-                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
 
                 Weight weight = new Weight();
                 weight.setmId(Integer.parseInt(id));
@@ -86,7 +86,7 @@ public class WeightUtil {
         if (cursor.getCount() > 0) {
             String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Id));
             String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Value));
-            long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
+            String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
 
             lastestWeight.setmId(Integer.parseInt(id));
             lastestWeight.setmValue(Integer.parseInt(value));

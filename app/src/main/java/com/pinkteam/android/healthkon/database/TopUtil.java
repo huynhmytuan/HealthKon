@@ -67,8 +67,8 @@ public class TopUtil {
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Id));
                 String username = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Username));
                 String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Distance));
-                long start_day = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.TopTable.Start_Day));
-                long end_day = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.TopTable.End_Day));
+                String start_day = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Start_Day));
+                String end_day = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.End_Day));
                 String top = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Top));
 
                 Top top1 = new Top();

@@ -70,7 +70,7 @@ public class JourneyUtil {
                     String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
                     String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
                     String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
-                    long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
+                    String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
                     String name = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Name));
                     String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
                     String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
@@ -118,7 +118,7 @@ public class JourneyUtil {
                     String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
                     String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
                     String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
-                    long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
+                    String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
                     String name = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Name));
                     String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
                     String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));

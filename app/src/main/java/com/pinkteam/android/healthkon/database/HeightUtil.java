@@ -64,7 +64,7 @@ public class HeightUtil {
             while (!cursor.isAfterLast()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Id));
                 String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
-                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
                 Height height = new Height();
                 height.setmId(Integer.parseInt(id));
@@ -79,14 +79,14 @@ public class HeightUtil {
         return heights;
     }
 
-    public Height getLastestdHeight(){
+    public Height getLastestHeight(){
         Height lastestHeight = new Height();
         Cursor cursor = viewData();
         cursor.moveToLast();
         if(cursor.getCount()>0){
             String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Id));
             String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
-            long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+            String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
             lastestHeight.setmId(Integer.parseInt(id));
             lastestHeight.setmValue(Integer.parseInt(value));

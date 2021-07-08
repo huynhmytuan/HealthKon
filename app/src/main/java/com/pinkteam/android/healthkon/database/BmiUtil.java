@@ -64,7 +64,7 @@ public class BmiUtil {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.BmiTable.Id));
-                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.BmiTable.Date));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.BmiTable.Date));
                 String curbmi = cursor.getString(cursor.getColumnIndex(dbHealthSchema.BmiTable.CurBMI));
                 String target_weight = cursor.getString(cursor.getColumnIndex(dbHealthSchema.BmiTable.Target_weight));
 
