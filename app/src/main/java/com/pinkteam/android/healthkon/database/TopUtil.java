@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.pinkteam.android.healthkon.database.*;
 import com.pinkteam.android.healthkon.Models.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,16 +18,21 @@ public class TopUtil {
 
     SQLiteDatabase mDatabase;
     Context mContext;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
     public TopUtil(Context context){
         mContext = context.getApplicationContext();
         mDatabase = new dbHeathHelper(mContext).getWritableDatabase();
     }
     private ContentValues topContentValues(Top top){
         ContentValues contentValues = new ContentValues();
+        String start = dateFormat.format(top.getmStart_day());
+        String end = dateFormat.format(top.getmEnd_day());
+
         contentValues.put(dbHealthSchema.TopTable.Username,top.getmUsername());
         contentValues.put(dbHealthSchema.TopTable.Distance,top.getmDistance());
-        contentValues.put(dbHealthSchema.TopTable.Start_Day, String.valueOf(top.getmStart_day()));
-        contentValues.put(dbHealthSchema.TopTable.End_Day, String.valueOf(top.getmEnd_day()));
+        contentValues.put(dbHealthSchema.TopTable.Start_Day, start);
+        contentValues.put(dbHealthSchema.TopTable.End_Day, end);
         contentValues.put(dbHealthSchema.TopTable.Top,top.getmTop());
 
         return contentValues;
@@ -67,17 +74,22 @@ public class TopUtil {
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Id));
                 String username = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Username));
                 String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Distance));
-                long start_day = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.TopTable.Start_Day));
-                long end_day = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.TopTable.End_Day));
+                String start_day = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Start_Day));
+                String end_day = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.End_Day));
                 String top = cursor.getString(cursor.getColumnIndex(dbHealthSchema.TopTable.Top));
 
                 Top top1 = new Top();
-                top1.setmId(Integer.parseInt(id));
-                top1.setmUsername(username);
-                top1.setmDistance(Integer.parseInt(distance));
-                top1.setmStart_day(new Date(start_day));
-                top1.setmEnd_day(new Date(end_day));
-                top1.setmTop(top);
+                try{
+                    top1.setmId(Integer.parseInt(id));
+                    top1.setmUsername(username);
+                    top1.setmDistance(Integer.parseInt(distance));
+                    top1.setmStart_day(dateFormat.parse(start_day));
+                    top1.setmEnd_day(dateFormat.parse(end_day));
+                    top1.setmTop(top);
+                }catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
+
 
                 tops.add(top1);
                 cursor.moveToNext();

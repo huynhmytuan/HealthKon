@@ -17,7 +17,7 @@ public class LocationUtil {
     SQLiteDatabase mDatabase;
     Context mContext;
     public LocationUtil(Context context){
-        mContext = context.getApplicationContext();
+        mContext = context;
         mDatabase = new dbHeathHelper(mContext).getWritableDatabase();
     }
 

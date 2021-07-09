@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.pinkteam.android.healthkon.database.*;
 import com.pinkteam.android.healthkon.Models.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,8 @@ public class HeightUtil {
 
     SQLiteDatabase mDatabase;
     Context mContext;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
     public HeightUtil(Context context){
         mContext = context.getApplicationContext();
         mDatabase = new dbHeathHelper(mContext).getWritableDatabase();
@@ -23,8 +27,9 @@ public class HeightUtil {
 
     private ContentValues heightContentValues(Height height){
         ContentValues contentValues = new ContentValues();
+        String date = dateFormat.format(height.getmDate());
         contentValues.put(dbHealthSchema.HeightTable.Value,height.getmValue());
-        contentValues.put(dbHealthSchema.HeightTable.Date, String.valueOf(height.getmDate()));
+        contentValues.put(dbHealthSchema.HeightTable.Date, date);
         return contentValues;
     }
 
@@ -64,12 +69,16 @@ public class HeightUtil {
             while (!cursor.isAfterLast()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Id));
                 String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
-                long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
                 Height height = new Height();
-                height.setmId(Integer.parseInt(id));
-                height.setmValue(Integer.parseInt(value));
-                height.setmDate(new Date(date));
+                try{
+                    height.setmId(Integer.parseInt(id));
+                    height.setmValue(Integer.parseInt(value));
+                    height.setmDate(dateFormat.parse(date));
+                }catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
 
                 heights.add(height);
                 cursor.moveToNext();
@@ -79,19 +88,60 @@ public class HeightUtil {
         return heights;
     }
 
-    public Height getLastestdHeight(){
+    public Height getLastestHeight(){
         Height lastestHeight = new Height();
         Cursor cursor = viewData();
         cursor.moveToLast();
         if(cursor.getCount()>0){
             String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Id));
             String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
-            long date = cursor.getLong(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
+            String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
-            lastestHeight.setmId(Integer.parseInt(id));
-            lastestHeight.setmValue(Integer.parseInt(value));
-            lastestHeight.setmDate(new Date(date));
+            try{
+                lastestHeight.setmId(Integer.parseInt(id));
+                lastestHeight.setmValue(Integer.parseInt(value));
+                lastestHeight.setmDate(dateFormat.parse(date));
+            }catch (Exception e){
+                Log.d("Database_Exp:",e.getMessage());
+            }
         }
         return lastestHeight;
+    }
+
+    public List<Height> getHeightInRange(Date StartDate, Date EndDate){
+
+        String starDate = dateFormat.format(StartDate);
+        String endDate = dateFormat.format(EndDate);
+
+        String query = " SELECT * FROM " + dbHealthSchema.HeightTable.TABLE_NAME +
+                " WHERE " + dbHealthSchema.HeightTable.Date + " BETWEEN \"" + starDate + "\" AND \"" + endDate +"\"";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        List <Height> heights = new ArrayList<>();
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Id));
+                String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Value));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
+
+                Height height = new Height();
+                try{
+                    height.setmId(Integer.parseInt(id));
+                    height.setmValue(Integer.parseInt(value));
+                    height.setmDate(dateFormat.parse(date));
+                }catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
+
+                heights.add(height);
+                cursor.moveToNext();
+            }
+            for(Height x : heights){
+                Log.d("Test print:","Id:"+x.getmId()+" and date: "+x.getmDate().toString());
+            }
+            cursor.close();
+        }
+        return heights;
     }
 }
