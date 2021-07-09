@@ -107,4 +107,41 @@ public class HeightUtil {
         }
         return lastestHeight;
     }
+
+    public List<Height> getHeightInRange(Date StartDate, Date EndDate){
+
+        String starDate = dateFormat.format(StartDate);
+        String endDate = dateFormat.format(EndDate);
+
+        String query = " SELECT * FROM " + dbHealthSchema.HeightTable.TABLE_NAME +
+                " WHERE " + dbHealthSchema.HeightTable.Date + " BETWEEN \"" + starDate + "\" AND \"" + endDate +"\"";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        List <Height> heights = new ArrayList<>();
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Id));
+                String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Value));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.WeightTable.Date));
+
+                Height height = new Height();
+                try{
+                    height.setmId(Integer.parseInt(id));
+                    height.setmValue(Integer.parseInt(value));
+                    height.setmDate(dateFormat.parse(date));
+                }catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
+
+                heights.add(height);
+                cursor.moveToNext();
+            }
+            for(Height x : heights){
+                Log.d("Test print:","Id:"+x.getmId()+" and date: "+x.getmDate().toString());
+            }
+            cursor.close();
+        }
+        return heights;
+    }
 }
