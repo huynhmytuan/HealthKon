@@ -4,10 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.pinkteam.android.healthkon.database.*;
 import com.pinkteam.android.healthkon.Models.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,8 @@ public class HeightUtil {
 
     SQLiteDatabase mDatabase;
     Context mContext;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
     public HeightUtil(Context context){
         mContext = context.getApplicationContext();
         mDatabase = new dbHeathHelper(mContext).getWritableDatabase();
@@ -23,8 +27,9 @@ public class HeightUtil {
 
     private ContentValues heightContentValues(Height height){
         ContentValues contentValues = new ContentValues();
+        String date = dateFormat.format(height.getmDate());
         contentValues.put(dbHealthSchema.HeightTable.Value,height.getmValue());
-        contentValues.put(dbHealthSchema.HeightTable.Date, String.valueOf(height.getmDate()));
+        contentValues.put(dbHealthSchema.HeightTable.Date, date);
         return contentValues;
     }
 
@@ -67,9 +72,13 @@ public class HeightUtil {
                 String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
                 Height height = new Height();
-                height.setmId(Integer.parseInt(id));
-                height.setmValue(Integer.parseInt(value));
-                height.setmDate(new Date(date));
+                try{
+                    height.setmId(Integer.parseInt(id));
+                    height.setmValue(Integer.parseInt(value));
+                    height.setmDate(dateFormat.parse(date));
+                }catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
 
                 heights.add(height);
                 cursor.moveToNext();
@@ -88,9 +97,13 @@ public class HeightUtil {
             String value = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Value));
             String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.HeightTable.Date));
 
-            lastestHeight.setmId(Integer.parseInt(id));
-            lastestHeight.setmValue(Integer.parseInt(value));
-            lastestHeight.setmDate(new Date(date));
+            try{
+                lastestHeight.setmId(Integer.parseInt(id));
+                lastestHeight.setmValue(Integer.parseInt(value));
+                lastestHeight.setmDate(dateFormat.parse(date));
+            }catch (Exception e){
+                Log.d("Database_Exp:",e.getMessage());
+            }
         }
         return lastestHeight;
     }

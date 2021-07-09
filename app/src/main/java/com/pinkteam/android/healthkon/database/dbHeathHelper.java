@@ -50,15 +50,6 @@ public class dbHeathHelper extends SQLiteOpenHelper {
                 dbHealthSchema.WeightTable.Date + " REAL )";
     }
 
-    private static final String CREATE_TABLE_BMI;
-    static {
-        CREATE_TABLE_BMI = " CREATE TABLE " + dbHealthSchema.BmiTable.TABLE_NAME + " (" +
-                dbHealthSchema.BmiTable.Id + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                dbHealthSchema.BmiTable.Date + " REAL, " +
-                dbHealthSchema.BmiTable.CurBMI + " REAL, " +
-                dbHealthSchema.BmiTable.Target_weight + " INTEGER )";
-    }
-
     private static final String CREATE_TABLE_TOP;
     static {
         CREATE_TABLE_TOP = " CREATE TABLE " + dbHealthSchema.TopTable.TABLE_NAME + " (" +
@@ -100,7 +91,6 @@ public class dbHeathHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_ACCOUNT);
         db.execSQL(CREATE_TABLE_HEIGHT);
         db.execSQL(CREATE_TABLE_WEIGHT);
-        db.execSQL(CREATE_TABLE_BMI);
         db.execSQL(CREATE_TABLE_TOP);
         db.execSQL(CREATE_TABLE_JOURNEY);
         db.execSQL(CREATE_TABLE_LOCATION);

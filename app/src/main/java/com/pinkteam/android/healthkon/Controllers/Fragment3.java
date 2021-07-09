@@ -113,10 +113,14 @@ public class Fragment3 extends Fragment {
         // if currently tracking then enable stopButton and disable startButton
         if(mLocationService != null && mLocationService.currentlyTracking()) {
             mStopButton.setEnabled(true);
+            mStopButton.setVisibility(View.VISIBLE);
             mStartButton.setEnabled(false);
+            mStartButton.setVisibility(View.GONE);
         } else {
             mStopButton.setEnabled(false);
+            mStopButton.setVisibility(View.GONE);
             mStartButton.setEnabled(true);
+            mStartButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -171,7 +175,9 @@ public class Fragment3 extends Fragment {
         // start the timer and tracking GPS locations
         mLocationService.playJourney();
         mStartButton.setEnabled(false);
+        mStartButton.setVisibility(View.GONE);
         mStopButton.setEnabled(true);
+        mStopButton.setVisibility(View.VISIBLE);
     }
 
     public void onClickStop(View view) {
@@ -180,7 +186,9 @@ public class Fragment3 extends Fragment {
         int journeyID = mLocationService.saveJourney();
 
         mStartButton.setEnabled(true);
+        mStartButton.setVisibility(View.VISIBLE);
         mStopButton.setEnabled(false);
+        mStopButton.setVisibility(View.GONE);
 
 
         DialogFragment modal = FinishedTrackingDialogue.newInstance(journeyID);

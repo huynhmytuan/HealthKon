@@ -29,13 +29,7 @@ public class dbHealthSchema {
         public static final String Value = "value";
         public static final String Date = "date";
     }
-    public static final class BmiTable{
-        public static final String TABLE_NAME = "bmi";
-        public static final String Id = "id";
-        public static final String Date = "date";
-        public static final String CurBMI = "cur_bmi";
-        public static final String  Target_weight= "target_weight";
-    }
+
     public static final class TopTable{
         public static final String TABLE_NAME = "top";
         public static final String Id = "id";
