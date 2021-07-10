@@ -198,13 +198,19 @@
         android:layout_weight="1.5"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_active"
+        <ImageButton
+            android:id="@+id/start_button"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/btnstart"
-            app:backgroundTint="@color/white"
-            app:backgroundTintMode="multiply"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:background="@drawable/btnstart" />
+
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btnstop" />
+
     </RelativeLayout>
 </LinearLayout>

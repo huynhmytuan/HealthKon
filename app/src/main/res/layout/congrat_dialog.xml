@@ -9,13 +9,13 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/btn_stoke_green"
         app:cardBackgroundColor="@color/green"
         app:cardCornerRadius="30dp"
         app:cardElevation="50dp"
-        app:cardPreventCornerOverlap="true"
-        android:layout_gravity="center">
+        app:cardPreventCornerOverlap="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/detail_button"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:layout_marginStart="50dp"
@@ -184,7 +184,7 @@
                     app:backgroundTintMode="multiply" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/run_again_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Run Again!"

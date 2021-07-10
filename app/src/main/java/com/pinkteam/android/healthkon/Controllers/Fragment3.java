@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,8 +34,6 @@ import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
 
-import org.w3c.dom.Text;
-
 public class Fragment3 extends Fragment {
     private LocationService.LocationServiceBinder mLocationService;
 
@@ -40,9 +41,11 @@ public class Fragment3 extends Fragment {
     private TextView mDurationText;
     private TextView mAvgSpeed;
 
-    private Button mStartButton;
-    private Button mStopButton;
+    private ImageButton mStartButton;
+    private ImageButton mStopButton;
     private static final int PERMISSION_GPS_CODE = 1;
+
+    private static Boolean running = false;
 
     // will poll the location service for distance and duration
     private Handler postBack = new Handler(Looper.getMainLooper());
@@ -127,17 +130,14 @@ public class Fragment3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.run_record, container, false);
+        View view = inflater.inflate(R.layout.run_record_layout, container, false);
 
-        mDistanceText  = (TextView) view.findViewById(R.id.total_distance_text);
-        mDurationText = (TextView) view.findViewById(R.id.duration_text);
-        mAvgSpeed = (TextView) view.findViewById(R.id.speed_text);
+        mDistanceText  = (TextView) view.findViewById(R.id.distance_textview);
+        mDurationText = (TextView) view.findViewById(R.id.time_textview);
+        mAvgSpeed = (TextView) view.findViewById(R.id.speed_textview);
 
-        mStartButton = (Button) view.findViewById(R.id.start_button);
-        mStopButton = (Button) view.findViewById(R.id.stop_button);
-
-        mStartButton.setEnabled(false);
-        mStopButton.setEnabled(false);
+        mStartButton = (ImageButton) view.findViewById(R.id.start_button);
+        mStopButton = (ImageButton) view.findViewById(R.id.stop_button);
 
         // register broadcast receiver to receive low battery broadcasts
         try {
@@ -158,7 +158,7 @@ public class Fragment3 extends Fragment {
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onClickPlay(v);
+                onClickPlay(v);
             }
         });
         mStopButton.setOnClickListener(new View.OnClickListener() {
@@ -169,15 +169,13 @@ public class Fragment3 extends Fragment {
         });
         return view;
     }
-
-
     public void onClickPlay(View view) {
         // start the timer and tracking GPS locations
-        mLocationService.playJourney();
         mStartButton.setEnabled(false);
         mStartButton.setVisibility(View.GONE);
         mStopButton.setEnabled(true);
         mStopButton.setVisibility(View.VISIBLE);
+        mLocationService.playJourney();
     }
 
     public void onClickStop(View view) {
@@ -185,11 +183,10 @@ public class Fragment3 extends Fragment {
         float distance = mLocationService.getDistance();
         int journeyID = mLocationService.saveJourney();
 
-        mStartButton.setEnabled(true);
-        mStartButton.setVisibility(View.VISIBLE);
         mStopButton.setEnabled(false);
         mStopButton.setVisibility(View.GONE);
-
+        mStartButton.setEnabled(true);
+        mStartButton.setVisibility(View.VISIBLE);
 
         DialogFragment modal = FinishedTrackingDialogue.newInstance(journeyID);
         modal.show(getParentFragmentManager(), "Finished");
@@ -226,13 +223,13 @@ public class Fragment3 extends Fragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             LayoutInflater i = getActivity().getLayoutInflater();
-            View view = i.inflate(R.layout.fragment_4,null);
+            View view = i.inflate(R.layout.congrat_dialog,null);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             TextView distance = (TextView) view.findViewById(R.id.distance_textview);
-            TextView duration = (TextView) view.findViewById(R.id.duration_textview);
-            TextView avgSpeed = (TextView) view.findViewById(R.id.avgspeed_textview);
+            TextView duration = (TextView) view.findViewById(R.id.time_textview);
+            TextView avgSpeed = (TextView) view.findViewById(R.id.speed_textview);
             Button detail = (Button) view.findViewById(R.id.detail_button);
             Button again = (Button) view.findViewById(R.id.run_again_button);
             again.setOnClickListener(new View.OnClickListener() {
