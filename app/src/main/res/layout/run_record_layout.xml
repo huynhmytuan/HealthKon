@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
+        android:layout_weight="1.4"
         android:orientation="vertical">
 
         <LinearLayout
@@ -192,18 +192,19 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_startrun"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_active"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:background="@drawable/btnstart"
             app:backgroundTint="@color/white"
-            app:backgroundTintMode="multiply" />
-    </LinearLayout>
+            app:backgroundTintMode="multiply"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 </LinearLayout>
