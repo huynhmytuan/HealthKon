@@ -3,7 +3,7 @@ package com.pinkteam.android.healthkon.Models;
 import java.util.Date;
 
 public class Height {
-    private int mId;
+    public int mId;
     private int mValue;
     private Date mDate;
 
