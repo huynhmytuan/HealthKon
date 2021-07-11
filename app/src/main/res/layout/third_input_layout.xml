@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgweigh"
+    android:background="@drawable/bgrselultdetail"
     android:orientation="vertical"
     android:weightSum="3">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.1"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <ImageView
@@ -26,7 +26,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.9"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
@@ -44,21 +44,28 @@
 
             </NumberPicker>
 
-            <Button
-                android:id="@+id/next_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/edittext_bg"
-                android:fontFamily="@font/roboto"
-                android:text="Next >>"
-                android:textAllCaps="false"
-                android:textSize="18sp"
-                app:backgroundTint="@color/white"
-                app:backgroundTintMode="multiply" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/next_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="Next >"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:backgroundTint="@color/white"
+            app:backgroundTintMode="multiply" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
