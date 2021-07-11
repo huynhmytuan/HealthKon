@@ -7,16 +7,17 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/details_btn"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_gravity="right"
+        android:layout_marginVertical="10dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginVertical="10dp"
         android:background="@drawable/btn_stoke_green"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/roboto"
         android:text="BMI Diagnostics"
         android:textSize="14dp"
         app:backgroundTint="@color/white"
@@ -60,7 +61,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="monospace"
+                            android:fontFamily="@font/roboto"
                             android:gravity="center"
                             android:text="Statistical:"
                             android:textColor="@color/white"
@@ -83,7 +84,7 @@
                                     android:id="@+id/heightextview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:text="Heigh:"
                                     android:textColor="@color/white"
@@ -93,7 +94,7 @@
                                     android:id="@+id/weightextview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:text="Weigh:"
                                     android:textColor="@color/white"
@@ -139,16 +140,16 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -165,7 +166,7 @@
                                     android:id="@+id/heigh_textview12"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:text="BMI Status:"
                                     android:textColor="@color/white"
@@ -175,7 +176,7 @@
                                     android:id="@+id/textView13"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:text="BMI Score :"
                                     android:textColor="@color/white"
@@ -192,7 +193,7 @@
                                     android:id="@+id/statusbmi_textview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:textColor="@color/white"
                                     android:textSize="20sp" />
@@ -201,7 +202,7 @@
                                     android:id="@+id/scorebmi_textview"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
+                                    android:fontFamily="@font/roboto"
                                     android:gravity="center"
                                     android:textColor="@color/white"
                                     android:textSize="20sp" />
@@ -257,20 +258,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/button_area"
-                android:fontFamily="monospace"
-                android:gravity="center"
                 android:layout_marginVertical="50px"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
                 android:text="00/00/00 - 00/00/00"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:paddingHorizontal="20dp"
                 android:id="@+id/lineChart"
                 android:layout_width="match_parent"
                 android:layout_height="750px"
                 android:layout_below="@id/date_range_textview"
+                android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
+                android:paddingHorizontal="20dp"
                 android:scaleType="matrix" />
         </RelativeLayout>
     </ScrollView>
@@ -282,9 +284,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|right"
-        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/plus"
         android:clickable="true"
         app:backgroundTint="@color/green"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/plus1" />
 </RelativeLayout>
