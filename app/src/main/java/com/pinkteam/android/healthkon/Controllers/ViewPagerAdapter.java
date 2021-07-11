@@ -19,7 +19,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new Fragment2();
             case 2:
-                return new Fragment3();
+                return new RunRecordFragment();
             case 3:
                 return new Fragment4();
             case 4:

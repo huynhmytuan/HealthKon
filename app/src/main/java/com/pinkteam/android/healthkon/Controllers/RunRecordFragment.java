@@ -34,7 +34,7 @@ import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
 
-public class Fragment3 extends Fragment {
+public class RunRecordFragment extends Fragment {
     private LocationService.LocationServiceBinder mLocationService;
 
     private TextView mDistanceText;
@@ -44,8 +44,6 @@ public class Fragment3 extends Fragment {
     private ImageButton mStartButton;
     private ImageButton mStopButton;
     private static final int PERMISSION_GPS_CODE = 1;
-
-    private static Boolean running = false;
 
     // will poll the location service for distance and duration
     private Handler postBack = new Handler(Looper.getMainLooper());
