@@ -409,7 +409,7 @@ public class BmiCalculateFragment extends Fragment {
             mChart.setData(lineData);
             mChart.getLegend().setEnabled(false);
             //Animate the data. millisecond.Larger numbers are slower
-            mChart.animateX(1000);
+            mChart.animateX(700);
         }else {
             mChart.invalidate();
             mChart.clear();
