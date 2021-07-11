@@ -22,7 +22,7 @@
             android:layout_marginEnd="50dp"
             android:background="@drawable/btn_stoke_green"
             android:fontFamily="monospace"
-            android:text="View details"
+            android:text="BMI Diagnostics"
             android:textSize="14dp"
             app:backgroundTint="@color/white"
             app:backgroundTintMode="multiply" />
@@ -242,24 +242,37 @@
             app:backgroundTintMode="multiply" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/date_range_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="00:00 00/00/00 - 00:00 00/00/00"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/chart"
-        android:orientation="vertical">
+        android:background="@drawable/chart">
 
-        <Button
-            android:id="@+id/btn_plus"
-            android:layout_width="67dp"
-            android:layout_height="67dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btnplus"
-            app:backgroundTint="@color/white"
-            app:backgroundTintMode="multiply" />
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:background="@drawable/plus"
+            android:clickable="true"
+            app:backgroundTint="@color/green"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </LinearLayout>

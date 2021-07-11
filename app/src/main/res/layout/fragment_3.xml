@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgweigh"
     android:orientation="vertical"
     android:weightSum="3">
 
@@ -12,16 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:srcCompat="@drawable/textpage1" />
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,84 +19,45 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:fontFamily="monospace"
-            android:text="Name:"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
         <EditText
             android:id="@+id/name_text"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="28dp"
-            android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:fontFamily="monospace"
-            android:gravity="center"
             android:hint="Your Name"
             android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="@color/material_on_primary_emphasis_medium"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="9dp"
-            android:fontFamily="monospace"
-            android:text="Email:"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/email_text"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="28dp"
-            android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:gravity="center"
             android:hint="Your Email"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/material_on_primary_emphasis_medium"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="9dp"
-            android:fontFamily="monospace"
-            android:text="Phone Number:"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/phone_text"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="28dp"
-            android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:gravity="center"
             android:hint="Your Phone Number"
             android:inputType="phone"
             android:textColorHint="@color/material_on_primary_emphasis_medium"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/next_button"
@@ -116,10 +67,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_bg"
-            android:fontFamily="monospace"
-            android:text="Next >>"
-            android:textAllCaps="false"
-            android:textSize="18sp"
+            android:text="Next!"
             app:backgroundTint="@color/white"
             app:backgroundTintMode="multiply" />
     </LinearLayout>
