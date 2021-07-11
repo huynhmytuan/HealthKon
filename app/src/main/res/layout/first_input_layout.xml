@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgweigh"
     android:orientation="vertical"
     android:weightSum="3">
 
@@ -34,10 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="29dp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/roboto"
             android:text="Name:"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15dp" />
 
         <EditText
             android:id="@+id/name_text"
@@ -48,8 +47,8 @@
             android:layout_marginEnd="28dp"
             android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:fontFamily="monospace"
-            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:gravity="left|center_vertical"
             android:hint="Your Name"
             android:inputType="textPersonName"
             android:textColor="@color/white"
@@ -62,10 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="29dp"
             android:layout_marginTop="9dp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/roboto"
             android:text="Email:"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/email_text"
@@ -76,9 +75,11 @@
             android:layout_marginEnd="28dp"
             android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:gravity="left|center_vertical"
             android:hint="Your Email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/white"
             android:textColorHint="@color/material_on_primary_emphasis_medium"
             android:textSize="16sp" />
 
@@ -88,10 +89,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="29dp"
             android:layout_marginTop="9dp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/roboto"
             android:text="Phone Number:"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/phone_text"
@@ -102,9 +103,11 @@
             android:layout_marginEnd="28dp"
             android:background="@drawable/edit_text_stoke_green"
             android:ems="10"
-            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:gravity="left|center_vertical"
             android:hint="Your Phone Number"
             android:inputType="phone"
+            android:textColor="@color/white"
             android:textColorHint="@color/material_on_primary_emphasis_medium"
             android:textSize="16sp" />
 
@@ -116,7 +119,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_bg"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/roboto"
             android:text="Next >>"
             android:textAllCaps="false"
             android:textSize="18sp"

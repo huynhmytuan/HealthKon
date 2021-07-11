@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgweigh"
     android:orientation="vertical"
     android:weightSum="3">
 
@@ -80,10 +79,11 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="50dp"
                     android:layout_weight="1"
-                    android:fontFamily="monospace"
+                    android:fontFamily="@font/roboto"
                     android:text="Male"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/female_radiobtn"
@@ -92,10 +92,11 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="50dp"
                     android:layout_weight="1"
-                    android:fontFamily="monospace"
+                    android:fontFamily="@font/roboto"
                     android:text="Female"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </RadioGroup>
         </LinearLayout>
@@ -108,7 +109,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/edittext_bg"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/roboto"
             android:text="Next >>"
             android:textAllCaps="false"
             android:textSize="18sp"
