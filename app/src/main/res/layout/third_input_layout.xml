@@ -11,37 +11,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.3"
-        android:orientation="vertical" />
+        android:layout_weight="2.1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/textpageweigh" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.9"
         android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/weigh_numberpicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edittext_background">
-
-        </NumberPicker>
-
-        <Button
-            android:id="@+id/next_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/edittext_bg"
-            android:text="Next!"
-            app:backgroundTint="@color/white"
-            app:backgroundTintMode="multiply" />
-    </LinearLayout>
+            android:orientation="vertical">
 
+            <NumberPicker
+                android:id="@+id/weight_numberpicker"
+                android:layout_width="wrap_content"
+                android:layout_height="206dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_background">
+
+            </NumberPicker>
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/edittext_bg"
+                android:fontFamily="monospace"
+                android:text="Next >>"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:backgroundTint="@color/white"
+                app:backgroundTintMode="multiply" />
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
