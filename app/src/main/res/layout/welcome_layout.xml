@@ -50,7 +50,7 @@
             android:fontFamily="@font/roboto"
             android:text="Next Step >>"
             android:textAllCaps="false"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:textStyle="italic|bold" />
 
     </LinearLayout>

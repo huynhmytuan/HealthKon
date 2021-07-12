@@ -23,18 +23,22 @@
         </receiver>
 
         <service
-        android:name=".Controllers.LocationService"
-        android:enabled="true"
-        android:exported="true" />
-
-        <activity android:name=".Controllers.MainActivity">
+            android:name=".Controllers.LocationService"
+            android:enabled="true"
+            android:exported="true" />
+        <activity android:name=".Controllers.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Controllers.MainActivity"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
 </manifest>
+
+
+
+
