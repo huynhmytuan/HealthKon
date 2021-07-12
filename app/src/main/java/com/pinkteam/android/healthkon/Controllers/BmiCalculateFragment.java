@@ -1,48 +1,42 @@
 package com.pinkteam.android.healthkon.Controllers;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
-import android.icu.util.TimeZone;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
-import android.renderscript.Sampler;
+import android.os.Vibrator;
 import android.util.*;
 import android.view.*;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.Chart;
+import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pinkteam.android.healthkon.Models.Height;
 import com.pinkteam.android.healthkon.Models.Weight;
@@ -52,18 +46,12 @@ import com.pinkteam.android.healthkon.database.WeightUtil;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 import static androidx.core.content.ContextCompat.startActivities;
 
 
@@ -71,6 +59,7 @@ public class BmiCalculateFragment extends Fragment {
 
     HeightUtil mHU;
     WeightUtil mWU;
+    MediaPlayer mp;
 
     TextView mViewHeight;
     TextView mViewWeight;
@@ -79,9 +68,10 @@ public class BmiCalculateFragment extends Fragment {
     TextView mViewDate;
     LineChart mChart;
 
+
     private Button mWeightBtn;
     private Button mHeightBtn;
-    private Button mCalendarBtn;
+    private LottieAnimationView mCalendarBtn;
 
     private AlertDialog dialogAdd;
     FloatingActionButton mFloatButtonAdd;
@@ -99,6 +89,8 @@ public class BmiCalculateFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bmi_calculate_layout, container, false);
+
+        mp = MediaPlayer.create(getActivity(),R.raw.effect_tick);;
 
         mHU = new HeightUtil(this.getContext());
         mWU = new WeightUtil(this.getContext());
@@ -129,7 +121,7 @@ public class BmiCalculateFragment extends Fragment {
 
         mChart = view.findViewById(R.id.lineChart);
 
-        mCalendarBtn = (Button) view.findViewById(R.id.view_cal_btn);
+        mCalendarBtn = (LottieAnimationView) view.findViewById(R.id.view_cal_btn);
 
 
 
@@ -146,7 +138,7 @@ public class BmiCalculateFragment extends Fragment {
         mFloatButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialogAdd(v);
+                AddDialogueShow();
             }
         });
 
@@ -241,7 +233,7 @@ public class BmiCalculateFragment extends Fragment {
         String string_date2 = sdf2.format(EndDate);
 
 
-        String selectedDateStr = string_date + " - " + string_date2;
+        String selectedDateStr ="Range Date: "+ string_date + " - " + string_date2;
         mViewDate.setText(selectedDateStr);
     }
 
@@ -342,7 +334,7 @@ public class BmiCalculateFragment extends Fragment {
         if(valuesSet != null){
             LineDataSet data;   //Line arguments
             //Graph background color
-            mChart.setBackgroundColor(Color.BLACK);
+            mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.cod_gray));
 
             //x-axis setting
             XAxis xAxis = mChart.getXAxis();
@@ -363,6 +355,7 @@ public class BmiCalculateFragment extends Fragment {
 
             //Make the y-axis a dashed line
             yAxis.setDrawZeroLine(false);
+            yAxis.enableAxisLineDashedLine(120f, 10f,0f);
 
 
             //The scale on the right. False if not needed
@@ -420,13 +413,13 @@ public class BmiCalculateFragment extends Fragment {
 
     //Refresh layout
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void RefreshLayout(View view){
+    private  void RefreshLayout(View view){
         Height mHeight = mHU.getLastestHeight();
-        String lastHeight = Integer.toString(mHeight.getmValue()) + " cm";
+        String lastHeight = Integer.toString(mHeight.getmValue());
         mViewHeight.setText(lastHeight);
 
         Weight mWeight = mWU.getLastestWeight();
-        String lastWeight = Integer.toString(mWeight.getmValue()) + " kg";
+        String lastWeight = Integer.toString(mWeight.getmValue());
         mViewWeight.setText(lastWeight);
 
         calculateBMI(mWeight.getmValue(), mHeight.getmValue());
@@ -470,74 +463,90 @@ public class BmiCalculateFragment extends Fragment {
 
 
     //Show dialog add information
-    public void ShowDialogAdd(View view) {
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View layout_dialog_add = inflater.inflate(R.layout.fragment_custom_dialog,null);
+    public void AddDialogueShow(){
+            Button mSavebtn;
+            Button mCancelbtn;
+            NumberPicker weightNumPicker;
+            NumberPicker heightNumPicker;
+            HeightUtil mHUtil = new HeightUtil(getContext());
+            WeightUtil mWUtil = new WeightUtil(getContext());
 
-        //------------------- build dialog add new ---------------------
-        // Xây dựng cái view
-        if (layout_dialog_add.getParent() != null) {// xóa các view ở lần bấm chuột trước
-            ((ViewGroup) layout_dialog_add.getParent()).removeAllViews();
-        }
-        //layout_root should be the name of the "top-level" layout node in the dialog_layout.xml file.
-        final EditText itemWeight = (EditText) layout_dialog_add.findViewById(R.id.itemWeight);  // editext này lấy ở file layout_custom_dialog
-        final EditText itemHeight = (EditText) layout_dialog_add.findViewById(R.id.itemHeight);
+            LayoutInflater i = getActivity().getLayoutInflater();
+            View view = i.inflate(R.layout.fragment_custom_dialog,null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-
-        //Building dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(layout_dialog_add);
-        builder.setTitle("Update information");
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            weightNumPicker = (NumberPicker) view.findViewById(R.id.itemWeight);
+            if (weightNumPicker != null) {
+                weightNumPicker.setMinValue(1);
+                weightNumPicker.setMaxValue(200);
+                weightNumPicker.setValue(40);
+                weightNumPicker.setWrapSelectorWheel(true);
+                weightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialogAdd.dismiss();
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(100);
+                        mp.setLooping(false);
+                        if(mp.isPlaying()){
+                            mp.stop();
+                        }
+                        mp.start();
                     }
-                }
-        );
-        builder.setPositiveButton("Save",null);
-        dialogAdd = builder.create();
-        dialogAdd.show();
-        dialogAdd.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View v) {
-                boolean error = false;
-                String _Weight = itemWeight.getText().toString();
-                String _Height = itemHeight.getText().toString();
-
-
-                if(_Weight.isEmpty()){
-                    itemWeight.setError("The value can't be empty");
-                    error = true;
-                }else{
-                    if(Integer.parseInt(_Weight) < 20 || Integer.parseInt(_Weight) > 200) {
-                        itemWeight.setError("The value must more than 20 and under 200.");
-                        error = true;
-                    }
-                }
-
-                if(_Height.isEmpty()) {
-                    itemHeight.setError("The value can't be empty");
-                    error = true;
-                }else{
-                    if(Integer.parseInt(_Height) <= 50 || Integer.parseInt(_Height) > 230) {
-                        itemHeight.setError("The value more than 49 and under 230.");
-                        error = true;
-                    }
-                }
-
-                if(!error){
-                    Date date = new Date();
-                    mHU.add(Integer.parseInt(_Height),date);
-                    mWU.add(Integer.parseInt(_Weight),date);
-                    Toast.makeText(getContext(),"You enter: " + _Weight + "\n" + _Height, Toast.LENGTH_SHORT).show();
-                    RefreshLayout(getView());
-                    dialogAdd.dismiss(); // tắt dialog
-                }
+                });
             }
-        });
-    }
+        //set builder view
+            builder.setView(view);
+
+            // Create the AlertDialog object and return it
+            AlertDialog dialog =  builder.create();
+            heightNumPicker = (NumberPicker) view.findViewById(R.id.itemHeight);
+            if (heightNumPicker != null) {
+                heightNumPicker.setMinValue(1);
+                heightNumPicker.setMaxValue(220);
+                heightNumPicker.setValue(150);
+                heightNumPicker.setWrapSelectorWheel(true);
+                heightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(100);
+                        mp.setLooping(false);
+                        if(mp.isPlaying()){
+                            mp.stop();
+                        }
+                        mp.start();
+                    }
+                });
+            }
+
+            mSavebtn = (Button) view.findViewById(R.id.save_button);
+            mSavebtn.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onClick(View v) {
+
+                    Date date = new Date();
+                    mHUtil.add(heightNumPicker.getValue(),date);
+                    mWUtil.add(weightNumPicker.getValue(),date);
+                    Toast.makeText(getContext(),"You enter: \n"
+                            +"- Weight: "+ weightNumPicker.getValue()
+                            + "\n - Height: " + heightNumPicker.getValue(), Toast.LENGTH_SHORT).show();
+                    RefreshLayout(getView());
+                    dialog.dismiss();
+                }
+
+            });
 
 
+            mCancelbtn = (Button) view.findViewById(R.id.cancel_button);
+            mCancelbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+
+            });
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
 }
