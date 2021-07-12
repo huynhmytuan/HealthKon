@@ -2,6 +2,8 @@ package com.pinkteam.android.healthkon.Controllers;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,21 +41,41 @@ public class OnboardFragment1 extends Fragment {
                 EditText phoneEdt = (EditText) view.findViewById(R.id.phone_text);
                 EditText ageEdt = (EditText) view.findViewById(R.id.age_text);
                 boolean error = false;
-                if(!ValidateHelper.validateName(nameEdt)){
-                    nameEdt.setError("Please enter a valid name");
+                if(nameEdt.getText().toString().isEmpty()){
+                    nameEdt.setError("Please enter your name here.");
                     error = true;
+                }else {
+                    if(!ValidateHelper.validateName(nameEdt)){
+                        nameEdt.setError("Name can't be contains number.");
+                        error = true;
+                    }
                 }
-                if(!ValidateHelper.validatePhone(phoneEdt)) {
-                    phoneEdt.setError("Please enter a valid phone number\n (i.e 0798469633)");
+                if(phoneEdt.getText().toString().isEmpty()){
+                    phoneEdt.setError("Please enter your phone number.");
                     error = true;
+                }else {
+                    if(!ValidateHelper.validatePhone(phoneEdt)) {
+                        phoneEdt.setError("Please enter a valid Viet Nam \nphone number (i.e 0798469633)");
+                        error = true;
+                    }
                 }
-                if(!ValidateHelper.validateAge(ageEdt)){
-                    ageEdt.setError("Please enter a valid age number ");
+                if(ageEdt.getText().toString().isEmpty()){
+                    ageEdt.setError("Please enter your age.");
                     error = true;
+                }else {
+                    if(!ValidateHelper.validateAge(ageEdt)){
+                        ageEdt.setError("Please enter a valid age number.");
+                        error = true;
+                    }
                 }
-                if(!ValidateHelper.validateEmail(emailEdt)) {
-                    emailEdt.setError("Please enter a valid individual email\n address (i.e name12@email.com). ");
+                if(emailEdt.getText().toString().isEmpty()){
+                    emailEdt.setError("Please enter your email address.");
                     error = true;
+                }else {
+                    if(!ValidateHelper.validateEmail(emailEdt)) {
+                        emailEdt.setError("Please enter a valid individual email\n address (i.e name12@email.com). ");
+                        error = true;
+                    }
                 }
                 if(!error){
                     WelcomeActivity.user.setmName(nameEdt.getText().toString());
