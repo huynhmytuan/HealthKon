@@ -75,8 +75,8 @@ public class RunRecordFragment extends Fragment {
                         }
 
                         final String time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                        final String dist = String.format("%.2f Km", distance);
-                        final String avgs = String.format("%.2f Km/h", avgSpeed);
+                        final String dist = String.format("%.2f", distance);
+                        final String avgs = String.format("%.2f", avgSpeed);
 
                         postBack.post(new Runnable() {
                             @Override
@@ -225,11 +225,10 @@ public class RunRecordFragment extends Fragment {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-            TextView distance = (TextView) view.findViewById(R.id.distance_textview);
-            TextView duration = (TextView) view.findViewById(R.id.time_textview);
-            TextView avgSpeed = (TextView) view.findViewById(R.id.speed_textview);
             Button detail = (Button) view.findViewById(R.id.detail_button);
-            Button again = (Button) view.findViewById(R.id.run_again_button);
+            TextView again = (TextView) view.findViewById(R.id.run_again_button);
+            TextView resutlTextView = (TextView) view.findViewById(R.id.run_result_text);
+
             again.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -246,9 +245,9 @@ public class RunRecordFragment extends Fragment {
             final long seconds = journey.getmDuration() % 60;
             float avg = journey.getmDistance() / ((float)journey.getmDuration() / 3600);
 
-            distance.setText(String.format("%.2f Km", journey.getmDistance()));
-            duration.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-            avgSpeed.setText(String.format("%.2f Km/h", avg));
+            resutlTextView.setText("You have been run  "+String.format("%.2f km", journey.getmDistance())
+                    + " in " +String.format("%02d:%02d:%02d", hours, minutes, seconds)+"\n"+
+                    "Average Speed: "+String.format("%.2f km/h", avg));
 
             //set builder view
             builder.setView(view);
