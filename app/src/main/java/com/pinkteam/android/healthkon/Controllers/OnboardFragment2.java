@@ -20,6 +20,10 @@ import com.pinkteam.android.healthkon.R;
 public class OnboardFragment2 extends Fragment {
     NonSwipeableViewPager viewPager;
     Button nextButton;
+    Button backButton;
+    RadioButton maleCheck;
+    RadioButton femaleCheck;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -29,33 +33,52 @@ public class OnboardFragment2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.second_input_layout, container, false);
-
         viewPager = getActivity().findViewById(R.id.slide_viewpager);
-        nextButton = view.findViewById(R.id.next_button2);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RadioButton maleCheck = (RadioButton) view.findViewById(R.id.male_radiobtn);
-                RadioButton femaleCheck = (RadioButton) view.findViewById(R.id.female_radiobtn);
-                if(!maleCheck.isChecked() && !femaleCheck.isChecked()){
-                    Toast.makeText(getContext(),"Please choose your gender.",Toast.LENGTH_SHORT).show();
-                }
-                if(maleCheck.isChecked()){
-                    WelcomeActivity.user.setmGender("Male");
-                    viewPager.setCurrentItem(3);
-                }else {
-                    if(femaleCheck.isChecked()){
-                        WelcomeActivity.user.setmGender("Female");
-                        viewPager.setCurrentItem(3);
-                    }
-                }
-                Log.d("Test user:", "name:"+WelcomeActivity.user.getmName()
-                        + " - email:"+WelcomeActivity.user.getmEmail()
-                        + " - phone:"+WelcomeActivity.user.getmPhone()
-                        + " - Gender:"+WelcomeActivity.user.getmGender()
-                        + " - Age:"+WelcomeActivity.user.getmAge());
-            }
-        });
+
+        maleCheck = (RadioButton) view.findViewById(R.id.male_radiobtn);
+        femaleCheck = (RadioButton) view.findViewById(R.id.female_radiobtn);
         return view;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            nextButton = getActivity().findViewById(R.id.next_button);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(!maleCheck.isChecked() && !femaleCheck.isChecked()){
+                        Toast.makeText(getContext(),"Please choose your gender.",Toast.LENGTH_SHORT).show();
+                    }
+                    if(maleCheck.isChecked()){
+                        WelcomeActivity.user.setmGender("Male");
+                        viewPager.setCurrentItem(3);
+                    }else {
+                        if(femaleCheck.isChecked()){
+                            WelcomeActivity.user.setmGender("Female");
+                            viewPager.setCurrentItem(3);
+                        }
+                    }
+                    Log.d("Test user:", "name:"+WelcomeActivity.user.getmName()
+                            + " - email:"+WelcomeActivity.user.getmEmail()
+                            + " - phone:"+WelcomeActivity.user.getmPhone()
+                            + " - Gender:"+WelcomeActivity.user.getmGender()
+                            + " - Age:"+WelcomeActivity.user.getmAge());
+                }
+            });
+            nextButton.setText("Next");
+            nextButton.setVisibility(View.VISIBLE);
+
+            backButton = getActivity().findViewById(R.id.back_button);
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(1);
+                }
+            });
+            backButton.setVisibility(View.VISIBLE);
+            backButton.setText("Back");
+        }
     }
 }

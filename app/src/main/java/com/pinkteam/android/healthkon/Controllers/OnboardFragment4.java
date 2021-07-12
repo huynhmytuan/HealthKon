@@ -27,6 +27,7 @@ import java.util.Date;
 
 public class OnboardFragment4 extends Fragment {
     NonSwipeableViewPager viewPager;
+    Button backButton;
     Button finishButton;
     NumberPicker heightNumPicker;
     UserUtil mUU;
@@ -52,22 +53,39 @@ public class OnboardFragment4 extends Fragment {
             heightNumPicker.setValue(150);
             heightNumPicker.setWrapSelectorWheel(true);
         }
-        finishButton = view.findViewById(R.id.next_button4);
-        finishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-                Intent i = new Intent(getActivity(),MainActivity.class);
-                startActivity(i);
-                WelcomeActivity.height.setmDate(new Date());
-                WelcomeActivity.height.setmValue(heightNumPicker.getValue());
-                Log.d("Test height:", "Height: " +WelcomeActivity.height.getmValue()
-                        + " - Date: " +WelcomeActivity.height.getmDate());
-                mUU.add(WelcomeActivity.user.getmName(),WelcomeActivity.user.getmAge(),WelcomeActivity.user.getmGender(),WelcomeActivity.user.getmEmail(),WelcomeActivity.user.getmPhone());
-                mWU.add(WelcomeActivity.weight.getmValue(),WelcomeActivity.weight.getmDate());
-                mHU.add(WelcomeActivity.height.getmValue(),WelcomeActivity.height.getmDate());
-            }
-        });
         return view;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            finishButton = getActivity().findViewById(R.id.next_button);
+            finishButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().finish();
+                    Intent i = new Intent(getActivity(),MainActivity.class);
+                    startActivity(i);
+                    WelcomeActivity.height.setmDate(new Date());
+                    WelcomeActivity.height.setmValue(heightNumPicker.getValue());
+                    Log.d("Test height:", "Height: " +WelcomeActivity.height.getmValue()
+                            + " - Date: " +WelcomeActivity.height.getmDate());
+                    mUU.add(WelcomeActivity.user.getmName(),WelcomeActivity.user.getmAge(),WelcomeActivity.user.getmGender(),WelcomeActivity.user.getmEmail(),WelcomeActivity.user.getmPhone());
+                    mWU.add(WelcomeActivity.weight.getmValue(),WelcomeActivity.weight.getmDate());
+                    mHU.add(WelcomeActivity.height.getmValue(),WelcomeActivity.height.getmDate());
+                }
+            });
+            finishButton.setVisibility(View.VISIBLE);
+            finishButton.setText("Done");
+
+            backButton = getActivity().findViewById(R.id.back_button);
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(3);
+                }
+            });
+            backButton.setVisibility(View.VISIBLE);
+        }
     }
 }

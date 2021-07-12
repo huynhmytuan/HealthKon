@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgrselultdetail"
     android:orientation="vertical"
     android:weightSum="2">
 
@@ -48,26 +47,11 @@
                 android:layout_marginStart="160dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="160dp"
-                android:background="@drawable/background_btn"
                 android:gravity="center"
-                android:solidColor="@color/green">
-
+                android:theme="@style/NumberPickerTextColorStyle"
+                >
             </NumberPicker>
 
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/next_button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="Done"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:backgroundTint="@color/white"
-        app:backgroundTintMode="multiply" />
 </LinearLayout>

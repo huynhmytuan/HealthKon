@@ -1,13 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgweigh">
+    android:background="@drawable/bgrselultdetail">
 
     <com.pinkteam.android.healthkon.Controllers.NonSwipeableViewPager
         android:id="@+id/slide_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.pinkteam.android.healthkon.Controllers.NonSwipeableViewPager>
+    <RelativeLayout
 
-</RelativeLayout>
+        android:layout_below="@id/slide_viewpager"
+        android:id="@+id/button_area"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:backgroundTint="@color/white"
+            app:backgroundTintMode="multiply"
+            app:cornerRadius="15dp" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:backgroundTint="@color/white"
+            app:backgroundTintMode="multiply"
+            app:cornerRadius="15dp" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

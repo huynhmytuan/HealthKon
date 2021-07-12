@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgrselultdetail"
     android:orientation="vertical"
     android:weightSum="2">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1.2"
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            app:srcCompat="@drawable/textpage1" />
-
+            app:srcCompat="@drawable/textpage1"
+            android:layout_weight="1.6"/>
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="182dp"
-            app:srcCompat="@drawable/logoapp" />
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/logoapp"
+            android:layout_weight="1.5"/>
     </LinearLayout>
 
     <LinearLayout
@@ -56,7 +57,7 @@
             android:ems="10"
             android:fontFamily="@font/roboto"
             android:gravity="left|center_vertical"
-            android:hint="Your Name"
+            android:hint="Enter your full name"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
@@ -96,7 +97,7 @@
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:gravity="left|center_vertical"
-                    android:hint="Your Age"
+                    android:hint="Enter your age"
                     android:inputType="number"
                     android:paddingLeft="10dp"
                     android:textColor="@color/white"
@@ -133,7 +134,7 @@
                     android:ems="10"
                     android:fontFamily="@font/roboto"
                     android:gravity="left|center_vertical"
-                    android:hint="Your Phone"
+                    android:hint="Enter your phone"
                     android:inputType="phone"
                     android:paddingLeft="10dp"
                     android:textColor="@color/white"
@@ -165,7 +166,7 @@
             android:ems="10"
             android:fontFamily="@font/roboto"
             android:gravity="left|center_vertical"
-            android:hint="Your Email"
+            android:hint="i.e example@mail.com"
             android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
             android:textColor="@color/white"
@@ -174,17 +175,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/next_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/roboto"
-        android:text="Next >"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:backgroundTint="@color/white"
-        app:backgroundTintMode="multiply" />
 </LinearLayout>

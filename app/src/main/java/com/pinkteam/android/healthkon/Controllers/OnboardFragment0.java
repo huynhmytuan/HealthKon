@@ -16,6 +16,9 @@ import com.pinkteam.android.healthkon.R;
 
 public class OnboardFragment0 extends Fragment {
     Button next;
+    Button backButton;
+    Button nextButton;
+
     NonSwipeableViewPager viewPager;
     @Override
     public void onAttach(@NonNull Context context) {
@@ -27,15 +30,20 @@ public class OnboardFragment0 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.welcome_layout, container, false);
         viewPager = getActivity().findViewById(R.id.slide_viewpager);
-        next = view.findViewById(R.id.next_btn);
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(1);
-            }
-        });
-
+        if(viewPager.getCurrentItem() == 0){
+            next = view.findViewById(R.id.next_btn);
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(1);
+                }
+            });
+            nextButton = getActivity().findViewById(R.id.next_button);
+            backButton = getActivity().findViewById(R.id.back_button);
+            nextButton.setVisibility(View.GONE);
+            backButton.setVisibility(View.GONE);
+        }
         return view;
     }
 }

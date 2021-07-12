@@ -22,6 +22,7 @@ public class OnboardFragment3 extends Fragment {
     NonSwipeableViewPager viewPager;
     NumberPicker weightNumPicker;
     Button nextButton;
+    Button backButton;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -42,17 +43,35 @@ public class OnboardFragment3 extends Fragment {
             weightNumPicker.setValue(40);
             weightNumPicker.setWrapSelectorWheel(true);
         }
-        nextButton = view.findViewById(R.id.next_button2);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(4);
-                WelcomeActivity.weight.setmDate(new Date());
-                WelcomeActivity.weight.setmValue(weightNumPicker.getValue());
-                Log.d("Test weight:", "Weight: " +WelcomeActivity.weight.getmValue()
-                        + " - Date: " +WelcomeActivity.weight.getmDate());
-            }
-        });
         return view;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            nextButton = getActivity().findViewById(R.id.next_button);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(4);
+                    WelcomeActivity.weight.setmDate(new Date());
+                    WelcomeActivity.weight.setmValue(weightNumPicker.getValue());
+                    Log.d("Test weight:", "Weight: " +WelcomeActivity.weight.getmValue()
+                            + " - Date: " +WelcomeActivity.weight.getmDate());
+                }
+            });
+            nextButton.setVisibility(View.VISIBLE);
+            nextButton.setText("Next");
+
+            backButton = getActivity().findViewById(R.id.back_button);
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(2);
+                }
+            });
+            backButton.setVisibility(View.VISIBLE);
+            backButton.setText("Back");
+        }
     }
 }
