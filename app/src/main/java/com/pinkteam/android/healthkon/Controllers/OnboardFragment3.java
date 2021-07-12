@@ -51,8 +51,13 @@ public class OnboardFragment3 extends Fragment {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                     Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-                    v.vibrate(VibrationEffect.EFFECT_TICK);
-//                    mp = MediaPlayer.create(getActivity(), SoundEffectConstants.CLICK);
+                    v.vibrate(100);
+                    mp = MediaPlayer.create(getActivity(),R.raw.effect_tick);
+                    mp.setLooping(false);
+                    if(mp.isPlaying()){
+                        mp.stop();
+                    }
+                    mp.start();
                 }
             });
         }
