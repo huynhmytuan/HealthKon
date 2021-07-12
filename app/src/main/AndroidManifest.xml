@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -26,13 +27,15 @@
             android:name=".Controllers.LocationService"
             android:enabled="true"
             android:exported="true" />
-        <activity android:name=".Controllers.WelcomeActivity">
+        <activity android:name=".Controllers.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controllers.MainActivity"></activity>
+        <activity android:name=".Controllers.MainActivity"
+            android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

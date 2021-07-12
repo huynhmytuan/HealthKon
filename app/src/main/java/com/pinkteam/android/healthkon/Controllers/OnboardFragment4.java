@@ -2,9 +2,13 @@ package com.pinkteam.android.healthkon.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +30,7 @@ import com.pinkteam.android.healthkon.database.WeightUtil;
 import java.util.Date;
 
 public class OnboardFragment4 extends Fragment {
+    MediaPlayer mp;
     NonSwipeableViewPager viewPager;
     Button backButton;
     Button finishButton;
@@ -52,6 +57,14 @@ public class OnboardFragment4 extends Fragment {
             heightNumPicker.setMaxValue(220);
             heightNumPicker.setValue(150);
             heightNumPicker.setWrapSelectorWheel(true);
+            heightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(VibrationEffect.EFFECT_TICK);
+//                    mp = MediaPlayer.create(getActivity(),SoundEffectConstants.CLICK);
+                }
+            });
         }
         return view;
     }
