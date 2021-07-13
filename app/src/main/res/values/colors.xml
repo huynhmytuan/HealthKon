@@ -13,6 +13,7 @@
     <color name="white">#DEFFFFFF</color>
 
     <color name="black">#000000</color>
+    <color name="black_text">#DE000000</color>
     <color name="black_shadow">#F7000000</color>
     <color name="cod_gray">#1C1B1D</color>
     <color name="nav_back">#1C1B1D</color>

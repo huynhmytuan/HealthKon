@@ -236,9 +236,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/btn_green"
-                        android:text="View Weight"
+                        android:text="View Height"
                         android:textAllCaps="false"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_text"
                         app:backgroundTint="@color/white"
                         app:backgroundTintMode="multiply" />
 
@@ -252,7 +252,7 @@
                         android:background="@drawable/btn_green"
                         android:text="View Weight"
                         android:textAllCaps="false"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_text"
                         app:backgroundTint="@color/white"
                         app:backgroundTintMode="multiply" />
 

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.os.Vibrator;
 import android.util.*;
 import android.view.*;
@@ -48,6 +49,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -75,10 +77,9 @@ public class BmiCalculateFragment extends Fragment {
     private Button mHeightBtn;
     private LottieAnimationView mCalendarBtn;
 
-    private AlertDialog dialogAdd;
     FloatingActionButton mFloatButtonAdd;
 
-    Pair<Long, Long> selectionDate;
+    Pair<Long, Long> selectionDate = null;
     private static boolean isHeightView = true;
 
     @Override
@@ -102,30 +103,33 @@ public class BmiCalculateFragment extends Fragment {
         mViewBMIScore = (TextView) view.findViewById(R.id.scorebmi_textview);
         mViewBMIStatus = (TextView) view.findViewById(R.id.statusbmi_textview);
         mViewDate = (TextView) view.findViewById(R.id.date_range_textview);
+        mFloatButtonAdd = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         mWeightBtn = (Button) view.findViewById(R.id.view_weight_btn);
+        mHeightBtn = (Button) view.findViewById(R.id.view_height_btn);
+        mChart = view.findViewById(R.id.lineChart);
+        mCalendarBtn = (LottieAnimationView) view.findViewById(R.id.view_cal_btn);
+        if(isHeightView){
+            RefreshLayout(view);
+        }else {
+            RefreshLayout(view);
+        }
+
+
         mWeightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isHeightView = false;
-                ShowWeightChart(null,null);
+                ShowWeightChart(selectionDate);
             }
         });
 
-        mHeightBtn = (Button) view.findViewById(R.id.view_height_btn);
         mHeightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isHeightView = true;
-                ShowHeightChart(null,null);
+                ShowHeightChart(selectionDate);
             }
         });
-
-
-        mChart = view.findViewById(R.id.lineChart);
-
-        mCalendarBtn = (LottieAnimationView) view.findViewById(R.id.view_cal_btn);
-
-
 
         mCalendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,23 +138,12 @@ public class BmiCalculateFragment extends Fragment {
             }
         });
 
-
-
-        mFloatButtonAdd = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
         mFloatButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddDialogueShow();
             }
         });
-
-        if(isHeightView){
-            ShowHeightChart(null,null);
-            RefreshLayout(view);
-        }else {
-            ShowWeightChart(null,null);
-            RefreshLayout(view);
-        }
 
 
         return view;
@@ -181,7 +174,6 @@ public class BmiCalculateFragment extends Fragment {
             Date startDay = cal.getTime();
 
             Log.d("Test_LOL:",startDay.toString());
-
             start = startDay.getTime();
             end = endDay.getTime();
             selectionDate = new Pair(start,end);
@@ -198,7 +190,7 @@ public class BmiCalculateFragment extends Fragment {
                 Date now = new Date();
                 Calendar cal = Calendar.getInstance();
 
-
+                //Get first date from selection
                 long firstDateLong = selection.first;
                 Date firstDate = new Date(firstDateLong);
                 cal.setTime(firstDate);
@@ -206,7 +198,7 @@ public class BmiCalculateFragment extends Fragment {
                 cal.set(Calendar.MINUTE,now.getMinutes());
                 cal.set(Calendar.SECOND,now.getSeconds());
                 firstDate = cal.getTime();
-
+                //Get end date from selection
                 long endDateLong = selection.second;
                 Date endDate = new Date(endDateLong);
                 cal.setTime(endDate);
@@ -214,14 +206,14 @@ public class BmiCalculateFragment extends Fragment {
                 cal.set(Calendar.MINUTE,now.getMinutes());
                 cal.set(Calendar.SECOND,now.getSeconds());
                 endDate = cal.getTime();
-
+                //Set text and put to selectionDate
                 setDateRangeText(firstDate,endDate);
                 selectionDate = selection;
                 picker.dismiss();
                 if(isHeightView){
-                    ShowHeightChart(firstDate,endDate);
+                    ShowHeightChart(selectionDate);
                 }else {
-                    ShowWeightChart(firstDate,endDate);
+                    ShowWeightChart(selectionDate);
                 }
             }
         });
@@ -268,82 +260,94 @@ public class BmiCalculateFragment extends Fragment {
 
     //Set Button Weight Chart
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void ShowWeightChart(Date StartDate, Date EndDate){
+    private void ShowWeightChart(Pair<Long,Long> selection){
         //Get data from database:
         ArrayList<Entry> valuesWeight = new ArrayList<>();
         List<Weight> weightList;
-
-        if(StartDate != null && EndDate != null){
-            //get data from db by (StartDate to EndDate)
-            weightList = mWU.getWeightInRange(StartDate,EndDate);
-
-        }else {
-            //Get today and first date of current month
-            Date endDate = new Date();
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(endDate);
-            int days = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
-            cal.set(Calendar.DAY_OF_MONTH, days);
-            Date startDate = cal.getTime();
-            setDateRangeText(startDate,endDate);
-            //Get data from db by first date of month and today
-            weightList = mWU.getWeightInRange(startDate,endDate);
-        }
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        Date startDate = new Date(selectionDate.first);
+        cal.setTime(startDate);
+        cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+        cal.set(Calendar.MINUTE,now.getMinutes());
+        cal.set(Calendar.SECOND,now.getSeconds());
+        startDate = cal.getTime();
+        Date endDate = new Date(selectionDate.second);
+        cal.setTime(endDate);
+        cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+        cal.set(Calendar.MINUTE,now.getMinutes());
+        cal.set(Calendar.SECOND,now.getSeconds());
+        endDate = cal.getTime();
+        //Get data from db by first date of month and today
+        weightList = mWU.getWeightInRange(startDate,endDate);
         if(!weightList.isEmpty()){
             for (int i =0 ; i < weightList.size(); i++) {
                 float value = (float) weightList.get(i).getmValue();
                 Log.d("Test_W-",value+"_"+i);
                 valuesWeight.add(new Entry((float)i, value));
             }
-            CreateChart(valuesWeight, StartDate, EndDate);
+            CreateChart(valuesWeight, selection);
         }else {
-            CreateChart(null,StartDate,EndDate);
+            CreateChart(null,selection);
         }
 
     }
 
     //Set Button Height Chart
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void ShowHeightChart(Date StartDate, Date EndDate){
+    private void ShowHeightChart(Pair<Long,Long> selection){
         //Get data from database:
         ArrayList<Entry> valuesHeight = new ArrayList<>();
         List<Height> heightList;
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        Date startDate = new Date(selectionDate.first);
+        cal.setTime(startDate);
+        cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+        cal.set(Calendar.MINUTE,now.getMinutes());
+        cal.set(Calendar.SECOND,now.getSeconds());
+        startDate = cal.getTime();
+        Date endDate = new Date(selectionDate.second);
+        cal.setTime(endDate);
+        cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+        cal.set(Calendar.MINUTE,now.getMinutes());
+        cal.set(Calendar.SECOND,now.getSeconds());
+        endDate = cal.getTime();
 
-        if(StartDate != null && EndDate != null){
-            //get data from db by (StartDate to EndDate)
-            heightList = mHU.getHeightInRange(StartDate,EndDate);
-
-        }else {
-            //Get today and first date of current month
-            Date endDate = new Date();
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(endDate);
-            int days = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
-            cal.set(Calendar.DAY_OF_MONTH, days);
-            Date startDate = cal.getTime();
-            setDateRangeText(startDate,endDate);
-            //Get data from db by first date of month and today
-            heightList = mHU.getHeightInRange(startDate,endDate);
-        }
+        //Get data from db by first date of month and today
+        Log.d("Date-print: ",startDate.toString()+"/"+endDate.toString());
+        heightList = mHU.getHeightInRange(startDate,endDate);
         if(!heightList.isEmpty()){
             for (int i =0 ; i < heightList.size(); i++) {
                 float value = (float) heightList.get(i).getmValue();
                 Log.d("Test_H-",value+"_"+i);
                 valuesHeight.add(new Entry((float)i, value));
             }
-            CreateChart(valuesHeight, StartDate, EndDate);
+            CreateChart(valuesHeight, selection);
         }else {
-            CreateChart(null,StartDate,EndDate);
+            CreateChart(null,selection);
         }
 
     }
 
     //Chart
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void CreateChart(ArrayList<Entry> valuesSet, Date StartDate, Date EndDate){
+    private void CreateChart(ArrayList<Entry> valuesSet, Pair<Long,Long> selection){
         if(valuesSet != null){
+            Calendar cal = Calendar.getInstance();
+            Date now = new Date();
+            Date StartDate = new Date(selectionDate.first);
+            cal.setTime(StartDate);
+            cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+            cal.set(Calendar.MINUTE,now.getMinutes());
+            cal.set(Calendar.SECOND,now.getSeconds());
+            StartDate = cal.getTime();
+            Date EndDate = new Date(selectionDate.second);
+            cal.setTime(EndDate);
+            cal.set(Calendar.HOUR_OF_DAY,now.getHours());
+            cal.set(Calendar.MINUTE,now.getMinutes());
+            cal.set(Calendar.SECOND,now.getSeconds());
+            EndDate = cal.getTime();
             LineDataSet data;   //Line arguments
             //Graph background color
             mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.cod_gray));
@@ -385,13 +389,13 @@ public class BmiCalculateFragment extends Fragment {
                 data.setColor(Color.RED);
                 data.setCircleColor(Color.rgb(254,157,112));
                 //Y-axis maximum / minimum setting
-                yAxis.setAxisMaximum(230f);
-                yAxis.setAxisMinimum(50f);
+                yAxis.setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
+                yAxis.setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
             }
             else {
                 //Y-axis maximum / minimum setting
-                yAxis.setAxisMaximum(200f);
-                yAxis.setAxisMinimum(20f);
+                yAxis.setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
+                yAxis.setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
                 data = new LineDataSet(valuesSet,"Weight");
                 data.setColor(Color.BLUE);
                 data.setCircleColor(Color.CYAN);
@@ -435,14 +439,38 @@ public class BmiCalculateFragment extends Fragment {
         mViewWeight.setText(weightValue +"");
 
         calculateBMI(mWeight.getmValue(), mHeight.getmValue());
-        if(isHeightView){
-            ShowHeightChart(null,null);
-        }
-        else {
-            ShowWeightChart(null,null);
-        }
-    }
+        if(selectionDate == null){
+            Date endDate = new Date();
+            long second = endDate.getTime();
 
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(endDate);
+            int days = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
+            cal.set(Calendar.DAY_OF_MONTH, days);
+            Date startDate = cal.getTime();
+            cal.setTime(startDate);
+            cal.set(Calendar.HOUR_OF_DAY,endDate.getHours());
+            cal.set(Calendar.MINUTE,endDate.getMinutes());
+            cal.set(Calendar.SECOND,endDate.getSeconds());
+
+            setDateRangeText(startDate,endDate);
+            long first = startDate.getTime();
+            selectionDate = new Pair<>(first,second);
+        }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                if(isHeightView){
+                    ShowHeightChart(selectionDate);
+                }
+                else {
+                    ShowWeightChart(selectionDate);
+                }
+            }
+        }, 2000);
+    }
     //Rewrite the data saved in String type to date type and SimpleDateFormat
     @RequiresApi(api = Build.VERSION_CODES.N)
     private  ArrayList<String> getDate(Date StartDate, Date EndDate) {
@@ -472,8 +500,6 @@ public class BmiCalculateFragment extends Fragment {
         }
         return dateLabels;
     }
-
-
     //Show dialog add information
     public void AddDialogueShow(){
             Button mSavebtn;
@@ -493,8 +519,7 @@ public class BmiCalculateFragment extends Fragment {
             AlertDialog dialog =  builder.create();
             weightNumPicker = (NumberPicker) view.findViewById(R.id.itemWeight);
             if (weightNumPicker != null) {
-                weightValue = weightNumPicker.getValue();
-                weightNumPicker.setMinValue(1);
+                weightNumPicker.setMinValue(20);
                 weightNumPicker.setMaxValue(200);
                 weightNumPicker.setValue(weightValue);
                 weightNumPicker.setWrapSelectorWheel(true);
@@ -507,16 +532,18 @@ public class BmiCalculateFragment extends Fragment {
                         mp.setLooping(false);
                         if(mp.isPlaying()){
                             mp.stop();
+                            mp.start();
+                        }else {
+                            mp.start();
                         }
-                        mp.start();
                     }
                 });
             }
+
             heightNumPicker = (NumberPicker) view.findViewById(R.id.itemHeight);
             if (heightNumPicker != null) {
-                heightValue = heightNumPicker.getValue();
-                heightNumPicker.setMinValue(1);
-                heightNumPicker.setMaxValue(220);
+                heightNumPicker.setMinValue(50);
+                heightNumPicker.setMaxValue(230);
                 heightNumPicker.setValue(heightValue);
                 heightNumPicker.setWrapSelectorWheel(true);
                 heightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -528,8 +555,10 @@ public class BmiCalculateFragment extends Fragment {
                         mp.setLooping(false);
                         if(mp.isPlaying()){
                             mp.stop();
+                            mp.start();
+                        }else {
+                            mp.start();
                         }
-                        mp.start();
                     }
                 });
             }
@@ -539,12 +568,11 @@ public class BmiCalculateFragment extends Fragment {
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onClick(View v) {
-
                     Date date = new Date();
                     mHUtil.add(heightValue,date);
                     mWUtil.add(weightValue,date);
-                    RefreshLayout(getView());
                     dialog.dismiss();
+                    RefreshLayout(getView());
                 }
 
             });
@@ -561,4 +589,23 @@ public class BmiCalculateFragment extends Fragment {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         }
+
+    private float findMinMaxEntryValue(ArrayList<Entry> valuesList, boolean FindMax){
+        float value = valuesList.get(0).getY();
+        for(Entry x : valuesList){
+            //if function is find max value
+            if(FindMax){
+                if(x.getY() > value){
+                    value = x.getY();
+                }
+            }
+            //if function is find min
+            else{
+                if (x.getY() < value){
+                    value = x.getY();
+                }
+            }
+        }
+        return  value;
+    }
 }
