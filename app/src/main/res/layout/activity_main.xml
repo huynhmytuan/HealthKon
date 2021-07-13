@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/black"
+        android:background="@drawable/bottom_nav_backgound"
         app:menu="@menu/menu_bottom_nav"
         app:itemIconTint="@color/custom_color_bottom_nav"
         app:itemTextColor="@color/custom_color_bottom_nav"/>

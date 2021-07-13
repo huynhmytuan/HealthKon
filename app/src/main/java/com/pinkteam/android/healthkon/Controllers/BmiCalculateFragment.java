@@ -57,6 +57,8 @@ import static androidx.core.content.ContextCompat.startActivities;
 
 public class BmiCalculateFragment extends Fragment {
 
+    private int heightValue = 0;
+    private int weightValue = 0;
     HeightUtil mHU;
     WeightUtil mWU;
     MediaPlayer mp;
@@ -242,16 +244,26 @@ public class BmiCalculateFragment extends Fragment {
         double bmiScore = Weight / Math.pow(Height, 2) * 10000;
         DecimalFormat df = new DecimalFormat("0.00");
         mViewBMIScore.setText(df.format(bmiScore)+"");
-        if (bmiScore < 18)
+        if (bmiScore < 18){
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.under_weight));
             mViewBMIStatus.setText("Underweight");
-        else if (18 <= bmiScore && bmiScore < 25)
+        }
+        else if (18 <= bmiScore && bmiScore < 25){
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.normal_weight));
             mViewBMIStatus.setText("Normal Weight");
-        else if (25 <= bmiScore && bmiScore < 30)
+        }
+        else if (25 <= bmiScore && bmiScore < 30){
+            mViewBMIScore.setTextColor(ContextCompat.getColor(getContext(),R.color.over_weight));
             mViewBMIStatus.setText("Over Weight");
-        else if (30 <= bmiScore && bmiScore < 35)
+        }
+        else if (30 <= bmiScore && bmiScore < 35){
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.obese_weight));
             mViewBMIStatus.setText("Obesity");
-        else if (35 <= bmiScore)
+        }
+        else if (35 <= bmiScore){
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.extreme_weight));
             mViewBMIStatus.setText("Extremely Obesity");
+        }
     }
 
     //Set Button Weight Chart
@@ -415,12 +427,12 @@ public class BmiCalculateFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private  void RefreshLayout(View view){
         Height mHeight = mHU.getLastestHeight();
-        String lastHeight = Integer.toString(mHeight.getmValue());
-        mViewHeight.setText(lastHeight);
+        heightValue = mHeight.getmValue();
+        mViewHeight.setText(heightValue + "");
 
         Weight mWeight = mWU.getLastestWeight();
-        String lastWeight = Integer.toString(mWeight.getmValue());
-        mViewWeight.setText(lastWeight);
+        weightValue = mWeight.getmValue();
+        mViewWeight.setText(weightValue +"");
 
         calculateBMI(mWeight.getmValue(), mHeight.getmValue());
         if(isHeightView){
@@ -474,16 +486,22 @@ public class BmiCalculateFragment extends Fragment {
             LayoutInflater i = getActivity().getLayoutInflater();
             View view = i.inflate(R.layout.fragment_custom_dialog,null);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            //set builder view
+            builder.setView(view);
 
+            // Create the AlertDialog object and return it
+            AlertDialog dialog =  builder.create();
             weightNumPicker = (NumberPicker) view.findViewById(R.id.itemWeight);
             if (weightNumPicker != null) {
+                weightValue = weightNumPicker.getValue();
                 weightNumPicker.setMinValue(1);
                 weightNumPicker.setMaxValue(200);
-                weightNumPicker.setValue(40);
+                weightNumPicker.setValue(weightValue);
                 weightNumPicker.setWrapSelectorWheel(true);
                 weightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        weightValue = weightNumPicker.getValue();
                         Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         v.vibrate(100);
                         mp.setLooping(false);
@@ -494,20 +512,17 @@ public class BmiCalculateFragment extends Fragment {
                     }
                 });
             }
-        //set builder view
-            builder.setView(view);
-
-            // Create the AlertDialog object and return it
-            AlertDialog dialog =  builder.create();
             heightNumPicker = (NumberPicker) view.findViewById(R.id.itemHeight);
             if (heightNumPicker != null) {
+                heightValue = heightNumPicker.getValue();
                 heightNumPicker.setMinValue(1);
                 heightNumPicker.setMaxValue(220);
-                heightNumPicker.setValue(150);
+                heightNumPicker.setValue(heightValue);
                 heightNumPicker.setWrapSelectorWheel(true);
                 heightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        heightValue = heightNumPicker.getValue();
                         Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         v.vibrate(100);
                         mp.setLooping(false);
@@ -526,11 +541,8 @@ public class BmiCalculateFragment extends Fragment {
                 public void onClick(View v) {
 
                     Date date = new Date();
-                    mHUtil.add(heightNumPicker.getValue(),date);
-                    mWUtil.add(weightNumPicker.getValue(),date);
-                    Toast.makeText(getContext(),"You enter: \n"
-                            +"- Weight: "+ weightNumPicker.getValue()
-                            + "\n - Height: " + heightNumPicker.getValue(), Toast.LENGTH_SHORT).show();
+                    mHUtil.add(heightValue,date);
+                    mWUtil.add(weightValue,date);
                     RefreshLayout(getView());
                     dialog.dismiss();
                 }

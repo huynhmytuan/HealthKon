@@ -5,18 +5,25 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FFEB3B</color>
     <color name="teal_700">#FF018786</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="color_selected_bottom_nav">#FFC107</color>
     <color name="green">#00cc33</color>
     <color name="red">#FF0000</color>
 
-
-    <color name="title_gray">#8c8c8c</color>
+    <!-- UI Color -->
+    <color name="title_gray">#99FFFFFF</color>
+    <color name="white">#DEFFFFFF</color>
 
     <color name="black">#000000</color>
-    <color name="cod_gray">#222422</color>
+    <color name="black_shadow">#F7000000</color>
+    <color name="cod_gray">#1C1B1D</color>
+    <color name="nav_back">#1C1B1D</color>
 
     <color name="green_malachite">#1ED760</color>
     <color name="green_dark_pastel">#1DB954</color>
+    <!-- BMI Color !-->
+    <color name="under_weight">#DE03A9F4</color>
+    <color name="normal_weight">#DE1ED760</color>
+    <color name="over_weight">#DEFF9800</color>
+    <color name="obese_weight">#DEFF0000</color>
+    <color name="extreme_weight">#DEE14EFA</color>
 
 </resources>
