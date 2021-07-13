@@ -11,8 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.4"
-        android:orientation="vertical">
+        android:layout_weight="1.2"
+        android:orientation="vertical"
+        android:paddingTop="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,15 +24,15 @@
                 android:id="@+id/imageView27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/distance" />
+                app:srcCompat="@drawable/time" />
 
             <TextView
-                android:id="@+id/distance_textview"
+                android:id="@+id/time_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="00:00"
+                android:text="00:00:00"
                 android:textColor="@color/white"
                 android:textSize="40sp" />
 
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="Km"
+                android:text="Running Time"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -62,15 +63,15 @@
                     android:id="@+id/imageView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/time" />
+                    app:srcCompat="@drawable/distance" />
 
                 <TextView
-                    android:id="@+id/time_textview"
+                    android:id="@+id/distance_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="00:00:00"
+                    android:text="0.00"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -79,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="Time"
+                    android:text="km"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="00:00:00"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -113,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="Speed"
+                    android:text="km/h"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -143,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="00:00"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -176,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="00:00"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -195,7 +196,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
+        android:layout_weight="1.8"
         android:orientation="vertical">
 
         <ImageButton

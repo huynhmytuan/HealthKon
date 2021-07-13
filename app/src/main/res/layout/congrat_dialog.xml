@@ -1,199 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/btn_stoke_green"
-        app:cardBackgroundColor="@color/green"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="50dp"
-        app:cardPreventCornerOverlap="true">
-
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/black"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView2"
+            android:orientation="vertical"
+            android:background="@drawable/congrat_back">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="281dp"
-                android:layout_weight="0.75"
-                app:srcCompat="@drawable/bgcongra" />
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_marginVertical="20dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:lottie_rawRes="@raw/congratulation_badge_animation"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imageView27"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/distance" />
-
                     <TextView
-                        android:id="@+id/distance_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:gravity="center"
-                        android:text="00:00"
+                        android:text="Congratulations!"
                         android:textColor="@color/white"
-                        android:textSize="25sp" />
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView23"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/time" />
-
-                        <TextView
-                            android:id="@+id/time_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="center"
-                            android:text="00:00:00"
-                            android:textColor="@color/white"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView24"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/speed" />
-
-                        <TextView
-                            android:id="@+id/speed_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="center"
-                            android:text="00:00:00"
-                            android:textColor="@color/white"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center"
+                        android:text="You did a great job in this journey."
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/run_result_text"
+                        android:paddingVertical="30dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center"
+                        android:text="You did a great job in this journey."
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
-                        <ImageView
-                            android:id="@+id/imageView25"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/step" />
-
-                        <TextView
-                            android:id="@+id/step_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="center"
-                            android:text="00:00"
-                            android:textColor="@color/white"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView26"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/calo" />
-
-                        <TextView
-                            android:id="@+id/kcal_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="center"
-                            android:text="00:00"
-                            android:textColor="@color/white"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/detail_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="50dp"
-                    android:background="@drawable/btn_stoke_green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_green_new"
                     android:fontFamily="@font/roboto"
-                    android:text="Detail Result"
+                    android:paddingHorizontal="30dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Show Detail"
                     android:textAllCaps="false"
-                    android:textSize="16dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:backgroundTint="@color/white"
-                    app:backgroundTintMode="multiply" />
-
-                <Button
+                    app:backgroundTintMode="multiply"/>
+                <TextView
+                    android:paddingVertical="15dp"
+                    android:layout_gravity="center"
                     android:id="@+id/run_again_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:text="Run Again!"
+                    android:textStyle="bold"
+                    android:text="Close"
+                    android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
