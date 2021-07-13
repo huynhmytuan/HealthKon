@@ -12,6 +12,8 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -300,7 +302,9 @@ public class RunRecordFragment extends Fragment {
                         }
                     });
             // Create the AlertDialog object and return it
-            return builder.create();
+            Dialog dialog = builder.create();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            return dialog;
         }
     }
 
