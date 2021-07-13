@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.pinkteam.android.healthkon.R;
 
-public class Fragment2 extends Fragment {
+public class HomeFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -21,7 +21,7 @@ public class Fragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_2, container, false);
+        View view = inflater.inflate(R.layout.home_layout, container, false);
         return view;
     }
 }

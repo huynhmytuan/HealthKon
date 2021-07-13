@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new BmiCalculateFragment();
             case 1:
-                return new Fragment2();
+                return new HomeFragment();
             case 2:
                 return new RunRecordFragment();
             case 3:
