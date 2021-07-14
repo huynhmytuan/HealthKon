@@ -152,6 +152,7 @@ public class JourneyUtil {
 
         return journey;
     }
+
     public List<Journey> getJourneysByDate(Date startDate, Date endDate){
         List<Journey> journeyList =  new ArrayList<>();
         String start = dateFormat.format(startDate);
@@ -195,6 +196,7 @@ public class JourneyUtil {
         }
         return journeyList;
     }
+
     public ArrayList<HashMap<String,Object>> getTotalDistance5Weeks(){
         //List Hashmap to store data
         ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
@@ -229,6 +231,61 @@ public class JourneyUtil {
         }
         return resultList;
     }
+
+    public ArrayList<HashMap<String,Object>> getTotalDistanceMonthly(){
+        //List Hashmap to store data
+        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
+        String query = "SELECT strftime('%m', date) as \"Month of Year\", SUM (distance) as \"Total Distance\" \n"
+                        +"FROM journey\n"
+                        +"WHERE strftime('%m%Y',date)  >=  strftime('%m', DATE('now','start of year')) AND strftime('%Y',date) = strftime('%Y',DATE('now','start of year'))\n"
+                        +"GROUP BY strftime('%m',date)";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                int month_number = cursor.getInt(cursor.getColumnIndex("Month of Year"));
+                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
+
+                HashMap<String,Object> mMap = new HashMap();
+                mMap.put("month_number",month_number);
+                mMap.put("total_distance",total_distance);
+
+                resultList.add(mMap);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return resultList;
+    }
+
+    public ArrayList<HashMap<String,Object>> getTotalDistanceDaily(){
+        //List Hashmap to store data
+        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
+        String query = "SELECT strftime('%d/%m/%Y', date) as \"Day of Week\", SUM (distance) as \"Total Distance\" \n"
+                +"FROM journey\n"
+                +"WHERE strftime(DATE(date)) > strftime(DATE('now', 'weekday 0', '-7 days'))\n"
+                +"GROUP BY strftime('%d%m%Y',date)";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
+                String day_of_week = cursor.getString(cursor.getColumnIndex("Day of Week"));
+
+                HashMap<String,Object> mMap = new HashMap();
+                mMap.put("total_distance",total_distance);
+                mMap.put("day_of_week",day_of_week);
+
+                resultList.add(mMap);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return resultList;
+    }
+
 
 }
 
