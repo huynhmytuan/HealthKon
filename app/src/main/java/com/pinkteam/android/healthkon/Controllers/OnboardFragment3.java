@@ -5,12 +5,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,7 @@ public class OnboardFragment3 extends Fragment {
     NumberPicker weightNumPicker;
     Button nextButton;
     Button backButton;
+    private int weightValue;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -40,23 +44,37 @@ public class OnboardFragment3 extends Fragment {
         View view = inflater.inflate(R.layout.third_input_layout, container, false);
 
         viewPager = getActivity().findViewById(R.id.slide_viewpager);
-
         weightNumPicker = (NumberPicker) view.findViewById(R.id.weight_numberpicker);
         if (weightNumPicker != null) {
             weightNumPicker.setMinValue(1);
             weightNumPicker.setMaxValue(200);
             weightNumPicker.setValue(40);
             weightNumPicker.setWrapSelectorWheel(true);
+            EditText input = findInput(weightNumPicker);
+            TextWatcher tw = new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.toString().length() != 0) {
+                        weightValue = Integer.parseInt(s.toString());
+                        if (weightValue >= weightNumPicker.getMinValue() && weightValue <= weightNumPicker.getMaxValue()) {
+                            weightNumPicker.setValue(weightValue);
+                        }
+                    }
+                }
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override
+                public void afterTextChanged(Editable s) {}
+            };
+            input.addTextChangedListener(tw);
             weightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                    weightValue = weightNumPicker.getValue();
                     Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                     v.vibrate(100);
                     mp = MediaPlayer.create(getActivity(),R.raw.effect_tick);
                     mp.setLooping(false);
-                    if(mp.isPlaying()){
-                        mp.stop();
-                    }
                     mp.start();
                 }
             });
@@ -73,7 +91,7 @@ public class OnboardFragment3 extends Fragment {
                 public void onClick(View v) {
                     viewPager.setCurrentItem(4);
                     WelcomeActivity.weight.setmDate(new Date());
-                    WelcomeActivity.weight.setmValue(weightNumPicker.getValue());
+                    WelcomeActivity.weight.setmValue(weightValue);
                     Log.d("Test weight:", "Weight: " +WelcomeActivity.weight.getmValue()
                             + " - Date: " +WelcomeActivity.weight.getmDate());
                 }
@@ -91,5 +109,17 @@ public class OnboardFragment3 extends Fragment {
             backButton.setVisibility(View.VISIBLE);
             backButton.setText("Back");
         }
+    }
+    private EditText findInput(ViewGroup np) {
+        int count = np.getChildCount();
+        for (int i = 0; i < count; i++) {
+            final View child = np.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                findInput((ViewGroup) child);
+            } else if (child instanceof EditText) {
+                return (EditText) child;
+            }
+        }
+        return null;
     }
 }

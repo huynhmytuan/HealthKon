@@ -18,9 +18,12 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.*;
 import android.view.*;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -502,6 +505,8 @@ public class BmiCalculateFragment extends Fragment {
     }
     //Show dialog add information
     public void AddDialogueShow(){
+            int tempWeightValue = weightValue;
+            int tempHeightValue = heightValue;
             Button mSavebtn;
             Button mCancelbtn;
             NumberPicker weightNumPicker;
@@ -512,6 +517,7 @@ public class BmiCalculateFragment extends Fragment {
             LayoutInflater i = getActivity().getLayoutInflater();
             View view = i.inflate(R.layout.fragment_custom_dialog,null);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
             //set builder view
             builder.setView(view);
 
@@ -522,6 +528,24 @@ public class BmiCalculateFragment extends Fragment {
                 weightNumPicker.setMinValue(20);
                 weightNumPicker.setMaxValue(200);
                 weightNumPicker.setValue(weightValue);
+                EditText input = findInput(weightNumPicker);
+                TextWatcher tw = new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.toString().length() != 0) {
+                            weightValue = Integer.parseInt(s.toString());
+                            if (weightValue >= weightNumPicker.getMinValue() && weightValue <= weightNumPicker.getMaxValue()) {
+                                weightNumPicker.setValue(weightValue);
+                            }
+                        }
+                    }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                    }
+                };
+                input.addTextChangedListener(tw);
                 weightNumPicker.setWrapSelectorWheel(true);
                 weightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
@@ -530,12 +554,7 @@ public class BmiCalculateFragment extends Fragment {
                         Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         v.vibrate(100);
                         mp.setLooping(false);
-                        if(mp.isPlaying()){
-                            mp.stop();
-                            mp.start();
-                        }else {
-                            mp.start();
-                        }
+                        mp.start();
                     }
                 });
             }
@@ -545,6 +564,23 @@ public class BmiCalculateFragment extends Fragment {
                 heightNumPicker.setMinValue(50);
                 heightNumPicker.setMaxValue(230);
                 heightNumPicker.setValue(heightValue);
+                EditText input = findInput(heightNumPicker);
+                TextWatcher tw = new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if (s.toString().length() != 0) {
+                            heightValue = Integer.parseInt(s.toString());
+                            if (heightValue >= heightNumPicker.getMinValue() && heightValue <= heightNumPicker.getMaxValue()) {
+                                heightNumPicker.setValue(heightValue);
+                            }
+                        }
+                    }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                    @Override
+                    public void afterTextChanged(Editable s) {}
+                };
+                input.addTextChangedListener(tw);
                 heightNumPicker.setWrapSelectorWheel(true);
                 heightNumPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override
@@ -553,12 +589,7 @@ public class BmiCalculateFragment extends Fragment {
                         Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                         v.vibrate(100);
                         mp.setLooping(false);
-                        if(mp.isPlaying()){
-                            mp.stop();
-                            mp.start();
-                        }else {
-                            mp.start();
-                        }
+                        mp.start();
                     }
                 });
             }
@@ -574,7 +605,6 @@ public class BmiCalculateFragment extends Fragment {
                     dialog.dismiss();
                     RefreshLayout(getView());
                 }
-
             });
 
 
@@ -582,6 +612,8 @@ public class BmiCalculateFragment extends Fragment {
             mCancelbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    weightNumPicker.setValue(tempWeightValue);
+                    heightNumPicker.setValue(tempHeightValue);
                     dialog.dismiss();
                 }
 
@@ -608,4 +640,17 @@ public class BmiCalculateFragment extends Fragment {
         }
         return  value;
     }
+    private EditText findInput(ViewGroup np) {
+        int count = np.getChildCount();
+        for (int i = 0; i < count; i++) {
+            final View child = np.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                findInput((ViewGroup) child);
+            } else if (child instanceof EditText) {
+                return (EditText) child;
+            }
+        }
+        return null;
+    }
+
 }

@@ -60,7 +60,6 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/user_name_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left"
@@ -86,6 +85,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -96,53 +96,9 @@
                         android:orientation="vertical"
                         android:paddingBottom="30dp">
 
-                        <RadioGroup
-                            android:layout_width="match_parent"
-                            android:layout_height="35dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/radioButton3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/radio_selector"
-                                android:button="@android:color/transparent"
-                                android:gravity="center"
-                                android:text="Week"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-
-                            <RadioButton
-                                android:id="@+id/radioButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/radio_selector"
-                                android:button="@android:color/transparent"
-                                android:gravity="center"
-                                android:text="Month"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-
-                            <RadioButton
-                                android:id="@+id/radioButton2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/radio_selector"
-                                android:button="@android:color/transparent"
-                                android:gravity="center"
-                                android:text="Year"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-                        </RadioGroup>
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -171,8 +127,8 @@
                                 tools:layout_marginTop="5dp" />
                         </LinearLayout>
 
-                        <com.github.mikephil.charting.charts.HorizontalBarChart
-                            android:id="@+id/barChart"
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lineChart"
                             android:layout_width="match_parent"
                             android:layout_height="750px"
                             android:layout_below="@id/date_range_textview"
