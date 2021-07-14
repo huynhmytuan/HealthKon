@@ -26,5 +26,13 @@
     <color name="over_weight">#DEFF9800</color>
     <color name="obese_weight">#DEFF0000</color>
     <color name="extreme_weight">#DEE14EFA</color>
+    <color name="distance">#ff9900</color>
+    <color name="step">#006699</color>
+    <color name="calo">#cc0033</color>
+    <color name="time">#9933ff</color>
+
+
+
+
 
 </resources>
