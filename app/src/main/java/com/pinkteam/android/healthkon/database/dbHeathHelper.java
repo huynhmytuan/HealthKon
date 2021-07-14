@@ -69,7 +69,7 @@ public class dbHeathHelper extends SQLiteOpenHelper {
                 dbHealthSchema.JourneyTable.Distance + " REAL NOT NULL, " +
                 dbHealthSchema.JourneyTable.Date + " REAL NOT NULL, " +
                 dbHealthSchema.JourneyTable.Name + " TEXT NOT NULL, " +
-                dbHealthSchema.JourneyTable.Rating + " INTEGER NOT NULL, " +
+                dbHealthSchema.JourneyTable.Rating + " REAL NOT NULL, " +
                 dbHealthSchema.JourneyTable.Comment + " VARCHAR(256) , " +
                 dbHealthSchema.JourneyTable.Image + " VARCHAR(256))";
     }

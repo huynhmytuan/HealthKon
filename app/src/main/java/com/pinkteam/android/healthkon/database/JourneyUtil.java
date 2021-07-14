@@ -38,7 +38,7 @@ public class JourneyUtil {
         return contentValues;
     }
     //Insert
-    public long add(long Duration, float Distance, Date Date, String Name, int Rating, String Comment, String Image){
+    public long add(long Duration, float Distance, Date Date, String Name, float Rating, String Comment, String Image){
         Journey mJourney = new Journey(Duration,Distance,Date,Name,Rating,Comment,Image);
         ContentValues contentValues = journeyContentValues(mJourney);
         long result = mDatabase.insert("journey", null,contentValues);
@@ -89,7 +89,7 @@ public class JourneyUtil {
                     journey.setmDistance(Float.parseFloat(distance));
                     journey.setmDate(dateFormat.parse(date));
                     journey.setmName(name);
-                    journey.setmRating(Integer.parseInt(rating));
+                    journey.setmRating(Float.parseFloat(rating));
                     journey.setmComment(comment);
                     journey.setmImage(image);
                 }
@@ -138,7 +138,7 @@ public class JourneyUtil {
                     journey.setmDistance(Float.parseFloat(distance));
                     journey.setmDate(dateFormat.parse(date));
                     journey.setmName(name);
-                    journey.setmRating(Integer.parseInt(rating));
+                    journey.setmRating(Float.parseFloat(rating));
                     journey.setmComment(comment);
                     journey.setmImage(image);
                 }
@@ -182,7 +182,7 @@ public class JourneyUtil {
                     journey.setmDistance(Float.parseFloat(distance));
                     journey.setmDate(dateFormat.parse(date));
                     journey.setmName(name);
-                    journey.setmRating(Integer.parseInt(rating));
+                    journey.setmRating(Float.parseFloat(rating));
                     journey.setmComment(comment);
                     journey.setmImage(image);
                 }
