@@ -29,7 +29,19 @@
     <color name="distance">#ff9900</color>
     <color name="step">#006699</color>
     <color name="calo">#cc0033</color>
-    <color name="time">#9933ff</color>
+
+    <color name="one">#cc3366</color>
+    <color name="two">#9966ff</color>
+    <color name="three">#3399ff</color>
+    <color name="four">#33cc99</color>
+    <color name="five">#99cc33</color>
+    <color name="six">#ff6600</color>
+    <color name="seven">#ff6666</color>
+    <color name="eight">#cc66ff</color>
+    <color name="nine">#3399cc</color>
+    <color name="ten">#33cccc</color>
+
+
 
 
 
