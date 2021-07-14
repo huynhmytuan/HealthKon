@@ -264,7 +264,7 @@ public class JourneyUtil {
         ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
         String query = "SELECT strftime('%d/%m/%Y', date) as \"Day of Week\", SUM (distance) as \"Total Distance\" \n"
                 +"FROM journey\n"
-                +"WHERE strftime(DATE(date)) > strftime(DATE('now', 'weekday 0', '-7 days'))\n"
+                +"WHERE strftime(DATE(date)) >= strftime(DATE('now', 'weekday 0', '-7 days'))\n"
                 +"GROUP BY strftime('%d%m%Y',date)";
         Cursor cursor = mDatabase.rawQuery(query,null);
         if(cursor.getCount()>0)
