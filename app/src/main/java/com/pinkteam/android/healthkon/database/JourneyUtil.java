@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class JourneyUtil {
@@ -151,5 +152,83 @@ public class JourneyUtil {
 
         return journey;
     }
+    public List<Journey> getJourneysByDate(Date startDate, Date endDate){
+        List<Journey> journeyList =  new ArrayList<>();
+        String start = dateFormat.format(startDate);
+        String end = dateFormat.format(endDate);
+
+        String query = " SELECT * FROM " + dbHealthSchema.JourneyTable.TABLE_NAME +
+                " WHERE " + dbHealthSchema.JourneyTable.Date + " BETWEEN \"" + start + "\" AND \"" + end +"\"";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+                String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
+                String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
+                String name = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Name));
+                String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
+                String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
+                String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
+
+                Journey journey = new Journey();
+
+                try{
+                    journey.setmJourneyId(Integer.parseInt(id));
+                    journey.setmDuration(Long.parseLong(duration));
+                    journey.setmDistance(Float.parseFloat(distance));
+                    journey.setmDate(dateFormat.parse(date));
+                    journey.setmName(name);
+                    journey.setmRating(Integer.parseInt(rating));
+                    journey.setmComment(comment);
+                    journey.setmImage(image);
+                }
+                catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
+                journeyList.add(journey);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return journeyList;
+    }
+    public ArrayList<HashMap<String,Object>> getTotalDistance5Weeks(){
+        //List Hashmap to store data
+        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
+        String query = "SELECT strftime('%W',date) as \"Week Order\","
+                        + "SUM(distance) as \"Total Distance\","
+                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
+                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
+                        + " from journey "
+                        +" where "
+                        + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
+                        + " group by strftime('%W',date);";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                int week_order = cursor.getInt(cursor.getColumnIndex("Week Order"));
+                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
+                String week_start = cursor.getString(cursor.getColumnIndex("Week Start"));
+                String week_end = cursor.getString(cursor.getColumnIndex("Week End"));
+
+                HashMap<String,Object> mMap = new HashMap();
+                mMap.put("week_order",week_order);
+                mMap.put("total_distance",total_distance);
+                mMap.put("week_start",week_start);
+                mMap.put("week_end",week_end);
+
+                resultList.add(mMap);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return resultList;
+    }
+
 }
 
