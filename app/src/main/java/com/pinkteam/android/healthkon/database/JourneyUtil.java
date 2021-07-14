@@ -37,35 +37,35 @@ public class JourneyUtil {
         contentValues.put(dbHealthSchema.JourneyTable.Image,journey.getmImage());
         return contentValues;
     }
-        //Insert
-        public long add(long Duration, float Distance, Date Date, String Name, int Rating, String Comment, String Image){
+    //Insert
+    public long add(long Duration, float Distance, Date Date, String Name, int Rating, String Comment, String Image){
         Journey mJourney = new Journey(Duration,Distance,Date,Name,Rating,Comment,Image);
         ContentValues contentValues = journeyContentValues(mJourney);
         long result = mDatabase.insert("journey", null,contentValues);
         return result;
     }
 
-        //Update
-        public long update(Journey journey){
+    //Update
+    public long update(Journey journey){
         ContentValues contentValues = journeyContentValues(journey);
         long result= mDatabase.update("journey",contentValues, dbHealthSchema.JourneyTable.JourneyId +"=?",new String[]{String.valueOf(journey.getmJourneyId())});
         return result;
     }
-        //delete
-        public long delete(int id){
+    //delete
+    public long delete(int id){
         String journeyID = Integer.toString(id);
         LocationUtil mLU = new LocationUtil(this.mContext);
         mLU.delete(id);
         return mDatabase.delete("journey", dbHealthSchema.JourneyTable.JourneyId +"=?", new String[]{journeyID});
     }
-        //view data
-        public Cursor viewData(){
+    //view data
+    public Cursor viewData(){
         String view = " SELECT * FROM " + dbHealthSchema.JourneyTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
         return cursor;
     }
-        // Truy van toan bo du lieu do ve 1 danh sach
-        public List<Journey> getAllJourney(){
+    // Truy van toan bo du lieu do ve 1 danh sach
+    public List<Journey> getAllJourney(){
         List <Journey> journeys = new ArrayList<>();
         Cursor cursor = viewData();
         if(cursor.getCount()>0)
@@ -104,16 +104,16 @@ public class JourneyUtil {
         return journeys;
     }
     public String getLastestRowID(){
-            String rowID;
-            Cursor cursor = viewData();
-            cursor.moveToLast();
-            if (cursor.getCount()>0){
-                rowID = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
-            }
-            else{
-                rowID = "null";
-            }
-            return rowID;
+        String rowID;
+        Cursor cursor = viewData();
+        cursor.moveToLast();
+        if (cursor.getCount()>0){
+            rowID = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+        }
+        else{
+            rowID = "null";
+        }
+        return rowID;
     }
 
     public Journey getJourneyByID(int JourneyID){
@@ -201,13 +201,13 @@ public class JourneyUtil {
         //List Hashmap to store data
         ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
         String query = "SELECT strftime('%W',date) as \"Week Order\","
-                        + "SUM(distance) as \"Total Distance\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
-                        + " from journey "
-                        +" where "
-                        + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
-                        + " group by strftime('%W',date);";
+                + "SUM(distance) as \"Total Distance\","
+                + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
+                + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
+                + " from journey "
+                +" where "
+                + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
+                + " group by strftime('%W',date);";
         Cursor cursor = mDatabase.rawQuery(query,null);
         if(cursor.getCount()>0)
         {
@@ -236,9 +236,9 @@ public class JourneyUtil {
         //List Hashmap to store data
         ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
         String query = "SELECT strftime('%m', date) as \"Month of Year\", SUM (distance) as \"Total Distance\" \n"
-                        +"FROM journey\n"
-                        +"WHERE strftime('%m%Y',date)  >=  strftime('%m', DATE('now','start of year')) AND strftime('%Y',date) = strftime('%Y',DATE('now','start of year'))\n"
-                        +"GROUP BY strftime('%m',date)";
+                +"FROM journey\n"
+                +"WHERE strftime('%m%Y',date)  >=  strftime('%m', DATE('now','start of year')) AND strftime('%Y',date) = strftime('%Y',DATE('now','start of year'))\n"
+                +"GROUP BY strftime('%m',date)";
         Cursor cursor = mDatabase.rawQuery(query,null);
         if(cursor.getCount()>0)
         {
