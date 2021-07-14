@@ -37,35 +37,35 @@ public class JourneyUtil {
         contentValues.put(dbHealthSchema.JourneyTable.Image,journey.getmImage());
         return contentValues;
     }
-        //Insert
-        public long add(long Duration, float Distance, Date Date, String Name, int Rating, String Comment, String Image){
+    //Insert
+    public long add(long Duration, float Distance, Date Date, String Name, int Rating, String Comment, String Image){
         Journey mJourney = new Journey(Duration,Distance,Date,Name,Rating,Comment,Image);
         ContentValues contentValues = journeyContentValues(mJourney);
         long result = mDatabase.insert("journey", null,contentValues);
         return result;
     }
 
-        //Update
-        public long update(Journey journey){
+    //Update
+    public long update(Journey journey){
         ContentValues contentValues = journeyContentValues(journey);
         long result= mDatabase.update("journey",contentValues, dbHealthSchema.JourneyTable.JourneyId +"=?",new String[]{String.valueOf(journey.getmJourneyId())});
         return result;
     }
-        //delete
-        public long delete(int id){
+    //delete
+    public long delete(int id){
         String journeyID = Integer.toString(id);
         LocationUtil mLU = new LocationUtil(this.mContext);
         mLU.delete(id);
         return mDatabase.delete("journey", dbHealthSchema.JourneyTable.JourneyId +"=?", new String[]{journeyID});
     }
-        //view data
-        public Cursor viewData(){
+    //view data
+    public Cursor viewData(){
         String view = " SELECT * FROM " + dbHealthSchema.JourneyTable.TABLE_NAME;
         Cursor cursor = mDatabase.rawQuery(view, null);
         return cursor;
     }
-        // Truy van toan bo du lieu do ve 1 danh sach
-        public List<Journey> getAllJourney(){
+    // Truy van toan bo du lieu do ve 1 danh sach
+    public List<Journey> getAllJourney(){
         List <Journey> journeys = new ArrayList<>();
         Cursor cursor = viewData();
         if(cursor.getCount()>0)
@@ -104,16 +104,16 @@ public class JourneyUtil {
         return journeys;
     }
     public String getLastestRowID(){
-            String rowID;
-            Cursor cursor = viewData();
-            cursor.moveToLast();
-            if (cursor.getCount()>0){
-                rowID = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
-            }
-            else{
-                rowID = "null";
-            }
-            return rowID;
+        String rowID;
+        Cursor cursor = viewData();
+        cursor.moveToLast();
+        if (cursor.getCount()>0){
+            rowID = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+        }
+        else{
+            rowID = "null";
+        }
+        return rowID;
     }
 
     public Journey getJourneyByID(int JourneyID){
@@ -152,6 +152,7 @@ public class JourneyUtil {
 
         return journey;
     }
+
     public List<Journey> getJourneysByDate(Date startDate, Date endDate){
         List<Journey> journeyList =  new ArrayList<>();
         String start = dateFormat.format(startDate);
@@ -196,52 +197,17 @@ public class JourneyUtil {
         return journeyList;
     }
 
-    public ArrayList<HashMap<String,Object>> getTotalDistanceCurWeeks(){
-        //List Hashmap to store data
-        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
-        String query = "SELECT strftime('%W',date) as \"Week Order\","
-                        + "SUM(distance) as \"Total Distance\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
-                        + " from journey "
-                        +" where "
-                        + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
-                        + " group by strftime('%W',date);";
-        Cursor cursor = mDatabase.rawQuery(query,null);
-        if(cursor.getCount()>0)
-        {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
-                int week_order = cursor.getInt(cursor.getColumnIndex("Week Order"));
-                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
-                String week_start = cursor.getString(cursor.getColumnIndex("Week Start"));
-                String week_end = cursor.getString(cursor.getColumnIndex("Week End"));
-
-                HashMap<String,Object> mMap = new HashMap();
-                mMap.put("week_order",week_order);
-                mMap.put("total_distance",total_distance);
-                mMap.put("week_start",week_start);
-                mMap.put("week_end",week_end);
-
-                resultList.add(mMap);
-                cursor.moveToNext();
-            }
-            cursor.close();
-        }
-        return resultList;
-    }
-
     public ArrayList<HashMap<String,Object>> getTotalDistance5Weeks(){
         //List Hashmap to store data
         ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
         String query = "SELECT strftime('%W',date) as \"Week Order\","
-                        + "SUM(distance) as \"Total Distance\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
-                        + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
-                        + " from journey "
-                        +" where "
-                        + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
-                        + " group by strftime('%W',date);";
+                + "SUM(distance) as \"Total Distance\","
+                + "strftime('%d/%m', MAX(DATE(date, 'weekday 0','-6 day')) ) as \"Week Start\","
+                + "strftime('%d/%m', MAX(DATE(date, 'weekday 0')) ) as \"Week End\""
+                + " from journey "
+                +" where "
+                + "strftime('%W',date)  >= strftime('%W',DATE('now', 'weekday 0', '-30 days'))"
+                + " group by strftime('%W',date);";
         Cursor cursor = mDatabase.rawQuery(query,null);
         if(cursor.getCount()>0)
         {
@@ -265,6 +231,61 @@ public class JourneyUtil {
         }
         return resultList;
     }
+
+    public ArrayList<HashMap<String,Object>> getTotalDistanceMonthly(){
+        //List Hashmap to store data
+        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
+        String query = "SELECT strftime('%m', date) as \"Month of Year\", SUM (distance) as \"Total Distance\" \n"
+                +"FROM journey\n"
+                +"WHERE strftime('%m%Y',date)  >=  strftime('%m', DATE('now','start of year')) AND strftime('%Y',date) = strftime('%Y',DATE('now','start of year'))\n"
+                +"GROUP BY strftime('%m',date)";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                int month_number = cursor.getInt(cursor.getColumnIndex("Month of Year"));
+                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
+
+                HashMap<String,Object> mMap = new HashMap();
+                mMap.put("month_number",month_number);
+                mMap.put("total_distance",total_distance);
+
+                resultList.add(mMap);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return resultList;
+    }
+
+    public ArrayList<HashMap<String,Object>> getTotalDistanceDaily(){
+        //List Hashmap to store data
+        ArrayList<HashMap<String,Object>> resultList = new ArrayList<>();
+        String query = "SELECT strftime('%d/%m/%Y', date) as \"Day of Week\", SUM (distance) as \"Total Distance\" \n"
+                +"FROM journey\n"
+                +"WHERE strftime(DATE(date)) >= strftime(DATE('now', 'weekday 0', '-7 days'))\n"
+                +"GROUP BY strftime('%d%m%Y',date)";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                float total_distance = cursor.getFloat(cursor.getColumnIndex("Total Distance"));
+                String day_of_week = cursor.getString(cursor.getColumnIndex("Day of Week"));
+
+                HashMap<String,Object> mMap = new HashMap();
+                mMap.put("total_distance",total_distance);
+                mMap.put("day_of_week",day_of_week);
+
+                resultList.add(mMap);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return resultList;
+    }
+
 
 }
 
