@@ -8,11 +8,11 @@ public class Journey {
     private float mDistance;
     private Date mDate;
     private String mName;
-    private int mRating;
+    private float mRating;
     private String mComment;
     private String mImage;
 
-    public Journey(long mDuration, float mDistance, Date mDate, String mName, int mRating, String mComment, String mImage) {
+    public Journey(long mDuration, float mDistance, Date mDate, String mName, float mRating, String mComment, String mImage) {
         this.mDuration = mDuration;
         this.mDistance = mDistance;
         this.mDate = mDate;
@@ -73,11 +73,11 @@ public class Journey {
         this.mName = mName;
     }
 
-    public int getmRating() {
+    public float getmRating() {
         return mRating;
     }
 
-    public void setmRating(int mRating) {
+    public void setmRating(float mRating) {
         this.mRating = mRating;
     }
 
