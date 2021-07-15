@@ -2,7 +2,10 @@ package com.pinkteam.android.healthkon.Controllers;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,8 +75,14 @@ public class RunRecordDetailFragment extends Fragment {
                 loadLayout();
             }
         });
-
         loadLayout();
+    editButton = (Button) view.findViewById(R.id.edit_btn);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddDialogueShow();
+            }
+        });
         return view;
     }
     private void loadLayout(){
@@ -102,15 +111,47 @@ public class RunRecordDetailFragment extends Fragment {
         Button cancel_Button;
         Button save_Button;
         LayoutInflater i = getActivity().getLayoutInflater();
-        View view = i.inflate(R.layout.fragment_custom_dialog, null);
+        View v = i.inflate(R.layout.run_record_edit_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        journey_name_Edittext = (EditText) v.findViewById(R.id.journey_name_edt);
+        comment_Edittext = (EditText) v.findViewById(R.id.comment_edt);
+        cancel_Button = (Button) v.findViewById(R.id.cancel_btn);
+        save_Button = (Button) v.findViewById((R.id.save_btn));
         //set builder view
-        builder.setView(view);
+        builder.setView(v);
+        //Set text view text display name and journey comment
+        journey_name_Edittext.setText(mJourney.getmName());
+        comment_Edittext.setText(mJourney.getmComment());
         // Create the AlertDialog object and return it
         AlertDialog dialog =  builder.create();
-        journey_name_Edittext = (EditText) view.findViewById(R.id.journey_name_edt);
-        comment_Edittext = (EditText) view.findViewById(R.id.comment_edt);
-        cancel_Button = (Button) view.findViewById(R.id.cancel_btn);
-        save_Button = (Button) view.findViewById((R.id.save_btn));
+        //Set action for save button
+        save_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mJourney.setmName(journey_name_Edittext.getText().toString());
+                mJourney.setmComment(comment_Edittext.getText().toString());
+                mJourneyUtil.update(mJourney);
+                dialog.dismiss();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        loadLayout();
+                    }
+                }, 2000);
+            }
+        });
+        //Set Action for cancel button
+        cancel_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        //show dialog
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }
