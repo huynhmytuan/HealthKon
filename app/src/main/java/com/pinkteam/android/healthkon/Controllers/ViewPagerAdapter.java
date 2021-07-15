@@ -25,7 +25,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return new Fragment5();
             default:
-                return new Fragment1();
+                return null;
 
         }
 

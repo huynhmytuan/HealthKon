@@ -14,7 +14,7 @@ import com.pinkteam.android.healthkon.R;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mNavigationView;
-    private ViewPager mViewpager;
+    private NonSwipeableViewPager mViewpager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +28,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_1:
-                        mViewpager.setCurrentItem(0);
+                        mViewpager.setCurrentItem(0,false);
                         break;
                     case R.id.action_2:
-                        mViewpager.setCurrentItem(1);
+                        mViewpager.setCurrentItem(1,false);
                         break;
                     case R.id.action_3:
-                        mViewpager.setCurrentItem(2);
+                        mViewpager.setCurrentItem(2,false);
                         break;
                     case R.id.action_4:
-                        mViewpager.setCurrentItem(3);
+                        mViewpager.setCurrentItem(3,false);
                         break;
                     case R.id.action_5:
-                        mViewpager.setCurrentItem(4);
+                        mViewpager.setCurrentItem(4,false);
                         break;
 
                 }

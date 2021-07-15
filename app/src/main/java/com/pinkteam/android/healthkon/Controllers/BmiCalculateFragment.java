@@ -111,6 +111,8 @@ public class BmiCalculateFragment extends Fragment {
         mHeightBtn = (Button) view.findViewById(R.id.view_height_btn);
         mChart = view.findViewById(R.id.lineChart);
         mCalendarBtn = (LottieAnimationView) view.findViewById(R.id.view_cal_btn);
+
+        internalizeChart();
         if(isHeightView){
             RefreshLayout(view);
         }else {
@@ -170,13 +172,11 @@ public class BmiCalculateFragment extends Fragment {
             long end = 0;
 
             Date endDay = new Date();
-            Log.d("Test_LOL:",endDay.toString());
             Calendar cal = Calendar.getInstance();
             cal.setTime(endDay);
             cal.set(Calendar.DAY_OF_MONTH,1);
             Date startDay = cal.getTime();
 
-            Log.d("Test_LOL:",startDay.toString());
             start = startDay.getTime();
             end = endDay.getTime();
             selectionDate = new Pair(start,end);
@@ -240,24 +240,24 @@ public class BmiCalculateFragment extends Fragment {
         DecimalFormat df = new DecimalFormat("0.00");
         mViewBMIScore.setText(df.format(bmiScore)+"");
         if (bmiScore < 18){
-            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.under_weight));
             mViewBMIStatus.setText("Underweight");
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.under_weight));
         }
         else if (18 <= bmiScore && bmiScore < 25){
-            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.normal_weight));
             mViewBMIStatus.setText("Normal Weight");
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.normal_weight));
         }
         else if (25 <= bmiScore && bmiScore < 30){
-            mViewBMIScore.setTextColor(ContextCompat.getColor(getContext(),R.color.over_weight));
             mViewBMIStatus.setText("Over Weight");
+            mViewBMIScore.setTextColor(ContextCompat.getColor(getContext(),R.color.over_weight));
         }
         else if (30 <= bmiScore && bmiScore < 35){
-            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.obese_weight));
             mViewBMIStatus.setText("Obesity");
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.obese_weight));
         }
         else if (35 <= bmiScore){
-            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.extreme_weight));
             mViewBMIStatus.setText("Extremely Obesity");
+            mViewBMIStatus.setTextColor(ContextCompat.getColor(getContext(),R.color.extreme_weight));
         }
     }
 
@@ -286,7 +286,7 @@ public class BmiCalculateFragment extends Fragment {
         if(!weightList.isEmpty()){
             for (int i =0 ; i < weightList.size(); i++) {
                 float value = (float) weightList.get(i).getmValue();
-                Log.d("Test_W-",value+"_"+i);
+
                 valuesWeight.add(new Entry((float)i, value));
             }
             CreateChart(valuesWeight, selection);
@@ -318,12 +318,10 @@ public class BmiCalculateFragment extends Fragment {
         endDate = cal.getTime();
 
         //Get data from db by first date of month and today
-        Log.d("Date-print: ",startDate.toString()+"/"+endDate.toString());
         heightList = mHU.getHeightInRange(startDate,endDate);
         if(!heightList.isEmpty()){
             for (int i =0 ; i < heightList.size(); i++) {
                 float value = (float) heightList.get(i).getmValue();
-                Log.d("Test_H-",value+"_"+i);
                 valuesHeight.add(new Entry((float)i, value));
             }
             CreateChart(valuesHeight, selection);
@@ -352,37 +350,10 @@ public class BmiCalculateFragment extends Fragment {
             cal.set(Calendar.SECOND,now.getSeconds());
             EndDate = cal.getTime();
             LineDataSet data;   //Line arguments
-            //Graph background color
-            mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.cod_gray));
 
-            //x-axis setting
-            XAxis xAxis = mChart.getXAxis();
-            //Output x-axis diagonally
-            xAxis.setLabelRotationAngle(0);
+
             //Set the date registered in the database to the x-axis
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(getDate(StartDate,EndDate)));
-
-            //Make the x-axis a dashed line(Dashed Line)
-            xAxis.enableGridDashedLine(102f, 10f, 0f);
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-            //Display
-            xAxis.setLabelCount(getDate(StartDate,EndDate).size(),true);
-            xAxis.setTextColor(Color.WHITE);
-
-            //y-axis setting
-            YAxis yAxis = mChart.getAxisLeft();
-
-            //Make the y-axis a dashed line
-            yAxis.setDrawZeroLine(false);
-            yAxis.enableAxisLineDashedLine(120f, 10f,0f);
-
-
-            //The scale on the right. False if not needed
-            mChart.getAxisRight().setEnabled(false);
-            yAxis.setEnabled(false);
-
-            mChart.setScaleMinima(5f, 5f);
-            mChart.fitScreen();
+            mChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(getDate(StartDate,EndDate)));
 
 
             //Make another set
@@ -392,17 +363,18 @@ public class BmiCalculateFragment extends Fragment {
                 data.setColor(Color.RED);
                 data.setCircleColor(Color.rgb(254,157,112));
                 //Y-axis maximum / minimum setting
-                yAxis.setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
-                yAxis.setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
+                mChart.getAxisLeft().setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
+                mChart.getAxisLeft().setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
             }
             else {
                 //Y-axis maximum / minimum setting
-                yAxis.setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
-                yAxis.setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
+                mChart.getAxisLeft().setAxisMaximum(findMinMaxEntryValue(valuesSet,true)+10f);
+                mChart.getAxisLeft().setAxisMinimum(findMinMaxEntryValue(valuesSet,false)-10f);
                 data = new LineDataSet(valuesSet,"Weight");
                 data.setColor(Color.BLUE);
                 data.setCircleColor(Color.CYAN);
             }
+
 
             data.setValueTextColor(Color.WHITE);
             data.setValueTextSize(10f);
@@ -418,10 +390,9 @@ public class BmiCalculateFragment extends Fragment {
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(data);
             LineData lineData = new LineData(dataSets);
+            mChart.animateX(2000);
             mChart.setData(lineData);
-            mChart.getLegend().setEnabled(false);
-            //Animate the data. millisecond.Larger numbers are slower
-            mChart.animateX(700);
+            mChart.invalidate();
         }else {
             mChart.invalidate();
             mChart.clear();
@@ -429,7 +400,39 @@ public class BmiCalculateFragment extends Fragment {
 
 
     }
+    private void internalizeChart(){
+        //Graph background color
+        mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.cod_gray));
+        //x-axis setting
+        XAxis xAxis = mChart.getXAxis();
+        //Output x-axis diagonally
+        xAxis.setLabelRotationAngle(0);
+        //Make the x-axis a dashed line(Dashed Line)
+        xAxis.enableGridDashedLine(102f, 10f, 0f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //Display
 
+        xAxis.setTextColor(Color.WHITE);
+
+        //y-axis setting
+        YAxis yAxis = mChart.getAxisLeft();
+
+        //Make the y-axis a dashed line
+        yAxis.setDrawZeroLine(false);
+        yAxis.enableAxisLineDashedLine(120f, 10f,0f);
+
+
+        //The scale on the right. False if not needed
+        mChart.getAxisRight().setEnabled(false);
+        yAxis.setEnabled(false);
+
+        mChart.setScaleMinima(5f, 5f);
+        mChart.fitScreen();
+        mChart.getLegend().setEnabled(false);
+        //Animate the data. millisecond.Larger numbers are slower
+        mChart.animateX(2000);
+        mChart.getDescription().setEnabled(false);
+    }
     //Refresh layout
     @RequiresApi(api = Build.VERSION_CODES.N)
     private  void RefreshLayout(View view){
@@ -440,8 +443,6 @@ public class BmiCalculateFragment extends Fragment {
         Weight mWeight = mWU.getLastestWeight();
         weightValue = mWeight.getmValue();
         mViewWeight.setText(weightValue +"");
-
-        calculateBMI(mWeight.getmValue(), mHeight.getmValue());
         if(selectionDate == null){
             Date endDate = new Date();
             long second = endDate.getTime();
@@ -460,6 +461,7 @@ public class BmiCalculateFragment extends Fragment {
             long first = startDate.getTime();
             selectionDate = new Pair<>(first,second);
         }
+        calculateBMI(mWeight.getmValue(), mHeight.getmValue());
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -472,7 +474,7 @@ public class BmiCalculateFragment extends Fragment {
                     ShowWeightChart(selectionDate);
                 }
             }
-        }, 2000);
+        }, 1500);
     }
     //Rewrite the data saved in String type to date type and SimpleDateFormat
     @RequiresApi(api = Build.VERSION_CODES.N)

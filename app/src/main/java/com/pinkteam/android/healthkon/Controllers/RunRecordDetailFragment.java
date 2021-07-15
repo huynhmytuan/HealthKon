@@ -108,9 +108,9 @@ public class RunRecordDetailFragment extends Fragment {
         builder.setView(view);
         // Create the AlertDialog object and return it
         AlertDialog dialog =  builder.create();
-        journey_name_Edittext = (EditText) view.findViewById(R.id.journey_name_edt);
-        comment_Edittext = (EditText) view.findViewById(R.id.comment_edt);
-        cancel_Button = (Button) view.findViewById(R.id.cancel_btn);
-        save_Button = (Button) view.findViewById((R.id.save_btn));
+//        journey_name_Edittext = (EditText) view.findViewById(R.id.journey_name_edt);
+//        comment_Edittext = (EditText) view.findViewById(R.id.comment_edt);
+//        cancel_Button = (Button) view.findViewById(R.id.cancel_btn);
+//        save_Button = (Button) view.findViewById((R.id.save_btn));
     }
 }

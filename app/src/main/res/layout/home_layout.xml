@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="20dp">
+            android:layout_marginHorizontal="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,6 +86,138 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_cod_gray_background"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView26"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/calo" />
+
+                                    <TextView
+                                        android:id="@+id/kcal_textview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:gravity="center"
+                                        android:text="00:00"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView25"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/step" />
+
+                                    <TextView
+                                        android:id="@+id/step_textview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:gravity="center"
+                                        android:text="00:00"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView27"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/distance" />
+
+                                    <TextView
+                                        android:id="@+id/distance_textview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:gravity="center"
+                                        android:text="00:00"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imageView23"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/time" />
+
+                                    <TextView
+                                        android:id="@+id/time_textview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:gravity="center"
+                                        android:text="00:00:00"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -94,16 +226,19 @@
                         android:layout_below="@id/title_chart"
                         android:background="@drawable/card_cod_gray_background"
                         android:orientation="vertical"
-                        android:paddingBottom="30dp">
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="20dp">
 
                         <RadioGroup
+                            android:id="@+id/time_radiogroup"
                             android:layout_width="match_parent"
                             android:layout_height="36dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="10dp"
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:id="@+id/radioButton3"
+                                android:id="@+id/week_radiobutton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -112,10 +247,11 @@
                                 android:gravity="center"
                                 android:text="Week"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                android:checked="true"/>
 
                             <RadioButton
-                                android:id="@+id/radioButton2"
+                                android:id="@+id/month_radiobutton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -127,7 +263,7 @@
                                 android:textSize="16sp" />
 
                             <RadioButton
-                                android:id="@+id/radioButton"
+                                android:id="@+id/year_radiobutton"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -142,7 +278,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -157,18 +292,6 @@
                                 android:text="Range Date: 00/00/00 - 00/00/00"
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />
-
-                            <com.airbnb.lottie.LottieAnimationView
-                                android:id="@+id/view_cal_btn2"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_toRightOf="@id/view_weight_btn"
-                                app:lottie_autoPlay="true"
-                                app:lottie_loop="true"
-                                app:lottie_rawRes="@raw/calendar_icon_anim"
-                                tools:layout_marginEnd="15dp"
-                                tools:layout_marginTop="5dp" />
                         </LinearLayout>
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -178,155 +301,13 @@
                             android:layout_below="@id/date_range_textview"
                             android:layout_marginBottom="10dp"
                             android:adjustViewBounds="true"
-                            android:paddingHorizontal="20dp"
+                            android:layout_marginHorizontal="10dp"
                             android:scaleType="matrix" />
                     </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="113dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/card_cod_gray_background"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/name_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center"
-                        android:text=" 05/07/2021 - 12/07/2021"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageView26"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center"
-                                    app:srcCompat="@drawable/calo" />
-
-                                <TextView
-                                    android:id="@+id/kcal_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:gravity="center"
-                                    android:text="00:00"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageView25"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center"
-                                    app:srcCompat="@drawable/step" />
-
-                                <TextView
-                                    android:id="@+id/step_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:gravity="center"
-                                    android:text="00:00"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageView27"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center"
-                                    app:srcCompat="@drawable/distance" />
-
-                                <TextView
-                                    android:id="@+id/distance_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:gravity="center"
-                                    android:text="00:00"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imageView23"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center"
-                                    app:srcCompat="@drawable/time" />
-
-                                <TextView
-                                    android:id="@+id/time_textview"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:gravity="center"
-                                    android:text="00:00:00"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
