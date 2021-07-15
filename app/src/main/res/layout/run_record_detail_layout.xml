@@ -100,15 +100,12 @@
                     android:text="Date: 00/00/00"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/lineChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="850px"
-                    android:layout_below="@id/date_range_textview"
-                    android:adjustViewBounds="true"
-                    android:paddingHorizontal="20dp"
-                    android:scaleType="matrix" />
+                    <fragment
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        xmlns:map="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"/>
             </LinearLayout>
         </LinearLayout>
 
