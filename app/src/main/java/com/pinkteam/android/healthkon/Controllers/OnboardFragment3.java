@@ -3,13 +3,10 @@ package com.pinkteam.android.healthkon.Controllers;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,8 +16,8 @@ import android.widget.NumberPicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
+import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
 import com.pinkteam.android.healthkon.R;
 
 import java.util.Date;
@@ -76,6 +73,11 @@ public class OnboardFragment3 extends Fragment {
                     mp = MediaPlayer.create(getActivity(),R.raw.effect_tick);
                     mp.setLooping(false);
                     mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mep) {
+                            mep.release();
+                        };
+                    });
                 }
             });
         }
@@ -92,8 +94,6 @@ public class OnboardFragment3 extends Fragment {
                     viewPager.setCurrentItem(4);
                     WelcomeActivity.weight.setmDate(new Date());
                     WelcomeActivity.weight.setmValue(weightValue);
-                    Log.d("Test weight:", "Weight: " +WelcomeActivity.weight.getmValue()
-                            + " - Date: " +WelcomeActivity.weight.getmDate());
                 }
             });
             nextButton.setVisibility(View.VISIBLE);

@@ -30,6 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.Models.Location;
 import com.pinkteam.android.healthkon.R;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RunRecordDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements OnMapReadyCallback {
     JourneyUtil mJourneyUtil;
     LocationUtil mLocationUtil;
     private  SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");

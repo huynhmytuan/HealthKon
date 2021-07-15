@@ -10,8 +10,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
+import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
 import com.pinkteam.android.healthkon.R;
 
 public class OnboardFragment0 extends Fragment {
@@ -36,7 +36,7 @@ public class OnboardFragment0 extends Fragment {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewPager.setCurrentItem(1);
+                    viewPager.setCurrentItem(1,false);
                 }
             });
             nextButton = getActivity().findViewById(R.id.next_button);

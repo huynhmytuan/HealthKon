@@ -2,13 +2,10 @@ package com.pinkteam.android.healthkon.Controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
+import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
 import com.pinkteam.android.healthkon.Models.Height;
 import com.pinkteam.android.healthkon.Models.User;
 import com.pinkteam.android.healthkon.Models.Weight;

@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,15 +18,11 @@ import android.widget.NumberPicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
-import com.pinkteam.android.healthkon.Models.Height;
-import com.pinkteam.android.healthkon.Models.User;
-import com.pinkteam.android.healthkon.Models.Weight;
+import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.HeightUtil;
 import com.pinkteam.android.healthkon.database.UserUtil;
-import com.pinkteam.android.healthkon.database.WeightUtil;
 import com.pinkteam.android.healthkon.database.WeightUtil;
 
 import java.util.Date;
@@ -88,6 +82,11 @@ public class OnboardFragment4 extends Fragment {
                     mp = MediaPlayer.create(getActivity(),R.raw.effect_tick);
                     mp.setLooping(false);
                     mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                        };
+                    });
                 }
             });
         }

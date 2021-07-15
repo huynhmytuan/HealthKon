@@ -19,7 +19,7 @@
         android:theme="@style/Theme.HealthKon">
 
         <receiver
-            android:name=".Controllers.MyReceiver"
+            android:name=".Material.MyReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter >

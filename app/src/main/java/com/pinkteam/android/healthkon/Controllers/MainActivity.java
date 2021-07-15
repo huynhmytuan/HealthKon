@@ -1,6 +1,5 @@
 package com.pinkteam.android.healthkon.Controllers;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,6 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
 import com.pinkteam.android.healthkon.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         mNavigationView = findViewById(R.id.bottom_nav);
         mViewpager = findViewById(R.id.view_pager);
+        mViewpager.setOffscreenPageLimit(0);
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
