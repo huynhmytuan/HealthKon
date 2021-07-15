@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pinkteam.android.healthkon.Controllers.RecyclerAdapter;
+import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
@@ -16,7 +17,7 @@ import com.pinkteam.android.healthkon.database.JourneyUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RunningListActivity extends AppCompatActivity {
+public class RunningListActivity extends SwipeDismissBaseActivity {
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private ArrayList<Journey> journeys;

@@ -1,10 +1,12 @@
-package com.pinkteam.android.healthkon.Controllers;
+package com.pinkteam.android.healthkon.Material;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.pinkteam.android.healthkon.Controllers.LocationService;
 
 public class MyReceiver extends BroadcastReceiver {
 

@@ -1,4 +1,4 @@
-package com.pinkteam.android.healthkon.Controllers;
+package com.pinkteam.android.healthkon.Material;
 
 import android.content.Context;
 import androidx.viewpager.widget.ViewPager;
