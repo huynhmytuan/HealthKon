@@ -1,13 +1,13 @@
 package com.pinkteam.android.healthkon.Controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -25,6 +27,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
 import com.pinkteam.android.healthkon.database.UserUtil;
@@ -36,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
     private boolean _hasLoadedOnce= false; // your boolean fiel
@@ -51,7 +53,10 @@ public class HomeFragment extends Fragment {
     RadioButton mMonthRadioButton;
     RadioButton mYearRadioButton;
     RadioGroup mRadioGroup;
+    Button mShowMore;
     BarChart mBarChart;
+    RecyclerView mRecycleView;
+    RecyclerAdapter recyclerAdapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -67,6 +72,7 @@ public class HomeFragment extends Fragment {
         mUserUtil = new UserUtil(getContext());
 
         //Referent to layout
+        mRecycleView = (RecyclerView) view.findViewById(R.id.home_recycler);
         mNameTextView = (TextView) view.findViewById(R.id.user_name_textview);
         mTotalDistanceTextView = (TextView) view.findViewById(R.id.distance_textview);
         mTotalTimeTextView = (TextView) view.findViewById(R.id.time_textview);
@@ -75,6 +81,14 @@ public class HomeFragment extends Fragment {
         mMonthRadioButton = (RadioButton) view.findViewById(R.id.month_radiobutton);
         mYearRadioButton = (RadioButton) view.findViewById(R.id.year_radiobutton);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.time_radiogroup);
+        mShowMore = (Button) view.findViewById(R.id.show_more_button);
+        mShowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), RunningListActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         CreateBarChart("Week");
@@ -92,8 +106,14 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        loadLayout();
+        refreshLayout();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshLayout();
     }
 
     @Override
@@ -103,13 +123,13 @@ public class HomeFragment extends Fragment {
         if (this.isVisible()) {
             // we check that the fragment is becoming visible
             if (isFragmentVisible_ && !_hasLoadedOnce) {
-                loadLayout();
+                refreshLayout();
                 _hasLoadedOnce = true;
             }
         }
     }
 
-    private void loadLayout(){
+    private void refreshLayout(){
         //Set hello user's last name
         String fullName = mUserUtil.getAllUser().get(0).getmName();
         String[] words = fullName.split("\\s+");
@@ -121,6 +141,10 @@ public class HomeFragment extends Fragment {
         }
         //internalize Chart
         internalizeBarChart();
+        ArrayList<Journey> journeys = mJourneyUtil.getRecentJourney(3);
+        recyclerAdapter = new RecyclerAdapter(getContext(),journeys, "home");
+        mRecycleView.setAdapter(recyclerAdapter);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void internalizeBarChart(){

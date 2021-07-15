@@ -89,7 +89,14 @@ public class RunRecordDetailActivity extends AppCompatActivity implements OnMapR
         timeTextview = (TextView) findViewById(R.id.time_textview);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         editButton = (Button) findViewById(R.id.edit_btn);
+        backButton = (Button) findViewById(R.id.back_btn);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

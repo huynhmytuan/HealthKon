@@ -26,14 +26,6 @@ public class dbHeathHelper extends SQLiteOpenHelper {
                 dbHealthSchema.UserTable.PHONE + " TEXT )";
     }
 
-    private static final String CREATE_TABLE_ACCOUNT;
-    static {
-        CREATE_TABLE_ACCOUNT=" CREATE TABLE " + dbHealthSchema.AccountTable.TABLE_NAME + " (" +
-            dbHealthSchema.AccountTable.Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            dbHealthSchema.AccountTable.Username + " TEXT NOT NULL, " +
-            dbHealthSchema.AccountTable.Password + " TEXT NOT NULL )";
-    }
-
     private static final String CREATE_TABLE_HEIGHT;
     static {
         CREATE_TABLE_HEIGHT=" CREATE TABLE " + dbHealthSchema.HeightTable.TABLE_NAME + " (" +
@@ -48,17 +40,6 @@ public class dbHeathHelper extends SQLiteOpenHelper {
                 dbHealthSchema.WeightTable.Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 dbHealthSchema.WeightTable.Value + " INTEGER, " +
                 dbHealthSchema.WeightTable.Date + " REAL )";
-    }
-
-    private static final String CREATE_TABLE_TOP;
-    static {
-        CREATE_TABLE_TOP = " CREATE TABLE " + dbHealthSchema.TopTable.TABLE_NAME + " (" +
-                dbHealthSchema.TopTable.Id + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                dbHealthSchema.TopTable.Username + " TEXT NOT NULL, " +
-                dbHealthSchema.TopTable.Distance + " REAL, " +
-                dbHealthSchema.TopTable.Start_Day + " REAL, " +
-                dbHealthSchema.TopTable.End_Day + " REAL, " +
-                dbHealthSchema.TopTable.Top + " TEXT )";
     }
 
     private static final String CREATE_TABLE_JOURNEY;
@@ -88,10 +69,8 @@ public class dbHeathHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_USER);
-        db.execSQL(CREATE_TABLE_ACCOUNT);
         db.execSQL(CREATE_TABLE_HEIGHT);
         db.execSQL(CREATE_TABLE_WEIGHT);
-        db.execSQL(CREATE_TABLE_TOP);
         db.execSQL(CREATE_TABLE_JOURNEY);
         db.execSQL(CREATE_TABLE_LOCATION);
         Log.d("SQL", " onCreate: ");
