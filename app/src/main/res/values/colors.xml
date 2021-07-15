@@ -15,8 +15,11 @@
     <color name="black">#000000</color>
     <color name="black_text">#DE000000</color>
     <color name="black_shadow">#F7000000</color>
-    <color name="cod_gray">#1C1B1D</color>
+    <color name="cod_gray">#141D1F</color>
+    <color name="bg_color">#0D1315</color>
     <color name="nav_back">#1C1B1D</color>
+    <color name="blue_light">#2EE7D6</color>
+
 
     <color name="green_malachite">#1ED760</color>
     <color name="green_dark_pastel">#1DB954</color>
