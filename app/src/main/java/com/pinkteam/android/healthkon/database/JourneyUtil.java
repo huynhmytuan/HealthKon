@@ -65,8 +65,8 @@ public class JourneyUtil {
         return cursor;
     }
     // Truy van toan bo du lieu do ve 1 danh sach
-    public List<Journey> getAllJourney(){
-        List <Journey> journeys = new ArrayList<>();
+    public ArrayList<Journey> getAllJourney(){
+        ArrayList <Journey> journeys = new ArrayList<>();
         Cursor cursor = viewData();
         if(cursor.getCount()>0)
         {
@@ -114,6 +114,47 @@ public class JourneyUtil {
             rowID = "null";
         }
         return rowID;
+    }
+
+    public ArrayList<Journey> getRecentJourney(int numOfJourney){
+        ArrayList<Journey> mJourneyList = new ArrayList<>();
+        Cursor cursor = viewData();
+        if(cursor.getCount()>0)
+        {
+            int count = 0;
+            cursor.moveToLast();
+            while (!cursor.isBeforeFirst() && count != numOfJourney){
+                String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
+                String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
+                String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
+                String date = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Date));
+                String name = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Name));
+                String rating = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Rating));
+                String comment = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Comment));
+                String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
+
+                Journey journey = new Journey();
+
+                try{
+                    journey.setmJourneyId(Integer.parseInt(id));
+                    journey.setmDuration(Long.parseLong(duration));
+                    journey.setmDistance(Float.parseFloat(distance));
+                    journey.setmDate(dateFormat.parse(date));
+                    journey.setmName(name);
+                    journey.setmRating(Float.parseFloat(rating));
+                    journey.setmComment(comment);
+                    journey.setmImage(image);
+                }
+                catch (Exception e){
+                    Log.d("Database_Exp:",e.getMessage());
+                }
+                mJourneyList.add(journey);
+                cursor.moveToPrevious();
+                count = count+1;
+            }
+            cursor.close();
+        }
+        return mJourneyList;
     }
 
     public Journey getJourneyByID(int JourneyID){

@@ -11,12 +11,6 @@ public class dbHealthSchema {
         public static final String EMAIL = "email";
         public static final String PHONE = "phone";
     }
-    public static final class AccountTable{
-        public static final String TABLE_NAME = "account";
-        public static final String Id = "id";
-        public static final String Username = "username";
-        public static final String Password = "password";
-    }
     public static final class HeightTable{
         public static final String TABLE_NAME = "height";
         public static final String Id = "id";
@@ -28,16 +22,6 @@ public class dbHealthSchema {
         public static final String Id = "id";
         public static final String Value = "value";
         public static final String Date = "date";
-    }
-
-    public static final class TopTable{
-        public static final String TABLE_NAME = "top";
-        public static final String Id = "id";
-        public static final String Username = "username";
-        public static final String Distance = "distance";
-        public static final String  Start_Day = "start_day";
-        public static final String End_Day = "end_day";
-        public static final String  Top = "top";
     }
     public static final class JourneyTable{
         public static final String TABLE_NAME = "journey";
