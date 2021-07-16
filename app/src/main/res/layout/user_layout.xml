@@ -9,24 +9,24 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="20dp">
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
+
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="280dp"
+                android:background="@drawable/topuser"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/back"
-                            app:backgroundTint="@color/blue_light"
+                            app:backgroundTint="@color/white"
                             app:backgroundTintMode="multiply" />
                     </LinearLayout>
 
@@ -64,7 +64,7 @@
                             android:gravity="right"
                             android:text="EDIT"
                             android:textAllCaps="false"
-                            android:textColor="@color/blue_light"
+                            android:textColor="@color/white"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             app:backgroundTint="@color/white"
@@ -80,41 +80,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/dot"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/rose" />
-
-                </LinearLayout>
-
                 <EditText
-                    android:id="@+id/name_textview"
+                    android:id="@+id/name_textview2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
                     android:gravity="center"
-                    android:text="Thanh Nhan"
                     android:hint="Enter your full name"
                     android:inputType="textPersonName"
+                    android:text="Thanh Nhan"
                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:background="@android:color/transparent"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -132,7 +116,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="co">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,18 +126,10 @@
                         android:elevation="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView10"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            app:srcCompat="@drawable/name" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -168,6 +145,7 @@
                                 android:id="@+id/gender_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginStart="20dp"
                                 android:text="Male"
                                 android:textColor="@color/white"
@@ -183,14 +161,6 @@
                         android:background="@drawable/card_cod_gray_background"
                         android:elevation="20dp"
                         android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView13"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            app:srcCompat="@drawable/email" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -211,6 +181,7 @@
                                 android:id="@+id/email_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
                                 android:layout_marginStart="20dp"
                                 android:text="nhantp18@uef.edu.vn"
                                 android:hint="i.e example@mail.com"
@@ -228,14 +199,6 @@
                         android:background="@drawable/card_cod_gray_background"
                         android:elevation="20dp"
                         android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView16"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            app:srcCompat="@drawable/phone" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -257,6 +220,7 @@
                                 android:id="@+id/phone_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
                                 android:layout_marginStart="20dp"
                                 android:text="0984675721"
                                 android:hint="Enter your phone"
@@ -275,14 +239,6 @@
                         android:background="@drawable/card_cod_gray_background"
                         android:elevation="20dp"
                         android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            app:srcCompat="@drawable/dob" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -304,6 +260,7 @@
                                 android:id="@+id/age_textview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
                                 android:layout_marginStart="20dp"
                                 android:text="20"
                                 android:hint="Enter your age"
