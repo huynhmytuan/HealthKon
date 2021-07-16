@@ -1,31 +1,22 @@
 package com.pinkteam.android.healthkon.Controllers;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,7 +24,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -43,17 +33,12 @@ import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.Models.Location;
 import com.pinkteam.android.healthkon.R;
-import com.pinkteam.android.healthkon.database.HeightUtil;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
 import com.pinkteam.android.healthkon.database.LocationUtil;
-import com.pinkteam.android.healthkon.database.UserUtil;
-import com.pinkteam.android.healthkon.database.WeightUtil;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements OnMapReadyCallback {

@@ -21,9 +21,10 @@
 
                 <ImageView
                     android:id="@+id/image_View"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/one" />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/two" />
             </LinearLayout>
 
             <LinearLayout
@@ -69,7 +70,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="5,5"
-                    android:textColor="@color/one"
+                    android:textColor="@color/two"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

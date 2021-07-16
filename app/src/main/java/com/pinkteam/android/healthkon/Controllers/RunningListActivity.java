@@ -4,18 +4,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pinkteam.android.healthkon.Controllers.RecyclerAdapter;
 import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RunningListActivity extends SwipeDismissBaseActivity {
     private RecyclerView recyclerView;

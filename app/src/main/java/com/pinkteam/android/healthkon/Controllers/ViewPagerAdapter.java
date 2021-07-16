@@ -15,15 +15,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new BmiCalculateFragment();
-            case 1:
                 return new HomeFragment();
-            case 2:
+            case 1:
                 return new RunRecordFragment();
+            case 2:
+                return new BmiCalculateFragment();
             case 3:
-                return new Fragment4();
-            case 4:
-                return new Fragment5();
+                return new InfoActivity();
+
             default:
                 return null;
 
@@ -32,6 +31,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 }

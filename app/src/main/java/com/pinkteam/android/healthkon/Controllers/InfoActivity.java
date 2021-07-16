@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.pinkteam.android.healthkon.R;
 
-public class Fragment4 extends Fragment {
+public class InfoActivity extends Fragment {
+    private LinearLayout mUserButton;
+    private LinearLayout mAboutButton;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -23,12 +25,21 @@ public class Fragment4 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_4, container, false);
-        Button button = view.findViewById(R.id.view_weight_btn);
-        button.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.info_layout, container, false);
+        mUserButton = view.findViewById(R.id.user_button);
+        mAboutButton = view.findViewById(R.id.about_button);
+
+        mUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), UserInfoActivity.class);
+                startActivity(i);
+            }
+        });
+        mAboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(i);
             }
         });

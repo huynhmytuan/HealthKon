@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgrselultdetail">
+    android:background="@color/bg_color">
 
     <com.pinkteam.android.healthkon.Material.NonSwipeableViewPager
         android:id="@+id/slide_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.pinkteam.android.healthkon.Material.NonSwipeableViewPager>
+        android:layout_height="match_parent"/>
+
     <RelativeLayout
 
-        android:layout_below="@id/slide_viewpager"
         android:id="@+id/button_area"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:orientation="horizontal"
+        android:layout_below="@id/slide_viewpager"
         android:gravity="bottom"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgrselultdetail"
+    android:background="@color/bg_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -33,7 +33,7 @@
                     android:background="@drawable/back"
 
                     android:gravity="left"
-                    app:backgroundTint="@android:color/holo_green_dark"
+                    app:backgroundTint="@color/blue_light"
                     app:backgroundTintMode="multiply" />
             </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp" />
 
     </LinearLayout>
 </LinearLayout>
