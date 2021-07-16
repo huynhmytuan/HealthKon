@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.pinkteam.android.healthkon.Models.*;
 import com.pinkteam.android.healthkon.database.*;
@@ -33,7 +32,6 @@ public class LocationUtil {
     //Insert
     public long add(int JourneyId, double Altitude, double Longitude, double Latitude){
         Location mLocation = new Location(JourneyId,Altitude,Longitude,Latitude);
-        Log.e("TEST OBJ", "Id: "+mLocation.getmJourneyId() +" alt: "+mLocation.getmAltitude()+" Long: "+mLocation.getmLongitude()+" Lat: "+mLocation.getmLatitude() );
         ContentValues contentValues = locationContentValues(mLocation);
         long result = mDatabase.insert("location", null,contentValues);
         return result;

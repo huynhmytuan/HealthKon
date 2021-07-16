@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
     TextView mNameTextView;
     TextView mTotalDistanceTextView;
     TextView mTotalTimeTextView;
+    TextView mCountRecordTextView;
     RadioButton mWeekRadioButton;
     RadioButton mMonthRadioButton;
     RadioButton mYearRadioButton;
@@ -76,6 +77,7 @@ public class HomeFragment extends Fragment {
         mNameTextView = (TextView) view.findViewById(R.id.user_name_textview);
         mTotalDistanceTextView = (TextView) view.findViewById(R.id.distance_textview);
         mTotalTimeTextView = (TextView) view.findViewById(R.id.time_textview);
+        mCountRecordTextView = (TextView) view.findViewById(R.id.count_textview);
         mBarChart = (BarChart) view.findViewById(R.id.barChart);
         mWeekRadioButton = (RadioButton) view.findViewById(R.id.week_radiobutton);
         mMonthRadioButton = (RadioButton) view.findViewById(R.id.month_radiobutton);
@@ -90,8 +92,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-        CreateBarChart("Week");
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment {
             }
         });
         refreshLayout();
+        CreateBarChart("Week");
         return view;
     }
 
@@ -116,20 +117,8 @@ public class HomeFragment extends Fragment {
         refreshLayout();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isFragmentVisible_) {
-        super.setUserVisibleHint(true);
-
-        if (this.isVisible()) {
-            // we check that the fragment is becoming visible
-            if (isFragmentVisible_ && !_hasLoadedOnce) {
-                refreshLayout();
-                _hasLoadedOnce = true;
-            }
-        }
-    }
-
     private void refreshLayout(){
+        internalizeBarChart();
         //Set hello user's last name
         String fullName = mUserUtil.getAllUser().get(0).getmName();
         String[] words = fullName.split("\\s+");
@@ -140,7 +129,6 @@ public class HomeFragment extends Fragment {
             mNameTextView.setText(fullName);
         }
         //internalize Chart
-        internalizeBarChart();
         ArrayList<Journey> journeys = mJourneyUtil.getRecentJourney(3);
         recyclerAdapter = new RecyclerAdapter(getContext(),journeys, "home");
         mRecycleView.setAdapter(recyclerAdapter);
@@ -149,7 +137,6 @@ public class HomeFragment extends Fragment {
 
     private void internalizeBarChart(){
         //Set Chart Style
-        mBarChart.animateY(5000);
         mBarChart.setScaleEnabled(false);
         mBarChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.cod_gray));
         mBarChart.getAxisRight().setEnabled(false);
@@ -192,20 +179,22 @@ public class HomeFragment extends Fragment {
         barData.setValueTextSize(12f);
 
         mBarChart.setData(barData);
-        mBarChart.animateY(1500);
         mBarChart.getAxisLeft().setAxisMaxValue(findMaxEntryValue(dataValues)+2f);
+        mBarChart.animateY(1500);
         mBarChart.invalidate();
         updateTotalValue(chartType);
     }
     private void updateTotalValue(String chartType){
         float totalDistance = 0;
         long totalDuration = 0;
+        int countRecord = 0;
         if(chartType.equals("Week")){
             ArrayList<HashMap<String,Object>> sumDistanceList = mJourneyUtil.getTotalDistanceDaily();
 
             for (HashMap x : sumDistanceList){
                 totalDistance += (float) x.get("total_distance");
                 totalDuration += (long) x.get("total_duration");
+                countRecord += (int) x.get("num_of_record");
             }
 
         }
@@ -214,22 +203,25 @@ public class HomeFragment extends Fragment {
             for (HashMap x : sumDistanceList){
                 totalDistance += (float) x.get("total_distance");
                 totalDuration += (long) x.get("total_duration");
+                countRecord += (int) x.get("num_of_record");
             }
 
         }
-        if(chartType.equals("Week")){
+        if(chartType.equals("Year")){
             ArrayList<HashMap<String,Object>> sumDistanceList = mJourneyUtil.getTotalDistanceMonthly();
             for (HashMap x : sumDistanceList){
                totalDistance += (float) x.get("total_distance");
                totalDuration += (long) x.get("total_duration");
+               countRecord += (int) x.get("num_of_record");
             }
         }
 
         long hours = totalDuration / 3600;
         long minutes = (totalDuration % 3600) / 60;
 
-        mTotalTimeTextView.setText(String.format("%.2f km", totalDistance));
+        mTotalDistanceTextView.setText(String.format("%.2f km", totalDistance));
         mTotalTimeTextView.setText(String.format("%02dh%02dm", hours, minutes));
+        mCountRecordTextView.setText(countRecord+"");
     }
     private ArrayList<BarEntry> getDataValues(String chartType){
         ArrayList<BarEntry> dataValues = new ArrayList<>();
@@ -251,7 +243,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
                 if(!isAdded){
-                        dataValues.add(new BarEntry(i-1,0f));
+                        dataValues.add(new BarEntry(i-1,0));
                 }
             }
         }
@@ -275,7 +267,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
                 if(!isAdded){
-                    dataValues.add(new BarEntry(i,0f));
+                    dataValues.add(new BarEntry(i,0));
                 }
                 //Get date from week number
                 Calendar cal = Calendar.getInstance();
@@ -302,7 +294,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
                 if(!isAdded){
-                    dataValues.add(new BarEntry(i,0f));
+                    dataValues.add(new BarEntry(i,0));
                 }
             }
         }

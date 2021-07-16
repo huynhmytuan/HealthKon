@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.pinkteam.android.healthkon.Models.*;
-import com.pinkteam.android.healthkon.database.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

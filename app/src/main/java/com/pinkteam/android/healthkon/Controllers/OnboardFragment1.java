@@ -95,11 +95,6 @@ public class OnboardFragment1 extends Fragment {
                         WelcomeActivity.user.setmEmail(emailEdt.getText().toString());
                         WelcomeActivity.user.setmPhone(phoneEdt.getText().toString());
                         WelcomeActivity.user.setmAge(Integer.parseInt(ageEdt.getText().toString()));
-                        Log.d("Test user:", "name:" + WelcomeActivity.user.getmName()
-                                + " - email:" + WelcomeActivity.user.getmEmail()
-                                + " - phone:" + WelcomeActivity.user.getmPhone()
-                                + " - Gender:" + WelcomeActivity.user.getmGender()
-                                + " - Age:" + WelcomeActivity.user.getmAge());
                         viewPager.setCurrentItem(2);
                     }
                 }

@@ -48,9 +48,8 @@ public class RunningListActivity extends SwipeDismissBaseActivity {
         journeys = new ArrayList<Journey>();
         mJourneyUtil = new JourneyUtil(getBaseContext());
         journeys = mJourneyUtil.getAllJourney();
-
-        recyclerAdapter= new RecyclerAdapter(this,journeys, "detail");
+        recyclerAdapter= new RecyclerAdapter(getApplicationContext(),journeys, "detail");
         recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 }

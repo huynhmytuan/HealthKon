@@ -28,10 +28,7 @@ public class Fragment4 extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), RunRecordDetailActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("journeyID", 3);
-                i.putExtras(b);
+                Intent i = new Intent(getActivity(), UserInfoActivity.class);
                 startActivity(i);
             }
         });

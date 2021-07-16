@@ -6,10 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.pinkteam.android.healthkon.database.*;
 import com.pinkteam.android.healthkon.Models.*;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -138,9 +136,6 @@ public class WeightUtil {
 
                 weights.add(weight);
                 cursor.moveToNext();
-            }
-            for(Weight x : weights){
-                Log.d("Test print:","Id:"+x.getmId()+" and date: "+x.getmDate().toString());
             }
             cursor.close();
         }

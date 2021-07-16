@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.pinkteam.android.healthkon.database.*;
 import com.pinkteam.android.healthkon.Models.*;
 
 import java.text.SimpleDateFormat;
@@ -136,9 +135,6 @@ public class HeightUtil {
 
                 heights.add(height);
                 cursor.moveToNext();
-            }
-            for(Height x : heights){
-                Log.d("Test print:","Id:"+x.getmId()+" and date: "+x.getmDate().toString());
             }
             cursor.close();
         }

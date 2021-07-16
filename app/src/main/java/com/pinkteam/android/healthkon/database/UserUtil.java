@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.pinkteam.android.healthkon.Models.*;
-import com.pinkteam.android.healthkon.database.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,11 @@ public class UserUtil {
     }
 
     //Update
-        public long update(User user){
+        public User update(User user){
         ContentValues contentValues = userContentValues(user);
         long result= mDatabase.update("user",contentValues, dbHealthSchema.UserTable.Id +"=?",new String[]{String.valueOf(user.getmId())});
-        return result;
+        user = getAllUser().get(0);
+        return user;
     }
     //delete
     public long delete(int id){

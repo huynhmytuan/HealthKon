@@ -68,7 +68,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }else {
             view = inflater.inflate(R.layout.running_record_item_layout_2, parent, false);
         }
-
         ViewHolder viewHolder = new ViewHolder(view, layoutName);
         return viewHolder;
     }

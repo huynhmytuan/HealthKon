@@ -3,8 +3,12 @@ package com.pinkteam.android.healthkon.Controllers;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,11 +27,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
@@ -50,7 +59,7 @@ import java.util.List;
 public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements OnMapReadyCallback {
     JourneyUtil mJourneyUtil;
     LocationUtil mLocationUtil;
-    private  SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");
     GoogleMap mMap;
 
     Button backButton;
@@ -107,7 +116,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(getBaseContext(),"Vote Rating:"+rating,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Vote Rating:" + rating, Toast.LENGTH_SHORT).show();
                 mJourney.setmRating(rating);
                 mJourneyUtil.update(mJourney);
                 loadLayout();
@@ -116,7 +125,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         loadLayout();
     }
 
-    private void loadLayout(){
+    private void loadLayout() {
         mJourney = mJourneyUtil.getJourneyByID(journeyID);
         //get data by journey Id
         String journeyDate = dateFormat.format(mJourney.getmDate());
@@ -135,6 +144,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         distanceTextview.setText(String.format("%.2f", distance));
         timeTextview.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
+
     //Show dialog add information
     public void AddDialogueShow() {
         EditText journey_name_Edittext;
@@ -155,7 +165,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         journey_name_Edittext.setText(mJourney.getmName());
         comment_Edittext.setText(mJourney.getmComment());
         // Create the AlertDialog object and return it
-        AlertDialog dialog =  builder.create();
+        AlertDialog dialog = builder.create();
         //Set action for save button
         save_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,30 +199,44 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
     @Override
     public void onMapReady(@NonNull @NotNull GoogleMap googleMap) {
         mMap = googleMap;
-
+        MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style_night);
+        mMap.setMapStyle(style);
         // draw polyline
 
         List<Location> locations = mLocationUtil.getLocationsByJourney(journeyID);
 
-        PolylineOptions line = new PolylineOptions().clickable(false);
+        PolylineOptions line = new PolylineOptions().clickable(false).width(10).color(getResources().getColor(R.color.green_malachite));
+        ;
         LatLng firstLoc = null;
         LatLng lastLoc = null;
-        if(!locations.isEmpty()){
-            for(int i = 1; i < locations.size()-1; i++){
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        if (!locations.isEmpty()) {
+            for (int i = 1; i < locations.size() - 1; i++) {
                 LatLng loc = new LatLng(locations.get(i).getmLatitude(), locations.get(i).getmLongitude());
                 line.add(loc);
+                builder.include(loc);
             }
             firstLoc = new LatLng(locations.get(0).getmLatitude(), locations.get(0).getmLongitude());
-            lastLoc = new LatLng(locations.get(locations.size()-1).getmLatitude(), locations.get(locations.size()-1).getmLongitude());
+            lastLoc = new LatLng(locations.get(locations.size() - 1).getmLatitude(), locations.get(locations.size() - 1).getmLongitude());
+            builder.include(firstLoc);
+            builder.include(lastLoc);
         }
+        if (lastLoc != null && firstLoc != null) {
+            //Bitmap start_pin = Bitmap.createScaledBitmap(, 120, 120, false);
+            Bitmap marker_pin = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.end_map_pin), 50, 50, false);
+            mMap.addMarker(new MarkerOptions().position(firstLoc).title("Start")).setIcon(BitmapDescriptorFactory.fromBitmap(marker_pin));
+            mMap.addMarker(new MarkerOptions().position(lastLoc).title("End")).setIcon(BitmapDescriptorFactory.fromBitmap(marker_pin));
 
-        float zoom = 15.0f;
-        if(lastLoc != null && firstLoc != null) {
-            mMap.addMarker(new MarkerOptions().position(firstLoc).title("Start"));
-            mMap.addMarker(new MarkerOptions().position(lastLoc).title("End"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLoc, zoom));
+            //Zoom
+            googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    LatLngBounds bounds = builder.build();
+                    final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
+                    mMap.animateCamera(cu, 1500 , null);
+                    mMap.addPolyline(line);
+                }
+            });
         }
-        mMap.addPolyline(line);
-
     }
 }
