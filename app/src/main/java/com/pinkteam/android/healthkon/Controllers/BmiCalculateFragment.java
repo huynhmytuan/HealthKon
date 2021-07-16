@@ -322,6 +322,7 @@ public class BmiCalculateFragment extends Fragment {
             LineDataSet data;   //Line arguments
             //Set the date registered in the database to the x-axis
             mChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(getDate()));
+            mChart.getXAxis().setLabelCount(getDate().size());
             if(isHeightView){
                 data = new LineDataSet(valuesSet,"Height");
                 data.setColor(Color.RED);

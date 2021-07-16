@@ -321,6 +321,7 @@ public class RunRecordFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // user agreed to enable GPS
+                    getDialog().dismiss();
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_GPS_CODE);
                 }
             });
