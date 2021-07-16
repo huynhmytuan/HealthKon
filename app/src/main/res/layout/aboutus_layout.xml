@@ -82,6 +82,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/tuan_faceboook"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
@@ -124,6 +125,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/nhan_faceook"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
@@ -166,6 +168,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/duong_facebook"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
@@ -208,6 +211,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/long_facebook"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
@@ -250,6 +254,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/phuong_facebook"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"

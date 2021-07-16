@@ -86,6 +86,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 Intent i = new Intent(v.getContext(), RunRecordDetailActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("journeyID", journey.getmJourneyId());
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                v.getContext().startActivity(i);
                 i.putExtras(b);
                 v.getContext().startActivity(i);
             }

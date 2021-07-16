@@ -238,6 +238,7 @@ public class RunRecordFragment extends Fragment {
                     b.putInt("journeyID", getArguments().getInt("JourneyID"));
                     i.putExtras(b);
                     v.getContext().startActivity(i);
+                    getDialog().dismiss();
                 }
             });
             again.setOnClickListener(new View.OnClickListener() {
