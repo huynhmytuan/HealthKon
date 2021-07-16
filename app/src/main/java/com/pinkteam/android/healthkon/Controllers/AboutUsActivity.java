@@ -45,7 +45,7 @@ public class AboutUsActivity extends SwipeDismissBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(AboutUsActivity.this, "https://www.facebook.com/shin11300","shin11300");
+                String facebookUrl = getFacebookPageURL(AboutUsActivity.this, "https://www.facebook.com/luis.phan.798","luis.phan.798");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
             }
@@ -55,7 +55,7 @@ public class AboutUsActivity extends SwipeDismissBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                String facebookUrl = getFacebookPageURL(AboutUsActivity.this, "https://www.facebook.com/profile.php?id=1000083701342360","1000083701342360");
+                String facebookUrl = getFacebookPageURL(AboutUsActivity.this, "https://www.facebook.com/profile.php?id=1000083701342360","profile.php?id=1000083701342360");
                 facebookIntent.setData(Uri.parse(facebookUrl));
                 startActivity(facebookIntent);
             }

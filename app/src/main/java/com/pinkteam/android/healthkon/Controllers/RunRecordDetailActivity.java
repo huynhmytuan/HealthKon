@@ -100,7 +100,7 @@ public class RunRecordDetailActivity extends AppCompatActivity implements OnMapR
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                RunRecordDetailActivity.this.finish();
             }
         });
         editButton.setOnClickListener(new View.OnClickListener() {
