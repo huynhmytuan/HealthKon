@@ -6,18 +6,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,15 +45,15 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements OnMapReadyCallback {
+public class RunRecordDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
     JourneyUtil mJourneyUtil;
     LocationUtil mLocationUtil;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");
     GoogleMap mMap;
 
     Button backButton;
-    Button editButton;
-    Button deleteButton;
+    ImageButton editButton;
+    ImageButton deleteButton;
     TextView dateTextview;
     TextView journeyNameTextview;
     TextView commentTextview;
@@ -85,15 +88,15 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         distanceTextview = (TextView) findViewById(R.id.distance_textview);
         timeTextview = (TextView) findViewById(R.id.time_textview);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        editButton = (Button) findViewById(R.id.edit_btn);
-        backButton = (Button) findViewById(R.id.back_btn);
-//        deleteButton = (Button) findViewById(R.id.delete_btn);
-//        deleteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showConfirmDialog();
-//            }
-//        });
+        editButton = findViewById(R.id.edit_btn);
+       backButton = (Button) findViewById(R.id.back_btn);
+       deleteButton =  findViewById(R.id.delete_btn);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showConfirmDialog();
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +137,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         journeyNameTextview.setText(journeyName);
         commentTextview.setText(comment);
         ratingBar.setRating(rating);
-        distanceTextview.setText(String.format("%.2f", distance));
+        distanceTextview.setText(String.format("%.2fkm", distance));
         timeTextview.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
 

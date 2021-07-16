@@ -17,12 +17,15 @@
     <color name="black_shadow">#F7000000</color>
     <color name="cod_gray">#141D1F</color>
     <color name="bg_color">#0D1316</color>
-    <color name="nav_back">#1C1B1D</color>
+    <color name="nav_back">#21252D</color>
     <color name="blue_light">#2EE7D6</color>
+
 
 
     <color name="green_malachite">#1ED760</color>
     <color name="green_dark_pastel">#1DB954</color>
+    <color name="summer_sky">#2BC9BF</color>
+    <color name="black_pearl">#0F1415</color>
     <!-- BMI Color !-->
     <color name="under_weight">#DE03A9F4</color>
     <color name="normal_weight">#DE1ED760</color>
