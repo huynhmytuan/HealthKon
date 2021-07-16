@@ -36,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
             viewPager.setAdapter(adapter);
         }else {
             this.finish();
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent(this,SplashActivity.class);
             startActivity(i);
         }
     }
