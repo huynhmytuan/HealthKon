@@ -6,316 +6,323 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical">
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/back_button"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="left"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/back"
-                        app:backgroundTint="@color/blue_light"
-                        app:backgroundTintMode="multiply" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/edit_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="right"
-                        android:text="EDIT"
-                        android:textAllCaps="false"
-                        android:textColor="@color/blue_light"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/white"
-                        app:backgroundTintMode="multiply" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/dot"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/rose" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/back_button"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/back"
+                            app:backgroundTint="@color/blue_light"
+                            app:backgroundTintMode="multiply" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/edit_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@android:color/transparent"
+                            android:gravity="right"
+                            android:text="EDIT"
+                            android:textAllCaps="false"
+                            android:textColor="@color/blue_light"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:backgroundTint="@color/white"
+                            app:backgroundTintMode="multiply" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/name_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Thanh Nhan"
-                android:hint="Enter your full name"
-                android:inputType="textPersonName"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:background="@android:color/transparent"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:paddingLeft="20dp"
-                android:text="Account Info"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/card_cod_gray_background"
-                    android:elevation="20dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/dot"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView10"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        app:srcCompat="@drawable/name" />
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rose" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Gender:"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/gender_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Male"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:background="@android:color/transparent"/>
-                    </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/name_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/card_cod_gray_background"
-                    android:elevation="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView13"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        app:srcCompat="@drawable/email" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Email:"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/email_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="nhantp18@uef.edu.vn"
-                            android:hint="i.e example@mail.com"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:background="@android:color/transparent"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/card_cod_gray_background"
-                    android:elevation="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView16"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        app:srcCompat="@drawable/phone" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Phone Number:"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/phone_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="0984675721"
-                            android:hint="Enter your phone"
-                            android:inputType="phone"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:background="@android:color/transparent"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/card_cod_gray_background"
-                    android:elevation="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        app:srcCompat="@drawable/dob" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView19"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Age:"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/age_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="20"
-                            android:hint="Enter your age"
-                            android:inputType="number"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:background="@android:color/transparent"/>
-                    </LinearLayout>
-                </LinearLayout>
-
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Thanh Nhan"
+                    android:hint="Enter your full name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:background="@android:color/transparent"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:paddingLeft="20dp"
+                    android:text="Account Info"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="@drawable/card_cod_gray_background"
+                        android:elevation="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/name" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="Gender:"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/gender_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="Male"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:background="@android:color/transparent"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_cod_gray_background"
+                        android:elevation="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/email" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="Email:"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/email_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="nhantp18@uef.edu.vn"
+                                android:hint="i.e example@mail.com"
+                                android:inputType="textEmailAddress"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:background="@android:color/transparent"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_cod_gray_background"
+                        android:elevation="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView16"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/phone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView17"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="Phone Number:"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/phone_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="0984675721"
+                                android:hint="Enter your phone"
+                                android:inputType="phone"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:background="@android:color/transparent"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/card_cod_gray_background"
+                        android:elevation="20dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/dob" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView19"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="Age:"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/age_textview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="20"
+                                android:hint="Enter your age"
+                                android:inputType="number"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:background="@android:color/transparent"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+</ScrollView>
+
+
+
 
 
 </LinearLayout>

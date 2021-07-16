@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_color">
+    android:layout_height="match_parent">
 
-    <com.pinkteam.android.healthkon.Material.NonSwipeableViewPager
+    <com.pinkteam.android.healthkon.CustomClass.NonSwipeableViewPager
         android:id="@+id/slide_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/bgrselultdetail"/>
 
     <RelativeLayout
 

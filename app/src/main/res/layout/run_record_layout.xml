@@ -4,27 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgrunnrecord"
+    android:background="@drawable/bgtest"
     android:orientation="vertical"
     android:weightSum="3">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.8"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/start_button"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btnstart" />
+
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btnstop" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_weight="1.2"
         android:orientation="vertical"
-        android:paddingTop="40dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="163dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shadow"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/time" />
+                app:srcCompat="@drawable/timegreen" />
 
             <TextView
                 android:id="@+id/time_textview"
@@ -40,22 +66,27 @@
                 android:id="@+id/km_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
                 android:text="Running Time"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textColor="@color/green_dark_pastel"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -63,33 +94,38 @@
                     android:id="@+id/imageView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/distance" />
+                    app:srcCompat="@drawable/distancegreen" />
 
                 <TextView
                     android:id="@+id/distance_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="0.00"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/distance_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="km"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:text="Total km"
+                    android:textColor="@color/green_dark_pastel"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -103,118 +139,28 @@
                     android:id="@+id/speed_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView43"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="km/h"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textColor="@color/green_dark_pastel"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView25"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/step" />
-
-                <TextView
-                    android:id="@+id/step_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView52"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:text="Step"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView26"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/calo" />
-
-                <TextView
-                    android:id="@+id/kcal_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView55"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:text="Kcal"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.8"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/start_button"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btnstart" />
-
-        <ImageButton
-            android:id="@+id/stop_button"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btnstop" />
-
-    </RelativeLayout>
 </LinearLayout>

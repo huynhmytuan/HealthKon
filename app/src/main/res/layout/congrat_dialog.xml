@@ -5,39 +5,53 @@
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    app:cardCornerRadius="30dp"
+    app:layout_constraintCircleRadius="30dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@color/bg_color"
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/bg_color"
             android:orientation="vertical"
-            android:background="@drawable/congrat_back">
+            >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/edit_text_congra">
+
                 <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:layout_marginVertical="20dp"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    app:lottie_rawRes="@raw/congratulation_badge_animation"
                     app:lottie_autoPlay="true"
-                    app:lottie_loop="true"/>
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/congratulation_badge_animation" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
+                android:background="@color/cod_gray"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,14 +75,15 @@
                         android:gravity="center"
                         android:text="You did a great job in this journey."
                         android:textColor="@color/white"
-                        android:textSize="10sp" />
+                        android:textSize="13sp" />
+
                     <TextView
                         android:id="@+id/run_result_text"
-                        android:paddingVertical="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:gravity="center"
+                        android:paddingVertical="30dp"
                         android:text="You did a great job in this journey."
                         android:textColor="@color/white"
                         android:textSize="15sp" />
@@ -77,31 +92,34 @@
 
                 <Button
                     android:id="@+id/detail_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
                     android:background="@drawable/btn_green_new"
                     android:fontFamily="@font/roboto"
                     android:paddingHorizontal="30dp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
                     android:text="Show Detail"
                     android:textAllCaps="false"
-                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/white"
-                    app:backgroundTintMode="multiply"/>
+                    app:backgroundTintMode="multiply" />
+
                 <TextView
-                    android:paddingVertical="15dp"
-                    android:layout_gravity="center"
                     android:id="@+id/run_again_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/roboto"
-                    android:textStyle="bold"
+                    android:paddingVertical="15dp"
                     android:text="Close"
-                    android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:textSize="16sp"/>
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
