@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
-import com.pinkteam.android.healthkon.Material.ValidateHelper;
+import com.pinkteam.android.healthkon.CustomClass.NonSwipeableViewPager;
+import com.pinkteam.android.healthkon.CustomClass.ValidateHelper;
 import com.pinkteam.android.healthkon.R;
 
 public class OnboardFragment1 extends Fragment {

@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.pinkteam.android.healthkon.CustomClass.RecyclerAdapter;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;

@@ -1,6 +1,7 @@
 package com.pinkteam.android.healthkon.Controllers;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -29,7 +30,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
+import com.pinkteam.android.healthkon.CustomClass.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.Models.Location;
 import com.pinkteam.android.healthkon.R;
@@ -49,6 +50,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
 
     Button backButton;
     Button editButton;
+    Button deleteButton;
     TextView dateTextview;
     TextView journeyNameTextview;
     TextView commentTextview;
@@ -85,7 +87,13 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         editButton = (Button) findViewById(R.id.edit_btn);
         backButton = (Button) findViewById(R.id.back_btn);
-
+//        deleteButton = (Button) findViewById(R.id.delete_btn);
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showConfirmDialog();
+//            }
+//        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +103,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddDialogueShow();
+                showEditDialog();
             }
         });
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -131,7 +139,7 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
     }
 
     //Show dialog add information
-    public void AddDialogueShow() {
+    public void showEditDialog() {
         EditText journey_name_Edittext;
         EditText comment_Edittext;
         Button cancel_Button;
@@ -178,6 +186,46 @@ public class RunRecordDetailActivity extends SwipeDismissBaseActivity implements
         });
         //show dialog
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    //Show delete dialog
+    private void showConfirmDialog(){
+        Button mPositiveButton, mNegativeButton;
+        TextView mDialogTitle, mDialogMessage;
+        LayoutInflater i = RunRecordDetailActivity.this.getLayoutInflater();
+        View view = i.inflate(R.layout.confrim_custom_dialog,null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RunRecordDetailActivity.this);
+        //set builder view
+        builder.setView(view);
+        mDialogTitle = view.findViewById(R.id.dialog_title);
+        mDialogMessage = view.findViewById(R.id.dialog_message);
+        mPositiveButton = view.findViewById(R.id.positive_button);
+        mNegativeButton = view.findViewById(R.id.negative_button);
+        mDialogTitle.setText("CONFIRM");
+        mDialogMessage.setText("Delete this Running Record?");
+
+        Dialog dialog = builder.create();
+        mPositiveButton.setText("Delete");
+        mPositiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mJourneyUtil.delete(journeyID);
+                dialog.dismiss();
+                Toast.makeText(getApplication(), "Updated", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mNegativeButton.setText("Cancel");
+        mNegativeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        // Create the AlertDialog object and return it
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
 

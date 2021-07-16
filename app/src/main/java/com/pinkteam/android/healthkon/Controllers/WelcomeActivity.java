@@ -5,7 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
+import com.pinkteam.android.healthkon.CustomClass.NonSwipeableViewPager;
+import com.pinkteam.android.healthkon.CustomClass.SliderAdapter;
 import com.pinkteam.android.healthkon.Models.Height;
 import com.pinkteam.android.healthkon.Models.User;
 import com.pinkteam.android.healthkon.Models.Weight;

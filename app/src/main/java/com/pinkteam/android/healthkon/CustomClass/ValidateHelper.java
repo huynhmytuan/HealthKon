@@ -1,4 +1,4 @@
-package com.pinkteam.android.healthkon.Material;
+package com.pinkteam.android.healthkon.CustomClass;
 
 import android.util.Patterns;
 import android.widget.EditText;

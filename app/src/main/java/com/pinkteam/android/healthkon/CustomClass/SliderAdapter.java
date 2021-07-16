@@ -1,9 +1,15 @@
-package com.pinkteam.android.healthkon.Controllers;
+package com.pinkteam.android.healthkon.CustomClass;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.pinkteam.android.healthkon.Controllers.OnboardFragment0;
+import com.pinkteam.android.healthkon.Controllers.OnboardFragment1;
+import com.pinkteam.android.healthkon.Controllers.OnboardFragment2;
+import com.pinkteam.android.healthkon.Controllers.OnboardFragment3;
+import com.pinkteam.android.healthkon.Controllers.OnboardFragment4;
 
 import org.jetbrains.annotations.NotNull;
 

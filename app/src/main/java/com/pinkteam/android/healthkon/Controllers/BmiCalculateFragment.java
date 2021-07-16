@@ -44,6 +44,7 @@ import com.pinkteam.android.healthkon.Models.Weight;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.HeightUtil;
 import com.pinkteam.android.healthkon.database.WeightUtil;
+import com.pinkteam.android.healthkon.CustomClass.*;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -80,6 +81,13 @@ public class BmiCalculateFragment extends Fragment {
     Pair<Long, Long> selectionDate = null;
     private static boolean isHeightView = true;
 
+
+    private int underWeightColorCode,
+            normalWeightColorCode,
+            overWeightColorCode,
+            obeseWeightColorCode,
+            extremeWeightColorCode;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -95,7 +103,11 @@ public class BmiCalculateFragment extends Fragment {
 
         mHU = new HeightUtil(this.getContext());
         mWU = new WeightUtil(this.getContext());
-
+        underWeightColorCode = getResources().getColor(R.color.under_weight);
+        normalWeightColorCode = getResources().getColor(R.color.normal_weight);
+        overWeightColorCode = getResources().getColor(R.color.over_weight);
+        obeseWeightColorCode = getResources().getColor(R.color.obese_weight);
+        extremeWeightColorCode = getResources().getColor(R.color.extreme_weight);
         mViewHeight = (TextView) view.findViewById(R.id.height_textview);
         mViewWeight = (TextView) view.findViewById(R.id.weight_textview);
         mViewBMIScore = (TextView) view.findViewById(R.id.scorebmi_textview);
@@ -151,7 +163,7 @@ public class BmiCalculateFragment extends Fragment {
         weightValue = mWeight.getmValue();
         mViewWeight.setText(weightValue +"");
         if(selectionDate == null){
-            selectionDate = getMonthStartToNow();
+            selectionDate = CustomDateRangeCalendar.getMonthStartToNow();
         }
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -172,22 +184,12 @@ public class BmiCalculateFragment extends Fragment {
     //Set Calendar
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void ShowCalendar(){
-        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.dateRangePicker();
-        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
-        constraintsBuilder.setValidator(DateValidatorPointBackward.now());
-        builder.setCalendarConstraints(constraintsBuilder.build());
-        //Set date range = selection date value
-        builder.setSelection(selectionDate);
-        MaterialDatePicker<Pair<Long,Long>> picker = builder.build();
+        MaterialDatePicker<Pair<Long,Long>> picker = CustomDateRangeCalendar.ShowCalendar(selectionDate);
         picker.show(getFragmentManager(), picker.toString());
-
         picker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
             @Override
             public void onPositiveButtonClick(Pair<Long, Long> selection) {
-                Pair<Date,Date> pair = getDateFromSeclection(selection);
-                //Get first date from selection
-                Date firstDate = pair.first;
-                Date endDate = pair.second;
+                Pair<Date,Date> pair = CustomDateRangeCalendar.getDateFromSeclection(selection);
                 //Set text and put to selectionDate
                 setDateRangeText(selectionDate);
                 selectionDate = selection;
@@ -199,7 +201,7 @@ public class BmiCalculateFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setDateRangeText(Pair<Long,Long> selectionDate){
-        Pair<Date, Date> pair = getDateFromSeclection(selectionDate);
+        Pair<Date, Date> pair = CustomDateRangeCalendar.getDateFromSeclection(selectionDate);
         Date startDate = pair.first;
         Date endDate = pair.second;
         SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -217,23 +219,23 @@ public class BmiCalculateFragment extends Fragment {
         mViewBMIScore.setText(df.format(bmiScore)+"");
         if (bmiScore < 18){
             mViewBMIStatus.setText("Underweight");
-            mViewBMIStatus.setTextColor(getResources().getColor(R.color.under_weight));
+            mViewBMIStatus.setTextColor(underWeightColorCode);
         }
         else if (18 <= bmiScore && bmiScore < 25){
             mViewBMIStatus.setText("Normal Weight");
-            mViewBMIStatus.setTextColor(getResources().getColor(R.color.normal_weight));
+            mViewBMIStatus.setTextColor(normalWeightColorCode);
         }
         else if (25 <= bmiScore && bmiScore < 30){
             mViewBMIStatus.setText("Over Weight");
-            mViewBMIScore.setTextColor(getResources().getColor(R.color.over_weight));
+            mViewBMIScore.setTextColor(overWeightColorCode);
         }
         else if (30 <= bmiScore && bmiScore < 35){
             mViewBMIStatus.setText("Obesity");
-            mViewBMIStatus.setTextColor(getResources().getColor(R.color.obese_weight));
+            mViewBMIStatus.setTextColor(obeseWeightColorCode);
         }
         else if (35 <= bmiScore){
             mViewBMIStatus.setText("Extremely Obesity");
-            mViewBMIStatus.setTextColor(getResources().getColor(R.color.extreme_weight));
+            mViewBMIStatus.setTextColor(extremeWeightColorCode);
         }
     }
     //Setup chart
@@ -276,7 +278,7 @@ public class BmiCalculateFragment extends Fragment {
         //Get data from database:
         ArrayList<Entry> valuesWeight = new ArrayList<>();
         List<Weight> weightList;
-        Pair<Date,Date> pair = getDateFromSeclection(selectionDate);
+        Pair<Date,Date> pair = CustomDateRangeCalendar.getDateFromSeclection(selectionDate);
         Date startDate = pair.first;
         Date endDate = pair.second;
         //Get data from db by first date of month and today
@@ -300,7 +302,7 @@ public class BmiCalculateFragment extends Fragment {
         //Get data from database:
         ArrayList<Entry> valuesHeight = new ArrayList<>();
         List<Height> heightList;
-        Pair<Date, Date> pair = getDateFromSeclection(selectionDate);
+        Pair<Date, Date> pair = CustomDateRangeCalendar.getDateFromSeclection(selectionDate);
         Date startDate = pair.first;
         Date endDate = pair.second;
         //Get data from db by first date of month and today
@@ -368,7 +370,7 @@ public class BmiCalculateFragment extends Fragment {
     private  ArrayList<String> getDate() {
         ArrayList<String> dateLabels = new ArrayList<>();
         List<Weight> weightList;
-        Pair<Date, Date> pair = getDateFromSeclection(selectionDate);
+        Pair<Date, Date> pair = CustomDateRangeCalendar.getDateFromSeclection(selectionDate);
         Date startDate = pair.first;
         Date endDate = pair.second;
         weightList = mWU.getWeightInRange(startDate,endDate);
@@ -512,51 +514,6 @@ public class BmiCalculateFragment extends Fragment {
             }
         }
         return  value;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private Pair<Date,Date> getDateFromSeclection(Pair<Long,Long> selectionDate){
-        //Get data from database:
-        Calendar cal = Calendar.getInstance();
-        Date now = new Date();
-        //Get Start Date
-        Date startDate = new Date(selectionDate.first);
-        cal.setTime(startDate);
-        cal.set(Calendar.HOUR_OF_DAY,now.getHours());
-        cal.set(Calendar.MINUTE,now.getMinutes());
-        cal.set(Calendar.SECOND,now.getSeconds());
-        startDate = cal.getTime();
-
-        //Get End Date
-        Date endDate = new Date(selectionDate.second);
-        cal.setTime(endDate);
-        cal.set(Calendar.HOUR_OF_DAY,24);
-        cal.set(Calendar.MINUTE,00);
-        cal.set(Calendar.SECOND,00);
-        endDate = cal.getTime();
-
-        return new Pair<>(startDate,endDate);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private Pair<Long, Long> getMonthStartToNow(){
-        //Get start Date of
-        Date endDate = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(endDate);
-        int days = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
-        cal.set(Calendar.DAY_OF_MONTH, days);
-        long second = endDate.getTime();
-
-        Date startDate = cal.getTime();
-        cal.setTime(startDate);
-        cal.set(Calendar.HOUR_OF_DAY,24);
-        cal.set(Calendar.MINUTE,00);
-        cal.set(Calendar.SECOND,00);
-        startDate = cal.getTime();
-        long first = startDate.getTime();
-
-        return new Pair<>(first,second);
     }
 
     //Set Edit text for pick number

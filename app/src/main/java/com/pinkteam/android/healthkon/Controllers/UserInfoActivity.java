@@ -1,20 +1,24 @@
 package com.pinkteam.android.healthkon.Controllers;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.app.AlertDialog;
 
-import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
-import com.pinkteam.android.healthkon.Material.ValidateHelper;
+import com.pinkteam.android.healthkon.CustomClass.SwipeDismissBaseActivity;
+import com.pinkteam.android.healthkon.CustomClass.ValidateHelper;
 import com.pinkteam.android.healthkon.Models.User;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.UserUtil;
@@ -80,7 +84,7 @@ public class UserInfoActivity extends SwipeDismissBaseActivity {
         //Set for name
         if(isEditable){
             if(checkInput()){
-                isConfirmDialog();
+                ShowConfirmDialog();
             }
         }else{
             setViewEditButton();
@@ -159,36 +163,48 @@ public class UserInfoActivity extends SwipeDismissBaseActivity {
         return valid;
     }
 
-    private void isConfirmDialog(){
-        int Check = 0;
+    private void ShowConfirmDialog(){
+        Button mPositiveButton, mNegativeButton;
+        TextView mDialogTitle, mDialogMessage;
+        LayoutInflater i = UserInfoActivity.this.getLayoutInflater();
+        View view = i.inflate(R.layout.confrim_custom_dialog,null);
         AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoActivity.this);
-        builder.setTitle("CONFIRM");
-        builder.setMessage("Update your information?");
-        builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+        //set builder view
+        builder.setView(view);
+        mDialogTitle = view.findViewById(R.id.dialog_title);
+        mDialogMessage = view.findViewById(R.id.dialog_message);
+        mPositiveButton = view.findViewById(R.id.positive_button);
+        mNegativeButton = view.findViewById(R.id.negative_button);
+        mDialogTitle.setText("CONFIRM");
+        mDialogMessage.setText("Update your information?");
+
+        Dialog dialog = builder.create();
+        mPositiveButton.setText("Update");
+        mPositiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 user.setmName(mNameTextview.getText().toString());
                 user.setmEmail(mEmailTextview.getText().toString());
                 user.setmPhone(mPhoneTextview.getText().toString());
                 user.setmAge(Integer.parseInt(mAgeTextview.getText().toString()));
                 user = mUserUtil.update(user);
                 setViewEditButton();
+                dialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                 loadLayout();
             }
         });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mNegativeButton.setText("Cancel");
+        mNegativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 setViewEditButton();
                 loadLayout();
-                dialog.dismiss();
-            }
+                dialog.dismiss();}
         });
-        AlertDialog dialog = builder.create();
+        // Create the AlertDialog object and return it
         dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.green_malachite));
         dialog.show();
     }
 

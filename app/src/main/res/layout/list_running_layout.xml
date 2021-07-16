@@ -20,22 +20,42 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <Button
                     android:id="@+id/back_button"
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:background="@drawable/back"
-
                     android:gravity="left"
                     app:backgroundTint="@color/blue_light"
                     app:backgroundTintMode="multiply" />
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/date_range_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/back_button"
+                    android:layout_toLeftOf="@id/view_cal_btn"
+                    android:layout_marginVertical="20px"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="Range Date: 00/00/00 - 00/00/00"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/view_cal_btn"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/calendar_icon_anim" />
+            </RelativeLayout>
 
         </LinearLayout>
 

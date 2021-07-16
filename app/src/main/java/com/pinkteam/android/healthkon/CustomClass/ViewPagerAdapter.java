@@ -1,9 +1,14 @@
-package com.pinkteam.android.healthkon.Controllers;
+package com.pinkteam.android.healthkon.CustomClass;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.pinkteam.android.healthkon.Controllers.BmiCalculateFragment;
+import com.pinkteam.android.healthkon.Controllers.HomeFragment;
+import com.pinkteam.android.healthkon.Controllers.InfoActivity;
+import com.pinkteam.android.healthkon.Controllers.RunRecordFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {

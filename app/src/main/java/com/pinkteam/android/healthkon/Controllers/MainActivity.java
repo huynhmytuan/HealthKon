@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pinkteam.android.healthkon.Material.NonSwipeableViewPager;
+import com.pinkteam.android.healthkon.CustomClass.NonSwipeableViewPager;
+import com.pinkteam.android.healthkon.CustomClass.ViewPagerAdapter;
 import com.pinkteam.android.healthkon.R;
 
 public class MainActivity extends AppCompatActivity {

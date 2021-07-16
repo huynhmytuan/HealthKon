@@ -12,6 +12,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -25,12 +26,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.pinkteam.android.healthkon.Material.MyReceiver;
+import com.pinkteam.android.healthkon.CustomClass.MyReceiver;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 import com.pinkteam.android.healthkon.database.JourneyUtil;
@@ -179,7 +181,6 @@ public class RunRecordFragment extends Fragment {
 
     public void onClickStop(View view) {
         // save the current journey to the database
-        float distance = mLocationService.getDistance();
         int journeyID = mLocationService.saveJourney();
 
         mStopButton.setEnabled(false);
@@ -245,14 +246,18 @@ public class RunRecordFragment extends Fragment {
             final long minutes = (journey.getmDuration() % 3600) / 60;
             final long seconds = journey.getmDuration() % 60;
             float avg = journey.getmDistance() / ((float)journey.getmDuration() / 3600);
-
-            resutlTextView.setText("You have been run  "+String.format("%.2f km", journey.getmDistance())
+            String distance= "0";
+            if(journey.getmDistance()<1){
+                float change = journey.getmDistance() * 1000;
+                distance = String.format("%.0fm", change);
+            }else{
+                distance = String.format("%.2fkm", journey.getmDistance());
+            }
+            resutlTextView.setText("You have been run  "+ distance
                     + " in " +String.format("%02d:%02d:%02d", hours, minutes, seconds)+"\n"+
                     "Average Speed: "+String.format("%.2f km/h", avg));
-
             //set builder view
             builder.setView(view);
-
             // Create the AlertDialog object and return it
             return builder.create();
         }
@@ -286,20 +291,34 @@ public class RunRecordFragment extends Fragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+            Button mPositiveButton, mNegativeButton;
+            TextView mDialogTitle, mDialogMessage;
+            LayoutInflater i = getActivity().getLayoutInflater();
+            View view = i.inflate(R.layout.confrim_custom_dialog,null);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("GPS is required to track your journey!")
-                    .setPositiveButton("Enable GPS", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // user agreed to enable GPS
-                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_GPS_CODE);
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // dialogue was cancelled
-                        }
-                    });
+            //set builder view
+            builder.setView(view);
+            mDialogTitle = view.findViewById(R.id.dialog_title);
+            mDialogMessage = view.findViewById(R.id.dialog_message);
+            mPositiveButton = view.findViewById(R.id.positive_button);
+            mNegativeButton = view.findViewById(R.id.negative_button);
+
+            mDialogTitle.setText("Service Requiment");
+            mDialogMessage.setText("GPS is required to track your journey!");
+
+            mPositiveButton.setText("Enable");
+            mPositiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // user agreed to enable GPS
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_GPS_CODE);
+                }
+            });
+            mNegativeButton.setText("Cancel");
+            mNegativeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {getDialog().dismiss();}
+            });
             // Create the AlertDialog object and return it
             Dialog dialog = builder.create();
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

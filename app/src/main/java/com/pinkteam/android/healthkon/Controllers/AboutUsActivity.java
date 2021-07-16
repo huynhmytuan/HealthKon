@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.pinkteam.android.healthkon.Material.SwipeDismissBaseActivity;
+import com.pinkteam.android.healthkon.CustomClass.SwipeDismissBaseActivity;
 import com.pinkteam.android.healthkon.R;
 
 public class AboutUsActivity extends SwipeDismissBaseActivity {

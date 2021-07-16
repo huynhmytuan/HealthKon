@@ -1,4 +1,4 @@
-package com.pinkteam.android.healthkon.Material;
+package com.pinkteam.android.healthkon.CustomClass;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

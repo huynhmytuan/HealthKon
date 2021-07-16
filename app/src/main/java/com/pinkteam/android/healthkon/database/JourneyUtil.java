@@ -193,8 +193,8 @@ public class JourneyUtil {
         return journey;
     }
 
-    public List<Journey> getJourneysByDate(Date startDate, Date endDate){
-        List<Journey> journeyList =  new ArrayList<>();
+    public ArrayList<Journey> getJourneysByDate(Date startDate, Date endDate){
+        ArrayList<Journey> journeyList =  new ArrayList<>();
         String start = dateFormat.format(startDate);
         String end = dateFormat.format(endDate);
 

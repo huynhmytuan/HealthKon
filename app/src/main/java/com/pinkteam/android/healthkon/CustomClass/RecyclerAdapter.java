@@ -1,4 +1,4 @@
-package com.pinkteam.android.healthkon.Controllers;
+package com.pinkteam.android.healthkon.CustomClass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pinkteam.android.healthkon.Controllers.RunRecordDetailActivity;
 import com.pinkteam.android.healthkon.Models.Journey;
 import com.pinkteam.android.healthkon.R;
 
@@ -78,7 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.journeyname_Textview.setText(journey.getmName());
         holder.date_Textview.setText(dateFormat.format(journey.getmDate()));
         float distance = journey.getmDistance();
-        holder.distance_Textview.setText(String.format("%.2f", distance));
+        holder.distance_Textview.setText(String.format("%.2fkm", distance));
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
