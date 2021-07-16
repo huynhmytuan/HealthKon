@@ -2,11 +2,13 @@ package com.pinkteam.android.healthkon.CustomClass;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView distance_Textview;
         TextView mtime_Textview;
         LinearLayout item;
+        RatingBar mRatingBar;
 
         public ViewHolder(@NonNull View view, String layoutName) {
             super(view);
@@ -42,6 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 date_Textview = (TextView) view.findViewById(R.id.date_txtview);
                 distance_Textview = (TextView) view.findViewById(R.id.distance_txtview);
                 item = (LinearLayout) view.findViewById(R.id.journey_item);
+                mRatingBar = (RatingBar) view.findViewById(R.id.ratingBar);
             }else {
                 journeyname_Textview = (TextView) itemView.findViewById(R.id.journeyname_txtview2);
                 date_Textview = (TextView) itemView.findViewById(R.id.date_textview2);
@@ -95,6 +99,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             final long minutes = (journey.getmDuration() % 3600) / 60;
             final long seconds = journey.getmDuration() % 60;
             holder.mtime_Textview.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        }else {
+            holder.mRatingBar.setRating(journey.getmRating());
         }
     }
 
