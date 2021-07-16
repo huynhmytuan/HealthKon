@@ -173,7 +173,7 @@ public class LocationService extends Service {
         String time = df.format(getDateTime());
         String journeyName = "Running "+ time;
         // save journey to database
-        mJourneyUtil.add((long)getDuration(),getDistance(),getDateTime(), journeyName,0,"","");
+        mJourneyUtil.add((long)getDuration(),getDistance(),getDateTime(), journeyName,1,"(Default Comment) Running is good!","");
         int journeyID = Integer.parseInt(mJourneyUtil.getLastestRowID());
 
         // for each location belonging to this journey save it to the location table linked to this journey

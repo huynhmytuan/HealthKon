@@ -230,7 +230,16 @@ public class RunRecordFragment extends Fragment {
             Button detail = (Button) view.findViewById(R.id.detail_button);
             TextView again = (TextView) view.findViewById(R.id.run_again_button);
             TextView resutlTextView = (TextView) view.findViewById(R.id.run_result_text);
-
+            detail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), RunRecordDetailActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("journeyID", getArguments().getInt("JourneyID"));
+                    i.putExtras(b);
+                    v.getContext().startActivity(i);
+                }
+            });
             again.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
