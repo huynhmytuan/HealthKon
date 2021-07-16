@@ -41,7 +41,7 @@
                         android:layout_marginTop="10dp"
 
                         android:background="@drawable/back"
-                        app:backgroundTint="@color/blue_light"
+                        app:backgroundTint="@color/white"
                         app:backgroundTintMode="multiply" />
                 </LinearLayout>
 

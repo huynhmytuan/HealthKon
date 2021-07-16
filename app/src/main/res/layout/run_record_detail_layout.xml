@@ -11,7 +11,7 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="640dp"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,7 +105,6 @@
         <RatingBar
             android:layout_marginLeft="20dp"
             android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"

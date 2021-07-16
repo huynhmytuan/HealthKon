@@ -32,7 +32,7 @@
                     android:layout_height="38dp"
                     android:background="@drawable/back"
                     android:gravity="left"
-                    app:backgroundTint="@color/blue_light"
+                    app:backgroundTint="@color/white"
                     app:backgroundTintMode="multiply" />
                 <TextView
                     android:id="@+id/date_range_textview"

@@ -78,12 +78,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/name_textview2"
+                    android:id="@+id/name_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:hint="Enter your full name"
@@ -116,8 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:background="co">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"

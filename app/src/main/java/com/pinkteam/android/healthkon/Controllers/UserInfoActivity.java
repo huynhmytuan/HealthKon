@@ -110,7 +110,6 @@ public class UserInfoActivity extends SwipeDismissBaseActivity {
             isEditable = true;
             mEditButton.setText("Save");
             mNameTextview.setFocusableInTouchMode(isEditable);
-            mNameTextview.setBackground(editableBg);
 
             mPhoneTextview.setFocusableInTouchMode(isEditable);
             mPhoneTextview.setBackground(editableBg);
