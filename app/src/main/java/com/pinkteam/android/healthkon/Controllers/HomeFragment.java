@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment {
 
         //Adding data Value
         ArrayList dataValues = getDataValues(chartType);
-        BarDataSet dataSet = new BarDataSet(dataValues,"Distances");
+        BarDataSet dataSet = new BarDataSet(dataValues,"Distances(km)");
         dataSet.setColor(getResources().getColor(R.color.green_malachite));
         BarData barData = new BarData(dataSet);
         barData.setBarWidth(0.5f);
@@ -261,7 +261,7 @@ public class HomeFragment extends Fragment {
                 //Get date from week number
                 for (HashMap x : sumDistanceList){
                     int week = (int) x.get("week_order");
-                    if (weekNumer == week){
+                    if (weekNumer == week+1){
                         float totalDistance = (float) x.get("total_distance");
                         dataValues.add(new BarEntry(i,totalDistance));
                         isAdded = true;

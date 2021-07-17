@@ -122,7 +122,7 @@ public class JourneyUtil {
         {
             int count = 0;
             cursor.moveToLast();
-            while (!cursor.isBeforeFirst() && count != numOfJourney){
+            while (!cursor.isBeforeFirst() && count <= numOfJourney){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
                 String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
                 String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
@@ -133,7 +133,6 @@ public class JourneyUtil {
                 String image = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Image));
 
                 Journey journey = new Journey();
-
                 try{
                     journey.setmJourneyId(Integer.parseInt(id));
                     journey.setmDuration(Long.parseLong(duration));
@@ -203,8 +202,8 @@ public class JourneyUtil {
         Cursor cursor = mDatabase.rawQuery(query,null);
         if(cursor.getCount()>0)
         {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
+            cursor.moveToLast();
+            while (!cursor.isBeforeFirst()){
                 String id = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.JourneyId));
                 String duration = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Duration));
                 String distance = cursor.getString(cursor.getColumnIndex(dbHealthSchema.JourneyTable.Distance));
@@ -230,7 +229,7 @@ public class JourneyUtil {
                     Log.d("Database_Exp:",e.getMessage());
                 }
                 journeyList.add(journey);
-                cursor.moveToNext();
+                cursor.moveToPrevious();
             }
             cursor.close();
         }
