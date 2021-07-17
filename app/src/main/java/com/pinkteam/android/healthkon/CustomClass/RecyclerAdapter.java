@@ -27,7 +27,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     Context mContext;
     ArrayList<Journey> mJourneys ;
-    private  SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");
+    private  SimpleDateFormat dateFormat = new SimpleDateFormat("E, HH:mm dd/MM/yyyy");
     String layoutName;
 
     public class ViewHolder extends RecyclerView.ViewHolder {

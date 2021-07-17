@@ -48,7 +48,7 @@ import java.util.List;
 public class RunRecordDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
     JourneyUtil mJourneyUtil;
     LocationUtil mLocationUtil;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("E, hh:mm dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("E, HH:mm dd/MM/yyyy");
     GoogleMap mMap;
 
     Button backButton;
